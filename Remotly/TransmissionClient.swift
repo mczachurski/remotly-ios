@@ -16,13 +16,14 @@ class TransmissionClient
     
     func loadTorrents(onCompletion: ((NSError!) -> Void)?)
     {
+        torrentsInformation.removeAll(keepCapacity: true)
         loadWithSession(getTorrents, onCompletion: onCompletion)
     }
     
     private func getTorrents(onCompletion: ((NSError!) -> Void)?)
     {
         var err: NSError?
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:9091/transmission/rpc")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.9:9091/transmission/rpc")!)
         request.HTTPMethod = "POST"
         request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
         
@@ -60,7 +61,7 @@ class TransmissionClient
         }
         
         var err: NSError?
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:9091/transmission/rpc")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.9:9091/transmission/rpc")!)
         request.HTTPMethod = "POST"
         
         let requestBody = [""]
