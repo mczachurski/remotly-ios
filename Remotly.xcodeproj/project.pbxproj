@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57E2DDB4A14F0480D75149AA /* libPods-Remotly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F81E9660345C741BE7CD76EB /* libPods-Remotly.a */; };
+		55DE004D0CA637D0277FB6C0 /* libPods-Remotly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */; };
+		D35D05FD1B6A9ABB00E4C72B /* TorrentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FC1B6A9ABB00E4C72B /* TorrentsList.swift */; };
+		D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */; };
+		D35D06011B6A9C3400E4C72B /* TorrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */; };
+		D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */; };
+		D35D06051B6D234E00E4C72B /* TransmissionGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06041B6D234E00E4C72B /* TransmissionGetRequest.swift */; };
+		D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */; };
 		D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */; };
 		D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */; };
 		D3FDEC821B67F64E00ADC986 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC811B67F64E00ADC986 /* ViewController.swift */; };
@@ -28,8 +34,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Remotly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		512BA6396FBCECF48CEFF871 /* Pods-Remotly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remotly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Remotly/Pods-Remotly.debug.xcconfig"; sourceTree = "<group>"; };
 		59EA18673000815EDBA8B661 /* Pods-Remotly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Remotly.release.xcconfig"; path = "Pods/Target Support Files/Pods-Remotly/Pods-Remotly.release.xcconfig"; sourceTree = "<group>"; };
+		D35D05FC1B6A9ABB00E4C72B /* TorrentsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsList.swift; sourceTree = "<group>"; };
+		D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionClient.swift; sourceTree = "<group>"; };
+		D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentInformation.swift; sourceTree = "<group>"; };
+		D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsCell.swift; sourceTree = "<group>"; };
+		D35D06041B6D234E00E4C72B /* TransmissionGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionGetRequest.swift; sourceTree = "<group>"; };
+		D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		D3FDEC771B67F64E00ADC986 /* Remotly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remotly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FDEC7B1B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,7 +54,6 @@
 		D3FDEC8F1B67F64E00ADC986 /* RemotlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemotlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FDEC941B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3FDEC951B67F64E00ADC986 /* RemotlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotlyTests.swift; sourceTree = "<group>"; };
-		F81E9660345C741BE7CD76EB /* libPods-Remotly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Remotly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57E2DDB4A14F0480D75149AA /* libPods-Remotly.a in Frameworks */,
+				D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */,
+				55DE004D0CA637D0277FB6C0 /* libPods-Remotly.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +79,7 @@
 		419654A1475282F6128423B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F81E9660345C741BE7CD76EB /* libPods-Remotly.a */,
+				02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -74,6 +87,7 @@
 		D3FDEC6E1B67F64E00ADC986 = {
 			isa = PBXGroup;
 			children = (
+				D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */,
 				D3FDEC791B67F64E00ADC986 /* Remotly */,
 				D3FDEC921B67F64E00ADC986 /* RemotlyTests */,
 				D3FDEC781B67F64E00ADC986 /* Products */,
@@ -94,6 +108,8 @@
 		D3FDEC791B67F64E00ADC986 /* Remotly */ = {
 			isa = PBXGroup;
 			children = (
+				D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */,
+				D35D05FC1B6A9ABB00E4C72B /* TorrentsList.swift */,
 				D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */,
 				D3FDEC811B67F64E00ADC986 /* ViewController.swift */,
 				D3FDEC831B67F64E00ADC986 /* Main.storyboard */,
@@ -101,6 +117,9 @@
 				D3FDEC881B67F64E00ADC986 /* LaunchScreen.xib */,
 				D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */,
 				D3FDEC7A1B67F64E00ADC986 /* Supporting Files */,
+				D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */,
+				D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */,
+				D35D06041B6D234E00E4C72B /* TransmissionGetRequest.swift */,
 			);
 			path = Remotly;
 			sourceTree = "<group>";
@@ -151,6 +170,7 @@
 				D3FDEC741B67F64E00ADC986 /* Frameworks */,
 				D3FDEC751B67F64E00ADC986 /* Resources */,
 				96E3944E1B92276FFB2D7EB1 /* Copy Pods Resources */,
+				D35D06081B6D365300E4C72B /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -268,6 +288,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Remotly/Pods-Remotly-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D35D06081B6D365300E4C72B /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -276,8 +311,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3FDEC821B67F64E00ADC986 /* ViewController.swift in Sources */,
+				D35D06011B6A9C3400E4C72B /* TorrentInformation.swift in Sources */,
+				D35D06051B6D234E00E4C72B /* TransmissionGetRequest.swift in Sources */,
 				D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */,
+				D35D05FD1B6A9ABB00E4C72B /* TorrentsList.swift in Sources */,
 				D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */,
+				D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */,
+				D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +446,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Remotly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +462,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Remotly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
