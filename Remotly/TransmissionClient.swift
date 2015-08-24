@@ -13,21 +13,117 @@ class TransmissionClient
 {
     var sessionId:String!
     var torrentsInformation:[TorrentInformation] = []
+    var transmissionUrl:String = "http://192.168.0.9:9091/transmission/rpc"
     
     func loadTorrents(onCompletion: ((NSError!) -> Void)?)
     {
         torrentsInformation.removeAll(keepCapacity: true)
         loadWithSession(getTorrents, onCompletion: onCompletion)
     }
+
+    func removeTorrent(torrentId:Int, onCompletion:((NSError!) -> Void)?)
+    {
+        var err: NSError?
+        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
+        request.HTTPMethod = "POST"
+        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        
+        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-remove\", \"tag\": 39693 }"
+        request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+            let json:JSON = JSON(data: data)
+            
+            var result = json["result"].stringValue
+            
+            if(result != "success")
+            {
+                let internalError = NSError(domain: "somedomain1", code: 123, userInfo: nil)
+            }
+            
+            if(onCompletion != nil)
+            {
+                onCompletion!(error)
+            }
+            
+        })
+        
+        task.resume()
+    }
+    
+    func reasumeTorrent(torrentId:Int, onCompletion:((NSError!) -> Void)?)
+    {
+        var err: NSError?
+        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
+        request.HTTPMethod = "POST"
+        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        
+        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-start\", \"tag\": 39693 }"
+        request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+            let json:JSON = JSON(data: data)
+                        
+            var result = json["result"].stringValue
+            
+            if(result != "success")
+            {
+                let internalError = NSError(domain: "somedomain1", code: 123, userInfo: nil)
+            }
+            
+            if(onCompletion != nil)
+            {
+                onCompletion!(error)
+            }
+            
+        })
+        
+        task.resume()
+    }
+    
+    func pauseTorrent(torrentId:Int, onCompletion:((NSError!) -> Void)?)
+    {
+        var err: NSError?
+        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
+        request.HTTPMethod = "POST"
+        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        
+        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-stop\", \"tag\": 39693 }"
+        request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+            let json:JSON = JSON(data: data)
+            
+            var result = json["result"].stringValue
+            
+            if(result != "success")
+            {
+                let internalError = NSError(domain: "somedomain1", code: 123, userInfo: nil)
+            }
+            
+            if(onCompletion != nil)
+            {
+                onCompletion!(error)
+            }
+        })
+        
+        task.resume()
+    }
     
     private func getTorrents(onCompletion: ((NSError!) -> Void)?)
     {
         var err: NSError?
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.9:9091/transmission/rpc")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
         request.HTTPMethod = "POST"
         request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
         
-        var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\" ]}, \"method\": \"torrent-get\", \"tag\": 39693 }"
+        var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\" ]}, \"method\": \"torrent-get\", \"tag\": 39693 }"
         request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         let session = NSURLSession.sharedSession()
@@ -40,7 +136,19 @@ class TransmissionClient
             for (key: String, subJson: JSON) in torrents
             {
                 var torrentInformation = TorrentInformation()
+                torrentInformation.id = subJson["id"].intValue
+                torrentInformation.status = subJson["status"].intValue
                 torrentInformation.name = subJson["name"].stringValue
+                torrentInformation.totalSize = subJson["totalSize"].intValue
+                torrentInformation.percentDone = subJson["percentDone"].doubleValue
+                torrentInformation.leftUntilDone = subJson["leftUntilDone"].intValue
+                torrentInformation.sizeWhenDone = subJson["sizeWhenDone"].intValue
+                torrentInformation.peersConnected = subJson["peersConnected"].intValue
+                torrentInformation.peersSendingToUs = subJson["peersSendingToUs"].intValue
+                torrentInformation.rateDownload = subJson["rateDownload"].intValue
+                torrentInformation.rateUpload = subJson["rateUpload"].intValue
+                torrentInformation.isFinished = subJson["isFinished"].boolValue
+                torrentInformation.peersGettingFromUs = subJson["peersGettingFromUs"].intValue
                 
                 self.torrentsInformation.append(torrentInformation)
             }
@@ -61,7 +169,7 @@ class TransmissionClient
         }
         
         var err: NSError?
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.9:9091/transmission/rpc")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
         request.HTTPMethod = "POST"
         
         let requestBody = [""]

@@ -100,7 +100,7 @@ class TorrentsList: UITableViewController {
 
         return cell
     }
-
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -108,5 +108,41 @@ class TorrentsList: UITableViewController {
     {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?
+    {
+        let torrentInformation = transmissionClient.torrentsInformation[indexPath.row]
+
+        var runAction:UITableViewRowAction
+        if(torrentInformation.isPaused)
+        {
+            runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                self.transmissionClient.reasumeTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
+                    self.reloadTorrents()
+                })
+            })
+            runAction.backgroundColor = UIColor.lightGrayColor()
+        }
+        else
+        {
+            runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Pause" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+                self.transmissionClient.pauseTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
+                    self.reloadTorrents()
+                })
+            })
+            runAction.backgroundColor = UIColor.lightGrayColor()
+        }
+        
+        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.transmissionClient.removeTorrent(torrentInformation.id, onCompletion: nil)
+        })
+        
+        return [deleteAction, runAction]
     }
 }
