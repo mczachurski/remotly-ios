@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class TransmissionClient
 {
-    var sessionId:String!
+    static var sessionId:String!
     var torrentsInformation:[TorrentInformation] = []
     var transmissionUrl:String = "http://192.168.0.9:9091/transmission/rpc"
     
@@ -21,12 +21,66 @@ class TransmissionClient
         loadWithSession(getTorrents, onCompletion: onCompletion)
     }
 
+    func addTorrent(fileUrl:NSURL, isExternal:Bool, onCompletion:((NSError!) -> Void)?)
+    {
+        let dataContent = NSData(contentsOfURL: fileUrl)
+        
+        let base64Content = dataContent?.base64EncodedStringWithOptions(nil)
+        let fileName = fileUrl.lastPathComponent
+        
+        var err: NSError?
+        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
+        request.HTTPMethod = "POST"
+        request.addValue(TransmissionClient.sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        
+        var requestJson = ""
+        
+        if(isExternal == true)
+        {
+            requestJson += "{ \"arguments\": {\"filename\": \""
+            requestJson += fileUrl.absoluteString!
+            requestJson += "\" }, \"method\": \"torrent-add\", \"tag\": 39693 }"
+        }
+        else
+        {
+            requestJson += "{ \"arguments\": {\"metainfo\": \""
+            requestJson += base64Content!
+            requestJson += "\" }, \"method\": \"torrent-add\", \"tag\": 39693 }"
+        }
+        
+        request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        
+        let session = NSURLSession.sharedSession()
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+
+            var datastring = NSString(data:data, encoding:NSUTF8StringEncoding)
+
+            let json:JSON = JSON(data: data)
+            
+            var result = json["result"].stringValue
+            
+            if(result != "success")
+            {
+                let internalError = NSError(domain: "somedomain1", code: 123, userInfo: nil)
+            }
+            
+            if(onCompletion != nil)
+            {
+                onCompletion!(error)
+            }
+            
+        })
+        
+        task.resume()
+    }
+    
     func removeTorrent(torrentId:Int, onCompletion:((NSError!) -> Void)?)
     {
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
         request.HTTPMethod = "POST"
-        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        request.addValue(TransmissionClient.sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
         
         var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-remove\", \"tag\": 39693 }"
         request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -58,7 +112,7 @@ class TransmissionClient
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
         request.HTTPMethod = "POST"
-        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        request.addValue(TransmissionClient.sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
         
         var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-start\", \"tag\": 39693 }"
         request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -90,7 +144,7 @@ class TransmissionClient
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
         request.HTTPMethod = "POST"
-        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        request.addValue(TransmissionClient.sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
         
         var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-stop\", \"tag\": 39693 }"
         request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -121,7 +175,7 @@ class TransmissionClient
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
         request.HTTPMethod = "POST"
-        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        request.addValue(TransmissionClient.sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
         
         var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\" ]}, \"method\": \"torrent-get\", \"tag\": 39693 }"
         request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -162,7 +216,7 @@ class TransmissionClient
     
     private func loadWithSession(loading: ((((NSError!) -> Void)?) -> Void), onCompletion: ((NSError!) -> Void)?)
     {
-        if(sessionId != nil)
+        if(TransmissionClient.sessionId != nil)
         {
             loading(onCompletion)
             return
@@ -190,7 +244,7 @@ class TransmissionClient
                 var httpResponse = response as! NSHTTPURLResponse
                 if(httpResponse.statusCode == 409)
                 {
-                    self.sessionId = httpResponse.allHeaderFields["X-Transmission-Session-Id"] as! String
+                    TransmissionClient.sessionId = httpResponse.allHeaderFields["X-Transmission-Session-Id"] as! String
                     loading(onCompletion)
                     return
                 }

@@ -13,24 +13,23 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static var shouldRefreshList = false
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool
     {
-        if (url.isFileReferenceURL())
+        if(url.pathExtension == "torrent")
         {
-            if(url.pathExtension == "torrent")
-            {
-                NSLog("URL: \(url.absoluteString)")
-            }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let addTorrentNavigationController = storyboard.instantiateViewControllerWithIdentifier("AddTorrentNavigation") as! UIViewController
+            let addTorrentController = addTorrentNavigationController.childViewControllers[0] as! AddTorrentController
+            addTorrentController.fileUrl = url
+            
+            self.window?.rootViewController?.presentViewController(addTorrentNavigationController, animated: true, completion: nil)
         }
         
         return true
     }
-
-    //func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool
-    //{
-    //    return true
-    //}
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

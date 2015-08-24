@@ -30,66 +30,74 @@
                                             <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading from 12 of 212 peers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccU-eL-luB">
-                                            <rect key="frame" x="8" y="29" width="559" height="21"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="yfU-nS-ZPn"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 MB of 3.43 GB (21.4%) - remaining time 1h 32m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="189-8L-DtF">
-                                            <rect key="frame" x="8" y="60" width="551" height="21"/>
+                                            <rect key="frame" x="8" y="58" width="551" height="21"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="Up4-gP-Y4i"/>
+                                                <constraint firstAttribute="height" constant="21" id="Pzx-R9-Cpr"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mUO-Cp-U2s">
-                                            <rect key="frame" x="8" y="54" width="551" height="2"/>
+                                            <rect key="frame" x="8" y="52" width="551" height="2"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="2" id="TVn-2C-y6d"/>
+                                                <constraint firstAttribute="height" constant="2" id="hAl-db-QEC"/>
                                             </constraints>
                                         </progressView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DL: 447,5 KB/s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqM-I3-OJz">
-                                            <rect key="frame" x="32" y="84" width="130" height="21"/>
+                                            <rect key="frame" x="32" y="82" width="130" height="21"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="DbX-Si-Tea"/>
-                                                <constraint firstAttribute="width" constant="130" id="Y05-9O-aeH"/>
+                                                <constraint firstAttribute="width" constant="130" id="PpT-2v-tbY"/>
+                                                <constraint firstAttribute="height" constant="21" id="ero-5v-1nQ"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download" translatesAutoresizingMaskIntoConstraints="NO" id="BN3-cc-fz0">
-                                            <rect key="frame" x="8" y="84" width="16" height="16"/>
+                                            <rect key="frame" x="8" y="82" width="16" height="16"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="16" id="06b-1F-Fev"/>
-                                                <constraint firstAttribute="height" constant="16" id="cGT-LK-1A1"/>
+                                                <constraint firstAttribute="width" constant="16" id="Dq5-OP-dUk"/>
+                                                <constraint firstAttribute="height" constant="16" id="fCI-FO-VpD"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upload" translatesAutoresizingMaskIntoConstraints="NO" id="33Y-IR-2DG">
-                                            <rect key="frame" x="170" y="84" width="16" height="16"/>
+                                            <rect key="frame" x="170" y="82" width="16" height="16"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="16" id="2b4-EA-wTa"/>
-                                                <constraint firstAttribute="width" constant="16" id="JvG-4Z-cq6"/>
+                                                <constraint firstAttribute="height" constant="16" id="P51-Um-KqP"/>
+                                                <constraint firstAttribute="width" constant="16" id="TLN-NM-dAx"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UL: 23,5 KB/s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9T-W3-PAL">
-                                            <rect key="frame" x="194" y="84" width="130" height="21"/>
+                                            <rect key="frame" x="194" y="82" width="130" height="21"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="fX9-Gg-q98"/>
-                                                <constraint firstAttribute="width" constant="130" id="kCC-Mk-XD5"/>
+                                                <constraint firstAttribute="height" constant="21" id="bwf-Oe-4Qg"/>
+                                                <constraint firstAttribute="width" constant="130" id="s71-vx-ed6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pause" translatesAutoresizingMaskIntoConstraints="NO" id="nub-vi-tXx">
+                                            <rect key="frame" x="8" y="32" width="16" height="16"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="16" id="2aK-hw-KCj"/>
+                                                <constraint firstAttribute="width" constant="16" id="ZRZ-LG-0bz"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading from 12 of 212 peers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccU-eL-luB">
+                                            <rect key="frame" x="24" y="30" width="535" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="n9E-9y-Xs0"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -98,31 +106,34 @@
                                     </subviews>
                                     <animations/>
                                     <constraints>
+                                        <constraint firstItem="mUO-Cp-U2s" firstAttribute="trailing" secondItem="llE-g8-107" secondAttribute="trailingMargin" id="0On-Th-hXp"/>
                                         <constraint firstItem="3jy-eK-Nah" firstAttribute="top" secondItem="llE-g8-107" secondAttribute="topMargin" id="1rK-aR-45p"/>
-                                        <constraint firstItem="189-8L-DtF" firstAttribute="trailing" secondItem="llE-g8-107" secondAttribute="trailingMargin" id="3SG-5D-zf9"/>
-                                        <constraint firstItem="mUO-Cp-U2s" firstAttribute="trailing" secondItem="llE-g8-107" secondAttribute="trailingMargin" id="8t3-EI-84e"/>
-                                        <constraint firstItem="mUO-Cp-U2s" firstAttribute="top" secondItem="ccU-eL-luB" secondAttribute="bottom" constant="4" id="AbZ-Ku-ew1"/>
-                                        <constraint firstItem="mUO-Cp-U2s" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="NKN-As-q3j"/>
-                                        <constraint firstItem="qqM-I3-OJz" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="Niz-xk-jCI"/>
-                                        <constraint firstItem="189-8L-DtF" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="Pfl-ma-3Ip"/>
-                                        <constraint firstItem="ccU-eL-luB" firstAttribute="top" secondItem="3jy-eK-Nah" secondAttribute="bottom" id="Pla-bH-YSy"/>
-                                        <constraint firstItem="33Y-IR-2DG" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="VJk-wi-NoS"/>
-                                        <constraint firstItem="m9T-W3-PAL" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="X6M-c3-b5l"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="ccU-eL-luB" secondAttribute="trailing" constant="-8" id="XXR-SR-BYM"/>
-                                        <constraint firstItem="189-8L-DtF" firstAttribute="top" secondItem="mUO-Cp-U2s" secondAttribute="bottom" constant="4" id="a6i-9I-ENi"/>
+                                        <constraint firstItem="189-8L-DtF" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="1tV-nB-DZJ"/>
+                                        <constraint firstItem="mUO-Cp-U2s" firstAttribute="top" secondItem="ccU-eL-luB" secondAttribute="bottom" constant="1" id="3UP-C0-EaC"/>
+                                        <constraint firstItem="nub-vi-tXx" firstAttribute="top" secondItem="3jy-eK-Nah" secondAttribute="bottom" constant="3" id="6xu-8P-qWU"/>
+                                        <constraint firstItem="189-8L-DtF" firstAttribute="trailing" secondItem="llE-g8-107" secondAttribute="trailingMargin" id="B7u-nn-naH"/>
+                                        <constraint firstItem="33Y-IR-2DG" firstAttribute="leading" secondItem="qqM-I3-OJz" secondAttribute="trailing" constant="8" id="BFV-J3-Ms6"/>
+                                        <constraint firstItem="ccU-eL-luB" firstAttribute="leading" secondItem="nub-vi-tXx" secondAttribute="trailing" id="EUp-Rr-PpF"/>
+                                        <constraint firstItem="33Y-IR-2DG" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="G7s-Wr-FQC"/>
+                                        <constraint firstItem="qqM-I3-OJz" firstAttribute="leading" secondItem="BN3-cc-fz0" secondAttribute="trailing" constant="8" id="Od8-oD-mqx"/>
+                                        <constraint firstItem="ccU-eL-luB" firstAttribute="top" secondItem="3jy-eK-Nah" secondAttribute="bottom" constant="1" id="QJh-I2-f7d"/>
+                                        <constraint firstItem="qqM-I3-OJz" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="V7a-Gj-Ugm"/>
+                                        <constraint firstAttribute="trailing" secondItem="ccU-eL-luB" secondAttribute="trailing" constant="8" id="YfJ-bZ-gPZ"/>
+                                        <constraint firstItem="BN3-cc-fz0" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="cBP-FC-RI0"/>
                                         <constraint firstItem="3jy-eK-Nah" firstAttribute="trailing" secondItem="llE-g8-107" secondAttribute="trailingMargin" id="cC1-6P-m7V"/>
-                                        <constraint firstItem="ccU-eL-luB" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="frF-jW-5Va"/>
-                                        <constraint firstItem="BN3-cc-fz0" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="m7B-Bi-Bkm"/>
+                                        <constraint firstItem="m9T-W3-PAL" firstAttribute="top" secondItem="189-8L-DtF" secondAttribute="bottom" constant="3" id="gPE-8e-e0R"/>
+                                        <constraint firstItem="mUO-Cp-U2s" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="ldC-9w-FGU"/>
+                                        <constraint firstItem="189-8L-DtF" firstAttribute="top" secondItem="mUO-Cp-U2s" secondAttribute="bottom" constant="4" id="ma9-Al-u6Y"/>
                                         <constraint firstItem="3jy-eK-Nah" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="nhV-uK-0lx"/>
-                                        <constraint firstItem="qqM-I3-OJz" firstAttribute="leading" secondItem="BN3-cc-fz0" secondAttribute="trailing" constant="8" id="oa3-1z-ar2"/>
-                                        <constraint firstItem="BN3-cc-fz0" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="qT8-7l-TV8"/>
-                                        <constraint firstItem="33Y-IR-2DG" firstAttribute="leading" secondItem="qqM-I3-OJz" secondAttribute="trailing" constant="8" id="qgL-s0-3sP"/>
-                                        <constraint firstItem="m9T-W3-PAL" firstAttribute="leading" secondItem="33Y-IR-2DG" secondAttribute="trailing" constant="8" id="uHb-Pg-SEN"/>
+                                        <constraint firstItem="nub-vi-tXx" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="ofE-fM-9xT"/>
+                                        <constraint firstItem="m9T-W3-PAL" firstAttribute="leading" secondItem="33Y-IR-2DG" secondAttribute="trailing" constant="8" id="v30-0S-6om"/>
+                                        <constraint firstItem="BN3-cc-fz0" firstAttribute="leading" secondItem="llE-g8-107" secondAttribute="leadingMargin" id="ya7-Gy-qk5"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
                                     <outlet property="downloadOutlet" destination="qqM-I3-OJz" id="NmF-p5-7gT"/>
+                                    <outlet property="imageStatusOutlet" destination="nub-vi-tXx" id="u27-E6-KiX"/>
                                     <outlet property="nameOutlet" destination="3jy-eK-Nah" id="8QH-rg-rTK"/>
                                     <outlet property="peerOutlet" destination="ccU-eL-luB" id="rBv-Oo-1Xj"/>
                                     <outlet property="progressOutlet" destination="mUO-Cp-U2s" id="Ux0-9k-AR7"/>
@@ -138,11 +149,87 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Torrents" id="a9S-Wu-8se">
                         <barButtonItem key="leftBarButtonItem" image="settings" id="uuG-Lj-pue"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZSf-GE-3YL">
+                            <connections>
+                                <action selector="addNewTorrentAction:" destination="EI7-cr-xlV" id="8a2-pr-jjt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="5NF-py-fsY" kind="presentation" identifier="AddTorrent" id="5iY-G6-Il6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8e-5v-Cgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="935" y="-264"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UKy-07-qUO">
+            <objects>
+                <navigationController storyboardIdentifier="AddTorrentNavigation" id="5NF-py-fsY" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jag-yA-Kqc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cZr-rU-XNz" kind="relationship" relationship="rootViewController" id="glD-df-Xi3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ps4-yf-QMj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="935" y="520"/>
+        </scene>
+        <!--AddTorrent-->
+        <scene sceneID="cMr-pJ-rJ2">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8b6-4A-JcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="AddTorrent" title="AddTorrent" id="cZr-rU-XNz" customClass="AddTorrentController" customModule="Remotly" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="niv-UD-AVn"/>
+                        <viewControllerLayoutGuide type="bottom" id="1lM-OQ-e8t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XpR-Rc-2ps">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="File name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Krg-GX-4xG">
+                                <rect key="frame" x="16" y="72" width="568" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="[FileName]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRv-rh-TiT">
+                                <rect key="frame" x="16" y="93" width="568" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="New torrent" id="jh8-XX-qzb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WDo-6C-DWq">
+                            <connections>
+                                <action selector="cancelAction:" destination="cZr-rU-XNz" id="nGd-3h-1y6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FdV-sx-0u5">
+                            <connections>
+                                <action selector="doneAction:" destination="cZr-rU-XNz" id="a19-wW-tPj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="fileNameOutlet" destination="aRv-rh-TiT" id="6zm-AF-Nhz"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1656" y="520"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S0T-q4-iIz">
@@ -164,6 +251,7 @@
     </scenes>
     <resources>
         <image name="download" width="16" height="16"/>
+        <image name="pause" width="16" height="16"/>
         <image name="settings" width="25" height="25"/>
         <image name="upload" width="16" height="16"/>
     </resources>

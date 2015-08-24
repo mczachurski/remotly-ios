@@ -12,6 +12,15 @@ class TorrentsList: UITableViewController {
 
     var transmissionClient = TransmissionClient()
     
+    @IBAction func addNewTorrentAction(sender: AnyObject)
+    {        
+        var alert = UIAlertView(title: "Torrent url", message: "Please enter url to torrent file", delegate: self, cancelButtonTitle: "Cancel")
+        alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        alert.tag = 1
+        alert.addButtonWithTitle("Add")
+        alert.show()
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -25,6 +34,15 @@ class TorrentsList: UITableViewController {
         transmissionClient.loadTorrents(torrentsLoadedCallback)
     }
 
+    override func viewWillAppear(animated: Bool)
+    {
+        if(AppDelegate.shouldRefreshList)
+        {
+            AppDelegate.shouldRefreshList = false
+            reloadTorrents()
+        }
+    }
+    
     func torrentsLoadedCallback(error:NSError?)
     {
         if(error == nil)
