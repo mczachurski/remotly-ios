@@ -15,7 +15,6 @@
 		D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */; };
 		D35D06051B6D234E00E4C72B /* TransmissionGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06041B6D234E00E4C72B /* TransmissionGetRequest.swift */; };
 		D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */; };
-		D389A9BA1B8B72D9008210C7 /* AddTorrentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D389A9B91B8B72D9008210C7 /* AddTorrentController.swift */; };
 		D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */; };
 		D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */; };
 		D3FDEC821B67F64E00ADC986 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC811B67F64E00ADC986 /* ViewController.swift */; };
@@ -45,7 +44,6 @@
 		D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsCell.swift; sourceTree = "<group>"; };
 		D35D06041B6D234E00E4C72B /* TransmissionGetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionGetRequest.swift; sourceTree = "<group>"; };
 		D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		D389A9B91B8B72D9008210C7 /* AddTorrentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTorrentController.swift; sourceTree = "<group>"; };
 		D3FDEC771B67F64E00ADC986 /* Remotly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remotly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FDEC7B1B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 		D3FDEC791B67F64E00ADC986 /* Remotly */ = {
 			isa = PBXGroup;
 			children = (
-				D389A9B91B8B72D9008210C7 /* AddTorrentController.swift */,
 				D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */,
 				D35D05FC1B6A9ABB00E4C72B /* TorrentsList.swift */,
 				D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */,
@@ -280,7 +277,6 @@
 				D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */,
 				D35D05FD1B6A9ABB00E4C72B /* TorrentsList.swift in Sources */,
 				D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */,
-				D389A9BA1B8B72D9008210C7 /* AddTorrentController.swift in Sources */,
 				D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */,
 				D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */,
 				D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */,

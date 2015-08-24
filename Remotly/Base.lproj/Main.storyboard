@@ -155,81 +155,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="5NF-py-fsY" kind="presentation" identifier="AddTorrent" id="5iY-G6-Il6"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8e-5v-Cgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="935" y="-264"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="UKy-07-qUO">
-            <objects>
-                <navigationController storyboardIdentifier="AddTorrentNavigation" id="5NF-py-fsY" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jag-yA-Kqc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="cZr-rU-XNz" kind="relationship" relationship="rootViewController" id="glD-df-Xi3"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ps4-yf-QMj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="935" y="520"/>
-        </scene>
-        <!--AddTorrent-->
-        <scene sceneID="cMr-pJ-rJ2">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8b6-4A-JcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="AddTorrent" title="AddTorrent" id="cZr-rU-XNz" customClass="AddTorrentController" customModule="Remotly" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="niv-UD-AVn"/>
-                        <viewControllerLayoutGuide type="bottom" id="1lM-OQ-e8t"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XpR-Rc-2ps">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="File name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Krg-GX-4xG">
-                                <rect key="frame" x="16" y="72" width="568" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.62445282940000002" green="0.61873978380000005" blue="0.66001850370000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="[FileName]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRv-rh-TiT">
-                                <rect key="frame" x="16" y="93" width="568" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="New torrent" id="jh8-XX-qzb">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="WDo-6C-DWq">
-                            <connections>
-                                <action selector="cancelAction:" destination="cZr-rU-XNz" id="nGd-3h-1y6"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="FdV-sx-0u5">
-                            <connections>
-                                <action selector="doneAction:" destination="cZr-rU-XNz" id="a19-wW-tPj"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="fileNameOutlet" destination="aRv-rh-TiT" id="6zm-AF-Nhz"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1656" y="520"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S0T-q4-iIz">

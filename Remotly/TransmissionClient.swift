@@ -23,11 +23,6 @@ class TransmissionClient
 
     func addTorrent(fileUrl:NSURL, isExternal:Bool, onCompletion:((NSError!) -> Void)?)
     {
-        let dataContent = NSData(contentsOfURL: fileUrl)
-        
-        let base64Content = dataContent?.base64EncodedStringWithOptions(nil)
-        let fileName = fileUrl.lastPathComponent
-        
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
         request.HTTPMethod = "POST"
@@ -43,6 +38,9 @@ class TransmissionClient
         }
         else
         {
+            let dataContent = NSData(contentsOfURL: fileUrl)
+            let base64Content = dataContent?.base64EncodedStringWithOptions(nil)
+            
             requestJson += "{ \"arguments\": {\"metainfo\": \""
             requestJson += base64Content!
             requestJson += "\" }, \"method\": \"torrent-add\", \"tag\": 39693 }"

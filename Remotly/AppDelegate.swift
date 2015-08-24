@@ -10,25 +10,48 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
 
     var window: UIWindow?
     static var shouldRefreshList = false
-
+    var fileUrl:NSURL?
+    
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool
     {
         if(url.pathExtension == "torrent")
         {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            fileUrl = url
             
-            let addTorrentNavigationController = storyboard.instantiateViewControllerWithIdentifier("AddTorrentNavigation") as! UIViewController
-            let addTorrentController = addTorrentNavigationController.childViewControllers[0] as! AddTorrentController
-            addTorrentController.fileUrl = url
-            
-            self.window?.rootViewController?.presentViewController(addTorrentNavigationController, animated: true, completion: nil)
+            var fileName = fileUrl?.lastPathComponent!
+            var alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName!)'?", delegate: self, cancelButtonTitle: "Cancel")
+            alert.alertViewStyle = UIAlertViewStyle.Default
+            alert.tag = 1
+            alert.addButtonWithTitle("Yes")
+            alert.show()
         }
         
         return true
+    }
+    
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
+    {
+        if(alertView.tag == 1)
+        {
+            if(buttonIndex == 1)
+            {
+                var transmissionClient = TransmissionClient()
+                transmissionClient.addTorrent(fileUrl!, isExternal:false, onCompletion: { (error) -> Void in
+                    if(error != nil)
+                    {
+                        // Print error.
+                    }
+                    else
+                    {
+                        AppDelegate.shouldRefreshList = true
+                    }
+                })
+            }
+        }
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

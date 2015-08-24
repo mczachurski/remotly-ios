@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TorrentsList: UITableViewController {
+class TorrentsList: UITableViewController, UIAlertViewDelegate {
 
     var transmissionClient = TransmissionClient()
     
@@ -19,6 +19,31 @@ class TorrentsList: UITableViewController {
         alert.tag = 1
         alert.addButtonWithTitle("Add")
         alert.show()
+    }
+    
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
+    {
+        if(alertView.tag == 1)
+        {
+            if(buttonIndex == 1)
+            {
+                var textfield = alertView.textFieldAtIndex(0)
+                var fileString = textfield?.text
+                var fileUrl = NSURL(string: fileString!)
+
+                var transmissionClient = TransmissionClient()
+                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
+                    if(error != nil)
+                    {
+                        // Print error.
+                    }
+                    else
+                    {
+                        AppDelegate.shouldRefreshList = true
+                    }
+                })
+            }
+        }
     }
     
     override func viewDidLoad()
