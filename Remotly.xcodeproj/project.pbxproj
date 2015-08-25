@@ -21,6 +21,8 @@
 		D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */; };
 		D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61221B8C9652006B8762 /* ServersCell.swift */; };
 		D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61241B8C99A0006B8762 /* Configuration.swift */; };
+		D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */; };
+		D3DA61291B8CA431006B8762 /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61281B8CA431006B8762 /* Torrent.swift */; };
 		D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */; };
 		D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */; };
 		D3FDEC851B67F64E00ADC986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FDEC831B67F64E00ADC986 /* Main.storyboard */; };
@@ -55,6 +57,8 @@
 		D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsHandler.swift; sourceTree = "<group>"; };
 		D3DA61221B8C9652006B8762 /* ServersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersCell.swift; sourceTree = "<group>"; };
 		D3DA61241B8C99A0006B8762 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatHandler.swift; sourceTree = "<group>"; };
+		D3DA61281B8CA431006B8762 /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
 		D3FDEC771B67F64E00ADC986 /* Remotly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remotly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FDEC7B1B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			children = (
 				D3DA61241B8C99A0006B8762 /* Configuration.swift */,
 				D3DA611D1B8C65AA006B8762 /* Server.swift */,
+				D3DA61281B8CA431006B8762 /* Torrent.swift */,
 				D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */,
 			);
 			name = CoreData;
@@ -137,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */,
+				D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -332,9 +338,11 @@
 				D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */,
 				D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */,
 				D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */,
+				D3DA61291B8CA431006B8762 /* Torrent.swift in Sources */,
 				D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */,
 				D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */,
 				D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */,
+				D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */,
 				D3DA611E1B8C65AA006B8762 /* Server.swift in Sources */,
 				D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */,
 				D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */,

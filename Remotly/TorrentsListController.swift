@@ -163,8 +163,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
 
         var runAction:UITableViewRowAction
         if(torrentInformation.isPaused)
-        {
-            runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        {            
+            runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume", handler: { (action, indexPath) -> Void in
                 self.transmissionClient.reasumeTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
                     self.reloadTorrents()
                 })

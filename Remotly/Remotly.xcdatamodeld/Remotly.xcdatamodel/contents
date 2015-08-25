@@ -9,8 +9,25 @@
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Torrent" representedClassName="PRODUCT_MODULE_NAME.Torrent" syncable="YES">
+        <attribute name="hashString" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isFinished" attributeType="Boolean" syncable="YES"/>
+        <attribute name="leftUntilDone" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="peersConnected" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="peersGettingFromUs" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="peersSendingToUs" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="percentDone" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rateDownload" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="rateUpload" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sizeWhenDone" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalSize" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Server" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Configuration" positionX="-45" positionY="36" width="128" height="60"/>
+        <element name="Torrent" positionX="-27" positionY="54" width="128" height="255"/>
     </elements>
 </model>

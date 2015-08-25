@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TorrentStatusEnum:Int {
+enum TorrentStatusEnum:Int32 {
     case Paused = 0
     case Downloading = 4
     case Finished = 6

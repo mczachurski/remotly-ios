@@ -83,7 +83,7 @@ class TransmissionClient
         task.resume()
     }
     
-    func removeTorrent(torrentId:Int, onCompletion:((NSError!) -> Void)?)
+    func removeTorrent(torrentId:Int32, onCompletion:((NSError!) -> Void)?)
     {
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
@@ -115,7 +115,7 @@ class TransmissionClient
         task.resume()
     }
     
-    func reasumeTorrent(torrentId:Int, onCompletion:((NSError!) -> Void)?)
+    func reasumeTorrent(torrentId:Int32, onCompletion:((NSError!) -> Void)?)
     {
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
@@ -147,7 +147,7 @@ class TransmissionClient
         task.resume()
     }
     
-    func pauseTorrent(torrentId:Int, onCompletion:((NSError!) -> Void)?)
+    func pauseTorrent(torrentId:Int32, onCompletion:((NSError!) -> Void)?)
     {
         var err: NSError?
         let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
@@ -185,7 +185,7 @@ class TransmissionClient
         request.HTTPMethod = "POST"
         request.addValue(TransmissionClient.sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
         
-        var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\" ]}, \"method\": \"torrent-get\", \"tag\": 39693 }"
+        var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\", \"hashString\" ]}, \"method\": \"torrent-get\", \"tag\": 39693 }"
         request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         let session = NSURLSession.sharedSession()
@@ -198,19 +198,20 @@ class TransmissionClient
             for (key: String, subJson: JSON) in torrents
             {
                 var torrentInformation = TorrentInformation()
-                torrentInformation.id = subJson["id"].intValue
-                torrentInformation.status = subJson["status"].intValue
+                torrentInformation.id = subJson["id"].int32Value
+                torrentInformation.status = subJson["status"].int32Value
                 torrentInformation.name = subJson["name"].stringValue
-                torrentInformation.totalSize = subJson["totalSize"].intValue
+                torrentInformation.totalSize = subJson["totalSize"].int32Value
                 torrentInformation.percentDone = subJson["percentDone"].doubleValue
-                torrentInformation.leftUntilDone = subJson["leftUntilDone"].intValue
-                torrentInformation.sizeWhenDone = subJson["sizeWhenDone"].intValue
-                torrentInformation.peersConnected = subJson["peersConnected"].intValue
-                torrentInformation.peersSendingToUs = subJson["peersSendingToUs"].intValue
-                torrentInformation.rateDownload = subJson["rateDownload"].intValue
-                torrentInformation.rateUpload = subJson["rateUpload"].intValue
+                torrentInformation.leftUntilDone = subJson["leftUntilDone"].int32Value
+                torrentInformation.sizeWhenDone = subJson["sizeWhenDone"].int32Value
+                torrentInformation.peersConnected = subJson["peersConnected"].int32Value
+                torrentInformation.peersSendingToUs = subJson["peersSendingToUs"].int32Value
+                torrentInformation.rateDownload = subJson["rateDownload"].int32Value
+                torrentInformation.rateUpload = subJson["rateUpload"].int32Value
                 torrentInformation.isFinished = subJson["isFinished"].boolValue
-                torrentInformation.peersGettingFromUs = subJson["peersGettingFromUs"].intValue
+                torrentInformation.peersGettingFromUs = subJson["peersGettingFromUs"].int32Value
+                torrentInformation.hashString = subJson["hashString"].stringValue
                 
                 self.torrentsInformation.append(torrentInformation)
             }
