@@ -18,6 +18,7 @@ class ServerDetailsController: UITableViewController
     @IBOutlet weak var userNameOutlet: UITextField!
     @IBOutlet weak var passwordOutlet: UITextField!
     @IBOutlet weak var isDefaultOutlet: UISwitch!
+    @IBOutlet weak var saveButtonOutlet: UIBarButtonItem!
     
     override func viewWillAppear(animated: Bool)
     {
@@ -32,6 +33,20 @@ class ServerDetailsController: UITableViewController
             var configuration = CoreDataHandler.getConfiguration(managedContext)
             isDefaultOutlet.on = server!.objectID == configuration.defaultServer?.objectID
         }
+        
+        checkValidData(self)
+    }
+    
+    @IBAction func checkValidData(sender: AnyObject)
+    {
+        if(isValidData())
+        {
+            saveButtonOutlet.enabled = true
+        }
+        else
+        {
+            saveButtonOutlet.enabled = false
+        }
     }
     
     @IBAction func cancelAction(sender: AnyObject)
@@ -41,7 +56,7 @@ class ServerDetailsController: UITableViewController
     
     @IBAction func saveAction(sender: AnyObject)
     {
-        if(!validateData())
+        if(!isValidData())
         {
             return
         }
@@ -76,27 +91,17 @@ class ServerDetailsController: UITableViewController
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    private func validateData() -> Bool
+    private func isValidData() -> Bool
     {
         var isValid = true
         if(nameOutlet.text.isEmpty)
         {
-            nameOutlet.backgroundColor = ColorsHandler.getValidationErrorColor()
             isValid = false
-        }
-        else
-        {
-            nameOutlet.backgroundColor = UIColor.whiteColor()
         }
         
         if(addressOutlet.text.isEmpty)
         {
-            addressOutlet.backgroundColor = ColorsHandler.getValidationErrorColor()
             isValid = false
-        }
-        else
-        {
-            addressOutlet.backgroundColor = UIColor.whiteColor()
         }
         
         return isValid

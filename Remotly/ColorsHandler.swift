@@ -20,9 +20,4 @@ class ColorsHandler
     {
         return UIColor(red: 159.0/255.0, green: 158.0/255.0, blue: 168.0/255.0, alpha: 1.0)
     }
-    
-    static func getValidationErrorColor() -> UIColor
-    {
-        return UIColor(red: 255.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1.0)
-    }
 }
