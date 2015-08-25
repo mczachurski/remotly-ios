@@ -1,16 +1,16 @@
 //
-//  TorrentsList.swift
-//  
+//  TorrentsListController.swift
+//  Remotly
 //
 //  Created by Marcin Czachurski on 30.07.2015.
-//
+//  Copyright (c) 2015 SunLine Technologies. All rights reserved.
 //
 
 import UIKit
 
-class TorrentsList: UITableViewController, UIAlertViewDelegate {
+class TorrentsListController: UITableViewController, UIAlertViewDelegate {
 
-    var transmissionClient = TransmissionClient()
+    var transmissionClient:TransmissionClient!
     
     @IBAction func addNewTorrentAction(sender: AnyObject)
     {        
@@ -31,7 +31,6 @@ class TorrentsList: UITableViewController, UIAlertViewDelegate {
                 var fileString = textfield?.text
                 var fileUrl = NSURL(string: fileString!)
 
-                var transmissionClient = TransmissionClient()
                 transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
                     if(error != nil)
                     {
@@ -52,7 +51,7 @@ class TorrentsList: UITableViewController, UIAlertViewDelegate {
         self.clearsSelectionOnViewWillAppear = false
         
         self.refreshControl = UIRefreshControl()
-        self.refreshControl!.backgroundColor = UIColor(red: 231.0/255.0, green: 44.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+        self.refreshControl!.backgroundColor = ColorsHandler.getMainColor()
         self.refreshControl!.tintColor = UIColor.whiteColor()
         self.refreshControl!.addTarget(self, action: "reloadTorrents", forControlEvents: UIControlEvents.ValueChanged)
         
@@ -170,7 +169,7 @@ class TorrentsList: UITableViewController, UIAlertViewDelegate {
                     self.reloadTorrents()
                 })
             })
-            runAction.backgroundColor = UIColor.lightGrayColor()
+            runAction.backgroundColor = ColorsHandler.getGrayColor()
         }
         else
         {
@@ -179,7 +178,7 @@ class TorrentsList: UITableViewController, UIAlertViewDelegate {
                     self.reloadTorrents()
                 })
             })
-            runAction.backgroundColor = UIColor.lightGrayColor()
+            runAction.backgroundColor = ColorsHandler.getGrayColor()
         }
         
         var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in

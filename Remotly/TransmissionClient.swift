@@ -13,7 +13,17 @@ class TransmissionClient
 {
     static var sessionId:String!
     var torrentsInformation:[TorrentInformation] = []
-    var transmissionUrl:String = "http://192.168.0.9:9091/transmission/rpc"
+    var transmissionUrl:String = ""
+    
+    init(address:String)
+    {
+        if(address.rangeOfString("http://", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) == nil)
+        {
+            transmissionUrl = "http://" + address
+        }
+        
+        transmissionUrl = transmissionUrl + "/transmission/rpc"
+    }
     
     func loadTorrents(onCompletion: ((NSError!) -> Void)?)
     {

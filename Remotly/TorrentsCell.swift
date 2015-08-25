@@ -1,9 +1,9 @@
 //
 //  TorrentsCell.swift
-//  
+//  Remotly
 //
-//  Created by Marcin Czachurski on 31.07.2015.
-//
+//  Created by Marcin Czachurski on 30.07.2015.
+//  Copyright (c) 2015 SunLine Technologies. All rights reserved.
 //
 
 import UIKit
@@ -35,12 +35,12 @@ class TorrentsCell: UITableViewCell
         else if (torrentInformation.isPaused)
         {
             imageStatusOutlet.image = UIImage(named: "pause")
-            nameOutlet.textColor = UIColor(red: 159.0/255.0, green: 158.0/255.0, blue: 168.0/255.0, alpha: 1.0)
+            nameOutlet.textColor = ColorsHandler.getGrayColor()
         }
         else
         {
             imageStatusOutlet.image = UIImage(named: "play2")
-            nameOutlet.textColor = UIColor(red: 159.0/255.0, green: 158.0/255.0, blue: 168.0/255.0, alpha: 1.0)
+            nameOutlet.textColor = ColorsHandler.getGrayColor()
         }
     }
     

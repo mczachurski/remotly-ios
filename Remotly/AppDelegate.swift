@@ -35,23 +35,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
     {
-        if(alertView.tag == 1)
+        if(alertView.tag == 1 && buttonIndex == 1)
         {
-            if(buttonIndex == 1)
+            var managedContext = CoreDataHandler.getManagedObjectContext()
+            var configuration = CoreDataHandler.getConfiguration(managedContext)
+            
+            if(configuration.defaultServer == nil)
             {
-                var transmissionClient = TransmissionClient()
-                transmissionClient.addTorrent(fileUrl!, isExternal:false, onCompletion: { (error) -> Void in
-                    if(error != nil)
-                    {
-                        // Print error.
-                    }
-                    else
-                    {
-                        AppDelegate.shouldRefreshList = true
-                    }
-                })
+                var alert = UIAlertView(title: "Error", message: "You have to set default server.", delegate: self, cancelButtonTitle: "OK")
+                alert.show()
+                return
             }
+            
+            downloadTorrent(configuration.defaultServer!)
         }
+    }
+    
+    private func downloadTorrent(server:Server)
+    {
+        var transmissionClient = TransmissionClient(address: server.address)
+        transmissionClient.addTorrent(fileUrl!, isExternal:false, onCompletion: { (error) -> Void in
+            if(error != nil)
+            {
+                // Print error.
+            }
+            else
+            {
+                AppDelegate.shouldRefreshList = true
+            }
+        })
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
