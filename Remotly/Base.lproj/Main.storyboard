@@ -300,7 +300,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-Ap-tao">
-                                                    <rect key="frame" x="525" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="543" y="6" width="51" height="31"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="Ftg-og-fyD"/>
@@ -311,10 +311,16 @@
                                             <animations/>
                                             <constraints>
                                                 <constraint firstItem="v0K-dC-nV3" firstAttribute="leading" secondItem="ou3-cU-Bnp" secondAttribute="leadingMargin" id="DTz-Xr-udi"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="HaL-Ap-tao" secondAttribute="trailing" constant="18" id="GHC-tk-7yc"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HaL-Ap-tao" secondAttribute="trailing" constant="6" id="GHC-tk-7yc"/>
+                                                <constraint firstItem="HaL-Ap-tao" firstAttribute="trailing" secondItem="ou3-cU-Bnp" secondAttribute="trailingMargin" id="fc5-zh-jZe"/>
                                                 <constraint firstAttribute="centerY" secondItem="v0K-dC-nV3" secondAttribute="centerY" id="tge-4i-RKs"/>
                                                 <constraint firstItem="HaL-Ap-tao" firstAttribute="top" secondItem="ou3-cU-Bnp" secondAttribute="topMargin" constant="-2" id="yU0-Xz-4cp"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="GHC-tk-7yc"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>

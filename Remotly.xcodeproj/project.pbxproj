@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */; };
 		D32BF18B1B8B042D0027AC01 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = D32BF18A1B8B042D0027AC01 /* ReadMe.txt */; };
 		D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */; };
 		D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Remotly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionErrorsHandler.swift; sourceTree = "<group>"; };
 		D32BF18A1B8B042D0027AC01 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentStatusEnum.swift; sourceTree = "<group>"; };
 		D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsListController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		D3DA61131B8C4879006B8762 /* Transmission */ = {
 			isa = PBXGroup;
 			children = (
+				D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */,
 				D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */,
 				D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */,
 				D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */,
@@ -348,6 +351,7 @@
 				D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */,
 				D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */,
 				D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */,
+				D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +430,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -464,6 +469,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

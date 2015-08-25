@@ -34,7 +34,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
                 transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
                     if(error != nil)
                     {
-                        // Print error.
+                        var alert = UIAlertView(title: "Error", message: "Error during adding torrent file", delegate: nil, cancelButtonTitle: "OK")
+                        alert.show()
                     }
                     else
                     {
@@ -55,7 +56,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
         self.refreshControl!.tintColor = UIColor.whiteColor()
         self.refreshControl!.addTarget(self, action: "reloadTorrents", forControlEvents: UIControlEvents.ValueChanged)
         
-        transmissionClient.loadTorrents(torrentsLoadedCallback)
+        transmissionClient.getTorrents(torrentsLoadedCallback)
     }
 
     override func viewWillAppear(animated: Bool)
@@ -77,7 +78,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
     
     func reloadTorrents()
     {
-        transmissionClient.loadTorrents(torrentsLoadedCallback)
+        transmissionClient.getTorrents(torrentsLoadedCallback)
     }
     
     func reloadData()

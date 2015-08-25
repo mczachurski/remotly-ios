@@ -15,7 +15,7 @@ class FormatHandler
         return round(value * divisor) / divisor
     }
     
-    static func formatSizeUnits(size:Int32) -> String
+    static func formatSizeUnits(size:Int64) -> String
     {
         var sizeString = ""
         if (size >= 1000000000)
@@ -49,7 +49,7 @@ class FormatHandler
         return sizeString;
     }
     
-    static func formatTime(seconds:Int32) -> String
+    static func formatTime(seconds:Int64) -> String
     {
         var timeString = ""
         if (seconds >= 86400)

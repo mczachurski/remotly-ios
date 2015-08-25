@@ -47,17 +47,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
                 return
             }
             
-            downloadTorrent(configuration.defaultServer!)
+            addTorrent(configuration.defaultServer!)
         }
     }
     
-    private func downloadTorrent(server:Server)
+    private func addTorrent(server:Server)
     {
         var transmissionClient = TransmissionClient(address: server.address)
         transmissionClient.addTorrent(fileUrl!, isExternal:false, onCompletion: { (error) -> Void in
             if(error != nil)
             {
-                // Print error.
+                var alert = UIAlertView(title: "Error", message: "Error during adding torrent file", delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
             }
             else
             {

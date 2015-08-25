@@ -10,17 +10,17 @@ import Foundation
 
 class TorrentInformation
 {
-    var id:Int32 = 0
+    var id:Int64 = 0
     var name:String = ""
-    var totalSize:Int32 = 0
+    var totalSize:Int64 = 0
     var percentDone:Double = 0.0
-    var leftUntilDone:Int32 = 0
-    var sizeWhenDone:Int32 = 0
+    var leftUntilDone:Int64 = 0
+    var sizeWhenDone:Int64 = 0
     var peersConnected:Int32 = 0
     var peersSendingToUs:Int32 = 0
     var peersGettingFromUs:Int32 = 0
-    var rateDownload:Int32 = 0
-    var rateUpload:Int32 = 0
+    var rateDownload:Int64 = 0
+    var rateUpload:Int64 = 0
     var isFinished:Bool = false
     var status:Int32 = 0
     var hashString:String = ""
@@ -32,16 +32,16 @@ class TorrentInformation
         }
     }
     
-    var downloadedSize: Int32 {
+    var downloadedSize: Int64 {
         get {
             let downloaded = sizeWhenDone - leftUntilDone
             return downloaded
         }
     }
     
-    var secondsToFinish: Int32 {
+    var secondsToFinish: Int64 {
         get {
-            var seconds:Int32 = 0
+            var seconds:Int64 = 0
             if(rateDownload > 0)
             {
                 seconds = leftUntilDone / rateDownload
