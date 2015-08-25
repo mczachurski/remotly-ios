@@ -34,7 +34,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
                 transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
                     if(error != nil)
                     {
-                        var alert = UIAlertView(title: "Error", message: "Error during adding torrent file", delegate: nil, cancelButtonTitle: "OK")
+                        var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
                         alert.show()
                     }
                     else
@@ -70,10 +70,14 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
     
     func torrentsLoadedCallback(error:NSError?)
     {
-        if(error == nil)
+        if(error != nil)
         {
-            reloadData()
+            var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: self, cancelButtonTitle: "OK")
+            alert.show()
+            return
         }
+
+        reloadData()
     }
     
     func reloadTorrents()
@@ -167,6 +171,13 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
         {            
             runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume", handler: { (action, indexPath) -> Void in
                 self.transmissionClient.reasumeTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
+                    
+                    if(error != nil)
+                    {
+                        var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                        alert.show()
+                    }
+                    
                     self.reloadTorrents()
                 })
             })
@@ -176,6 +187,13 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
         {
             runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Pause" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
                 self.transmissionClient.pauseTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
+                    
+                    if(error != nil)
+                    {
+                        var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                        alert.show()
+                    }
+                    
                     self.reloadTorrents()
                 })
             })
@@ -183,7 +201,16 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
         }
         
         var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            self.transmissionClient.removeTorrent(torrentInformation.id, onCompletion: nil)
+            self.transmissionClient.removeTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
+                
+                if(error != nil)
+                {
+                    var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                    alert.show()
+                }
+                
+                self.reloadTorrents()
+            })
         })
         
         return [deleteAction, runAction]

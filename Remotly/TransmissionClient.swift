@@ -72,10 +72,7 @@ class TransmissionClient
                 }
             }
             
-            if(onCompletion != nil)
-            {
-                onCompletion!(internalError)
-            }
+            onCompletion?(internalError)
         })
     }
     
@@ -108,10 +105,7 @@ class TransmissionClient
                 }
             }
             
-            if(onCompletion != nil)
-            {
-                onCompletion!(internalError)
-            }
+            onCompletion?(internalError)
         })
     }
     
@@ -144,10 +138,7 @@ class TransmissionClient
                 }
             }
             
-            if(onCompletion != nil)
-            {
-                onCompletion!(internalError)
-            }
+            onCompletion?(internalError)
         })
     }
     
@@ -180,10 +171,7 @@ class TransmissionClient
                 }
             }
             
-            if(onCompletion != nil)
-            {
-                onCompletion!(internalError)
-            }
+            onCompletion?(internalError)
         })
     }
     
@@ -243,10 +231,7 @@ class TransmissionClient
                 }
             }
             
-            if(onCompletion != nil)
-            {
-                onCompletion!(internalError)
-            }
+            onCompletion?(internalError)
         })
     }
     
@@ -254,42 +239,48 @@ class TransmissionClient
     
     private func sendRequest(requestJson: String, completionHandler: ((NSData!, NSURLResponse!, NSError!) -> Void)?)
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
-        request.HTTPMethod = "POST"
-        
-        let sessionId = getSessionIdForServer()
-        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
-        
-        request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        let request = sendRequestPrepareRequest(requestJson)
         let session = NSURLSession.sharedSession()
-        
         let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             
-            if(self.checkIfErrorIsMissingSessionId(response))
+            if(error != nil)
             {
-                // If error was missing session Id we have to do request again (now we should have proper session Id).
-                let sessionId = self.getSessionIdForServer()
-                request.setValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
-                
-                let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-                    if(completionHandler != nil)
-                    {
-                        completionHandler!(data, response, error)
-                    }
-                })
-                
-                task.resume();
+                completionHandler?(data, response, error)
             }
             else
             {
-                if(completionHandler != nil)
+                if(self.checkIfErrorIsMissingSessionId(response))
                 {
-                    completionHandler!(data, response, error)
+                    // If error was missing session Id we have to do request again (now we should have proper session Id).
+                    let sessionId = self.getSessionIdForServer()
+                    request.setValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+                    
+                    let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+                        completionHandler?(data, response, error)
+                    })
+                    
+                    task.resume();
+                }
+                else
+                {
+                    completionHandler?(data, response, error)
                 }
             }
         })
         
         task.resume();
+    }
+    
+    private func sendRequestPrepareRequest(requestJson: String) -> NSMutableURLRequest
+    {
+        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
+        request.HTTPMethod = "POST"
+        
+        let sessionId = getSessionIdForServer()
+        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        
+        return request
     }
     
     // MARK: Manage sessions

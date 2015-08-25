@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         transmissionClient.addTorrent(fileUrl!, isExternal:false, onCompletion: { (error) -> Void in
             if(error != nil)
             {
-                var alert = UIAlertView(title: "Error", message: "Error during adding torrent file", delegate: nil, cancelButtonTitle: "OK")
+                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
                 alert.show()
             }
             else
