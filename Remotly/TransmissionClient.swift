@@ -13,8 +13,17 @@ class TransmissionClient
 {
     static var sessionIds:Dictionary<String, String> = Dictionary<String,String>()
     var transmissionUrl:String = ""
+    var userName:String = ""
+    var password:String = ""
     
-    init(address:String)
+    init(address:String, userName:String, password:String)
+    {
+        prepareTransmissionUrl(address)
+        self.userName = userName
+        self.password = password
+    }
+    
+    private func prepareTransmissionUrl(address:String)
     {
         if(address.rangeOfString("http://", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) == nil)
         {
@@ -275,6 +284,16 @@ class TransmissionClient
         
         let sessionId = getSessionIdForServer()
         request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        
+        if(!userName.isEmpty && !password.isEmpty)
+        {            
+            let credentials = "\(userName):\(password)"
+            let credentialsData = credentials.dataUsingEncoding(NSUTF8StringEncoding)
+            let authorization = credentialsData?.base64EncodedStringWithOptions(nil)
+            
+            request.setValue("Basic \(authorization!)", forHTTPHeaderField: "Authorization")
+        }
+
         request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         return request

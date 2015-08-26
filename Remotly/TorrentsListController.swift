@@ -69,7 +69,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     override func viewDidLoad()
     {
         context = CoreDataHandler.getManagedObjectContext()
-        transmissionClient = TransmissionClient(address: server.address)
+        transmissionClient = TransmissionClient(address: server.address, userName: server.userName, password: server.password)
         
         super.viewDidLoad()
         

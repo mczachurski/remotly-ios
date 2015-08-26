@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     
     private func addTorrent(server:Server)
     {
-        var transmissionClient = TransmissionClient(address: server.address)
+        var transmissionClient = TransmissionClient(address: server.address, userName:server.userName, password:server.password)
         transmissionClient.addTorrent(fileUrl!, isExternal:false, onCompletion: { (error) -> Void in
             if(error != nil)
             {
