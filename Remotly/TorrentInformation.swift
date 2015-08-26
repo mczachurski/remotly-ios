@@ -24,4 +24,5 @@ class TorrentInformation
     var isFinished:Bool = false
     var status:Int32 = 0
     var hashString:String = ""
+    var addedDate: NSTimeInterval = 0
 }

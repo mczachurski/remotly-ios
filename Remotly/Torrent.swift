@@ -2,7 +2,7 @@
 //  Torrent.swift
 //  
 //
-//  Created by Marcin Czachurski on 25.08.2015.
+//  Created by Marcin Czachurski on 26.08.2015.
 //
 //
 
@@ -25,5 +25,7 @@ class Torrent: NSManagedObject {
     @NSManaged var sizeWhenDone: Int64
     @NSManaged var status: Int32
     @NSManaged var totalSize: Int64
+    @NSManaged var addedDate: NSTimeInterval
     @NSManaged var server: Server
+
 }

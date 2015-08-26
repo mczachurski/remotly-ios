@@ -17,16 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool
     {
-        if(url.pathExtension == "torrent")
+        fileUrl = url
+        
+        if(fileUrl == nil)
         {
-            fileUrl = url
-            
-            var fileName = fileUrl?.lastPathComponent!
-            var alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName!)'?", delegate: self, cancelButtonTitle: "Cancel")
-            alert.alertViewStyle = UIAlertViewStyle.Default
-            alert.tag = 1
-            alert.addButtonWithTitle("Yes")
-            alert.show()
+            return false
+        }
+        
+        if(fileUrl!.pathExtension == "torrent")
+        {
+            addTorrentViaFile()
+        }
+        else if(fileUrl!.scheme == "magnet")
+        {
+            addTorrentViaMagnetLink()
         }
         
         return true
@@ -36,24 +40,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     {
         if(alertView.tag == 1 && buttonIndex == 1)
         {
-            var managedContext = CoreDataHandler.getManagedObjectContext()
-            var configuration = CoreDataHandler.getConfiguration(managedContext)
-            
-            if(configuration.defaultServer == nil)
+            if let defaultServer = getDefaultServer()
             {
-                var alert = UIAlertView(title: "Error", message: "You have to set default server.", delegate: self, cancelButtonTitle: "OK")
-                alert.show()
-                return
+                addTorrent(defaultServer, isExternal: false)
             }
-            
-            addTorrent(configuration.defaultServer!)
+        }
+        else if(alertView.tag == 2 && buttonIndex == 1)
+        {
+            if let defaultServer = getDefaultServer()
+            {
+                addTorrent(defaultServer, isExternal: true)
+            }
         }
     }
     
-    private func addTorrent(server:Server)
+    private func getDefaultServer() -> Server?
+    {
+        var managedContext = CoreDataHandler.getManagedObjectContext()
+        var configuration = CoreDataHandler.getConfiguration(managedContext)
+        
+        if(configuration.defaultServer == nil)
+        {
+            var alert = UIAlertView(title: "Error", message: "You have to set default server.", delegate: self, cancelButtonTitle: "OK")
+            alert.show()
+            return nil
+        }
+        
+        return configuration.defaultServer
+    }
+    
+    private func addTorrentViaFile()
+    {
+        var fileName = fileUrl!.lastPathComponent!
+        var alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName)'?", delegate: self, cancelButtonTitle: "Cancel")
+        alert.alertViewStyle = UIAlertViewStyle.Default
+        alert.tag = 1
+        alert.addButtonWithTitle("Yes")
+        alert.show()
+    }
+    
+    private func addTorrentViaMagnetLink()
+    {
+        var fileName = MagnetLinkHander.getFileName(fileUrl!)
+        var alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName)'?", delegate: self, cancelButtonTitle: "Cancel")
+        alert.alertViewStyle = UIAlertViewStyle.Default
+        alert.tag = 2
+        alert.addButtonWithTitle("Yes")
+        alert.show()
+    }
+    
+    private func addTorrent(server:Server, isExternal:Bool)
     {
         var transmissionClient = TransmissionClient(address: server.address, userName:server.userName, password:server.password)
-        transmissionClient.addTorrent(fileUrl!, isExternal:false, onCompletion: { (error) -> Void in
+        transmissionClient.addTorrent(fileUrl!, isExternal:isExternal, onCompletion: { (error) -> Void in
             if(error != nil)
             {
                 var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")

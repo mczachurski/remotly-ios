@@ -26,6 +26,7 @@ extension Torrent
         self.sizeWhenDone = torrentFromServer.sizeWhenDone
         self.status = torrentFromServer.status
         self.totalSize = torrentFromServer.totalSize
+        self.addedDate = torrentFromServer.addedDate
     }
     
     var downloadedPercentDone: Double {

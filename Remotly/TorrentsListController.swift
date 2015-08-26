@@ -19,7 +19,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
         let fetchRequest = NSFetchRequest(entityName: "Torrent")
-        let primarySortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let primarySortDescriptor = NSSortDescriptor(key: "addedDate", ascending: true)
         fetchRequest.sortDescriptors = [primarySortDescriptor]
         
         let predicate = NSPredicate(format: "server == %@", self.server)
@@ -28,7 +28,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         let frc = NSFetchedResultsController(
             fetchRequest: fetchRequest,
             managedObjectContext: self.context,
-            sectionNameKeyPath: "server",
+            sectionNameKeyPath: nil,
             cacheName: nil)
         
         frc.delegate = self

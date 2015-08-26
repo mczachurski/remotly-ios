@@ -23,7 +23,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         let frc = NSFetchedResultsController(
             fetchRequest: serversFetchRequest,
             managedObjectContext: self.context,
-            sectionNameKeyPath: "name",
+            sectionNameKeyPath: nil,
             cacheName: nil)
         
         frc.delegate = self

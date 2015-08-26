@@ -90,7 +90,7 @@ class FormatHandler
         }
         else
         {
-            timeString = "unknown"
+            timeString = "unknown time"
         }
         
         return timeString

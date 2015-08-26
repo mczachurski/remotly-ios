@@ -191,7 +191,7 @@ class TransmissionClient
     
     private func getTorrentsPrepareJson() -> String
     {
-        var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\", \"hashString\" ]}, \"method\": \"torrent-get\" }"
+        var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\", \"hashString\", \"addedDate\" ]}, \"method\": \"torrent-get\" }"
         return requestJson
     }
     
@@ -231,6 +231,7 @@ class TransmissionClient
                         torrentInformation.isFinished = subJson["isFinished"].boolValue
                         torrentInformation.peersGettingFromUs = subJson["peersGettingFromUs"].int32Value
                         torrentInformation.hashString = subJson["hashString"].stringValue
+                        torrentInformation.addedDate = subJson["addedDate"].doubleValue
                         
                         torrentInformations.append(torrentInformation)
                     }
