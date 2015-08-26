@@ -74,9 +74,10 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     {
         reloadTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(4.0), target: self, selector: Selector("reloadTimer:"), userInfo: nil, repeats: true)
     }
-    
-    override func viewDidDisappear(animated: Bool)
+
+    override func viewWillDisappear(animated: Bool)
     {
+        invalidateReloadTimer();
     }
     
     private func invalidateReloadTimer()
