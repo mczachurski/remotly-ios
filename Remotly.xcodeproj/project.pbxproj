@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30B77621B8D06A800A23067 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77601B8D06A800A23067 /* Server.swift */; };
+		D30B77631B8D06A800A23067 /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77611B8D06A800A23067 /* Torrent.swift */; };
+		D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */; };
 		D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */; };
 		D32BF18B1B8B042D0027AC01 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = D32BF18A1B8B042D0027AC01 /* ReadMe.txt */; };
 		D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */; };
@@ -18,12 +21,10 @@
 		D3DA61151B8C48D5006B8762 /* ServerDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */; };
 		D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61191B8C52E5006B8762 /* ServersListController.swift */; };
 		D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */; };
-		D3DA611E1B8C65AA006B8762 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA611D1B8C65AA006B8762 /* Server.swift */; };
 		D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */; };
 		D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61221B8C9652006B8762 /* ServersCell.swift */; };
 		D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61241B8C99A0006B8762 /* Configuration.swift */; };
 		D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */; };
-		D3DA61291B8CA431006B8762 /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61281B8CA431006B8762 /* Torrent.swift */; };
 		D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */; };
 		D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */; };
 		D3FDEC851B67F64E00ADC986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FDEC831B67F64E00ADC986 /* Main.storyboard */; };
@@ -44,6 +45,9 @@
 
 /* Begin PBXFileReference section */
 		02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Remotly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30B77601B8D06A800A23067 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		D30B77611B8D06A800A23067 /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
+		D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentExtensions.swift; sourceTree = "<group>"; };
 		D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionErrorsHandler.swift; sourceTree = "<group>"; };
 		D32BF18A1B8B042D0027AC01 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentStatusEnum.swift; sourceTree = "<group>"; };
@@ -55,12 +59,10 @@
 		D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDetailsController.swift; sourceTree = "<group>"; };
 		D3DA61191B8C52E5006B8762 /* ServersListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersListController.swift; sourceTree = "<group>"; };
 		D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
-		D3DA611D1B8C65AA006B8762 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsHandler.swift; sourceTree = "<group>"; };
 		D3DA61221B8C9652006B8762 /* ServersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersCell.swift; sourceTree = "<group>"; };
 		D3DA61241B8C99A0006B8762 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatHandler.swift; sourceTree = "<group>"; };
-		D3DA61281B8CA431006B8762 /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
 		D3FDEC771B67F64E00ADC986 /* Remotly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remotly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FDEC7B1B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,10 +135,11 @@
 		D3DA61161B8C4ECA006B8762 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				D30B77601B8D06A800A23067 /* Server.swift */,
+				D30B77611B8D06A800A23067 /* Torrent.swift */,
 				D3DA61241B8C99A0006B8762 /* Configuration.swift */,
-				D3DA611D1B8C65AA006B8762 /* Server.swift */,
-				D3DA61281B8CA431006B8762 /* Torrent.swift */,
 				D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */,
+				D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -339,18 +342,19 @@
 				D3DA61151B8C48D5006B8762 /* ServerDetailsController.swift in Sources */,
 				D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */,
 				D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */,
+				D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */,
 				D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */,
 				D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */,
-				D3DA61291B8CA431006B8762 /* Torrent.swift in Sources */,
 				D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */,
 				D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */,
 				D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */,
 				D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */,
-				D3DA611E1B8C65AA006B8762 /* Server.swift in Sources */,
 				D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */,
 				D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */,
+				D30B77631B8D06A800A23067 /* Torrent.swift in Sources */,
 				D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */,
 				D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */,
+				D30B77621B8D06A800A23067 /* Server.swift in Sources */,
 				D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

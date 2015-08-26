@@ -18,21 +18,21 @@ class TorrentsCell: UITableViewCell
     @IBOutlet weak var progressOutlet: UIProgressView!
     @IBOutlet weak var imageStatusOutlet: UIImageView!
     
-    func setTorrent(torrentInformation:TorrentInformation)
+    func setTorrent(torrent:Torrent)
     {
-        nameOutlet.text = torrentInformation.name
-        sizeOutlet.text = torrentInformation.sizeInformationValue
-        peerOutlet.text = torrentInformation.peersInformationValue
-        downloadOutlet.text = torrentInformation.downloadInformationValue
-        uploadOutlet.text = torrentInformation.uploadInformationValue
-        progressOutlet.progress = Float(torrentInformation.downloadedPercentDone)
+        nameOutlet.text = torrent.name
+        sizeOutlet.text = torrent.sizeInformationValue
+        peerOutlet.text = torrent.peersInformationValue
+        downloadOutlet.text = torrent.downloadInformationValue
+        uploadOutlet.text = torrent.uploadInformationValue
+        progressOutlet.progress = Float(torrent.downloadedPercentDone)
         
-        if(torrentInformation.isDownloading)
+        if(torrent.isDownloading)
         {
             nameOutlet.textColor = UIColor.blackColor()
             imageStatusOutlet.image = UIImage(named: "play1")
         }
-        else if (torrentInformation.isPaused)
+        else if (torrent.isPaused)
         {
             imageStatusOutlet.image = UIImage(named: "pause")
             nameOutlet.textColor = ColorsHandler.getGrayColor()

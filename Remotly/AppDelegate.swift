@@ -13,7 +13,6 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
 
     var window: UIWindow?
-    static var shouldRefreshList = false
     var fileUrl:NSURL?
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool
@@ -59,10 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
             {
                 var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
                 alert.show()
-            }
-            else
-            {
-                AppDelegate.shouldRefreshList = true
             }
         })
     }

@@ -11,8 +11,10 @@ import CoreData
 
 class Server: NSManagedObject {
 
-    @NSManaged var name: String
     @NSManaged var address: String
-    @NSManaged var userName: String
+    @NSManaged var name: String
     @NSManaged var password: String
+    @NSManaged var userName: String
+    @NSManaged var torrents: NSSet
+
 }

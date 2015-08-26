@@ -37,6 +37,34 @@ class CoreDataHandler
         return server as! Server
     }
     
+    static func createTorrentEntity(server:Server, managedContext:NSManagedObjectContext) -> Torrent
+    {
+        let entity =  NSEntityDescription.entityForName("Torrent", inManagedObjectContext: managedContext)
+        let torrentEntity = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+
+        var torrent = torrentEntity as! Torrent
+        torrent.server = server
+        
+        return torrent
+    }
+    
+    static func getAllTorrentFromServer(server:Server, managedContext:NSManagedObjectContext) -> [Torrent]
+    {
+        let fetchRequest = NSFetchRequest(entityName: "Torrent")
+        let predicate = NSPredicate(format: "server == %@", server)
+        fetchRequest.predicate = predicate
+        
+        var error: NSError?
+        var fetchedObjects = managedContext.executeFetchRequest(fetchRequest, error: &error)
+        
+        if(error != nil)
+        {
+            return [Torrent]()
+        }
+        
+        return fetchedObjects as! [Torrent]
+    }
+    
     static func getConfiguration(managedContext:NSManagedObjectContext) -> Configuration
     {
         let fetchRequest = NSFetchRequest(entityName: "Configuration")

@@ -7,10 +7,34 @@
 //
 
 import UIKit
+import CoreData
 
-class TorrentsListController: UITableViewController, UIAlertViewDelegate {
-
-    var transmissionClient:TransmissionClient!
+class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetchedResultsControllerDelegate
+{
+    var server:Server!
+    private var transmissionClient:TransmissionClient!
+    private var context: NSManagedObjectContext!
+    private var reloadTimer:NSTimer?
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Torrent")
+        let primarySortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [primarySortDescriptor]
+        
+        let predicate = NSPredicate(format: "server == %@", self.server)
+        fetchRequest.predicate = predicate
+        
+        let frc = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: "server",
+            cacheName: nil)
+        
+        frc.delegate = self
+        
+        return frc
+    }()
     
     @IBAction func addNewTorrentAction(sender: AnyObject)
     {        
@@ -37,10 +61,6 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
                         var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
                         alert.show()
                     }
-                    else
-                    {
-                        AppDelegate.shouldRefreshList = true
-                    }
                 })
             }
         }
@@ -48,36 +68,99 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
     
     override func viewDidLoad()
     {
+        context = CoreDataHandler.getManagedObjectContext()
+        transmissionClient = TransmissionClient(address: server.address)
+        
         super.viewDidLoad()
-        self.clearsSelectionOnViewWillAppear = false
         
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl!.backgroundColor = ColorsHandler.getMainColor()
-        self.refreshControl!.tintColor = UIColor.whiteColor()
-        self.refreshControl!.addTarget(self, action: "reloadTorrents", forControlEvents: UIControlEvents.ValueChanged)
-        
-        transmissionClient.getTorrents(torrentsLoadedCallback)
-    }
-
-    override func viewWillAppear(animated: Bool)
-    {
-        if(AppDelegate.shouldRefreshList)
+        var error: NSError? = nil
+        if (fetchedResultsController.performFetch(&error) == false)
         {
-            AppDelegate.shouldRefreshList = false
-            reloadTorrents()
+            print("An error occurred: \(error?.localizedDescription)")
+        }
+
+        self.clearsSelectionOnViewWillAppear = true
+    }
+        
+    override func viewDidAppear(animated: Bool)
+    {
+        reloadTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(4.0), target: self, selector: Selector("reloadTimer:"), userInfo: nil, repeats: true)
+    }
+    
+    override func viewDidDisappear(animated: Bool)
+    {
+    }
+    
+    private func invalidateReloadTimer()
+    {
+        reloadTimer?.invalidate()
+        reloadTimer = nil
+    }
+    
+    func reloadTimer(timer:NSTimer)
+    {
+        self.reloadTorrents()
+    }
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController)
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.beginUpdates()
         }
     }
     
-    func torrentsLoadedCallback(error:NSError?)
+    func controllerDidChangeContent(controller: NSFetchedResultsController)
     {
-        if(error != nil)
-        {
-            var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: self, cancelButtonTitle: "OK")
-            alert.show()
-            return
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.endUpdates()
         }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType)
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            switch(type) {
+                case NSFetchedResultsChangeType.Insert:
+                    self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: UITableViewRowAnimation.Fade)
+                    break;
+                case NSFetchedResultsChangeType.Delete:
+                    self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: UITableViewRowAnimation.Fade)
+                    break;
+                default:
+                    break
+            }
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?)
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            var tableView = self.tableView
+            
+            switch(type)
+            {
+                case NSFetchedResultsChangeType.Insert:
+                    tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+                    break;
+                
+                case NSFetchedResultsChangeType.Delete:
+                    tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+                    break;
+                
+                case NSFetchedResultsChangeType.Update:
 
-        reloadData()
+                    var cell = tableView.cellForRowAtIndexPath(indexPath!) as! TorrentsCell
+                    let torrent = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Torrent
+                    cell.setTorrent(torrent)
+                
+                    break;
+                
+                case NSFetchedResultsChangeType.Move:
+                    tableView.deleteRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+                    tableView.insertRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+                    break;
+            }
+        }
     }
     
     func reloadTorrents()
@@ -85,78 +168,99 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
         transmissionClient.getTorrents(torrentsLoadedCallback)
     }
     
-    func reloadData()
+    func torrentsLoadedCallback(torrentInformations:[TorrentInformation]!, error:NSError?)
     {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
+        if(error != nil)
+        {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.invalidateReloadTimer();
+                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: self, cancelButtonTitle: "OK")
+                alert.show()
+            }
+            return
+        }
+
+        synchronizeWithCoreData(torrentInformations)
+    }
+    
+    private func synchronizeWithCoreData(torrentInformations:[TorrentInformation]!)
+    {
+        var torrentsFromCoreData = fetchedResultsController.fetchedObjects as! [Torrent]
+        
+        for torrentFromServer in torrentInformations
+        {
+            var wasSynchronized = false
+            for torrentFromCoreData in torrentsFromCoreData
+            {
+                if(torrentFromServer.hashString == torrentFromCoreData.hashString)
+                {
+                    torrentFromCoreData.synchronizeData(torrentFromServer)
+                    wasSynchronized = true
+                    break
+                }
+            }
+            
+            if(!wasSynchronized)
+            {
+                var newTorrent = CoreDataHandler.createTorrentEntity(server, managedContext: context)
+                newTorrent.synchronizeData(torrentFromServer)
+            }
         }
         
-        if(self.refreshControl != nil)
+        for torrentFromCoreData in torrentsFromCoreData
         {
-            var formatter = NSDateFormatter()
-            formatter.dateFormat = "MMM d, h:mm a"
-            let dateString = formatter.stringFromDate(NSDate())
-            var title = "Last update: \(dateString)"
-            var attrsDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-            var attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
-            self.refreshControl!.attributedTitle = attributedTitle
+            var isExist = false
+            for torrentFromServer in torrentInformations
+            {
+                if(torrentFromServer.hashString == torrentFromCoreData.hashString)
+                {
+                    isExist = true
+                    break
+                }
+            }
+            
+            if(!isExist)
+            {
+                context.deleteObject(torrentFromCoreData)
+            }
         }
+        
+        CoreDataHandler.save(context)
     }
     
     // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        if(transmissionClient.torrentsInformation.count > 0)
+        if let sections = fetchedResultsController.sections
         {
-            self.tableView.backgroundView = nil
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            return 1
-        }
-        else
-        {
-            // Display a message when the table is empty
-            let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-            
-            messageLabel.text = "No data is currently available. Please pull down to refresh."
-            messageLabel.textColor = UIColor.blackColor()
-            messageLabel.numberOfLines = 0
-            messageLabel.textAlignment = NSTextAlignment.Center
-            messageLabel.font = UIFont(name: "Palatino-Italic", size: 20)
-            messageLabel.sizeToFit()
-            
-            self.tableView.backgroundView = messageLabel
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+            return sections.count
         }
         
-        return 1;
+        return 0
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return transmissionClient.torrentsInformation.count
+        if let sections = fetchedResultsController.sections
+        {
+            let currentSection = sections[section] as! NSFetchedResultsSectionInfo
+            return currentSection.numberOfObjects
+        }
+        
+        return 0
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("TorrentCell", forIndexPath: indexPath) as! TorrentsCell
-
-        let torrentInformation = transmissionClient.torrentsInformation[indexPath.row]
-        cell.setTorrent(torrentInformation)
-
+        let torrent = fetchedResultsController.objectAtIndexPath(indexPath) as! Torrent
+        
+        cell.setTorrent(torrent)
+        
         return cell
     }
-    
+        
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
     {
         
@@ -164,7 +268,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?
     {
-        let torrentInformation = transmissionClient.torrentsInformation[indexPath.row]
+        let torrentInformation = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Torrent
 
         var runAction:UITableViewRowAction
         if(torrentInformation.isPaused)
@@ -180,6 +284,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
                     
                     self.reloadTorrents()
                 })
+                
+                tableView.setEditing(false, animated: true)
             })
             runAction.backgroundColor = ColorsHandler.getGrayColor()
         }
@@ -196,6 +302,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
                     
                     self.reloadTorrents()
                 })
+                
+                tableView.setEditing(false, animated: true)
             })
             runAction.backgroundColor = ColorsHandler.getGrayColor()
         }
@@ -211,6 +319,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate {
                 
                 self.reloadTorrents()
             })
+            
+            tableView.setEditing(false, animated: true)
         })
         
         return [deleteAction, runAction]

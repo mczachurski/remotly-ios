@@ -12,10 +12,7 @@ import SwiftyJSON
 class TransmissionClient
 {
     static var sessionIds:Dictionary<String, String> = Dictionary<String,String>()
-    
-    var torrentsInformation:[TorrentInformation] = []
     var transmissionUrl:String = ""
-    
     
     init(address:String)
     {
@@ -177,10 +174,8 @@ class TransmissionClient
     
     // MARK: Get torrents
     
-    func getTorrents(onCompletion: ((NSError!) -> Void)?)
+    func getTorrents(onCompletion: (([TorrentInformation]!, NSError!) -> Void)?)
     {
-        torrentsInformation.removeAll(keepCapacity: true)
-        
         var requestJson = getTorrentsPrepareJson()
         getTorrentsSendRequest(requestJson, onCompletion: onCompletion)
     }
@@ -191,9 +186,11 @@ class TransmissionClient
         return requestJson
     }
     
-    private func getTorrentsSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    private func getTorrentsSendRequest(requestJson:String, onCompletion:(([TorrentInformation]!, NSError!) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
+            
+            var torrentInformations = [TorrentInformation]()
             var internalError = error
             if(internalError == nil)
             {
@@ -226,12 +223,12 @@ class TransmissionClient
                         torrentInformation.peersGettingFromUs = subJson["peersGettingFromUs"].int32Value
                         torrentInformation.hashString = subJson["hashString"].stringValue
                         
-                        self.torrentsInformation.append(torrentInformation)
+                        torrentInformations.append(torrentInformation)
                     }
                 }
             }
             
-            onCompletion?(internalError)
+            onCompletion?(torrentInformations, internalError)
         })
     }
     

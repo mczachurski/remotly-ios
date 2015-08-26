@@ -64,7 +64,8 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         return 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         if let sections = fetchedResultsController.sections
         {
             let currentSection = sections[section] as! NSFetchedResultsSectionInfo
@@ -125,7 +126,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
             let destinationViewController = segue.destinationViewController as! TorrentsListController
             
             var server = getServerForSender(sender)
-            destinationViewController.transmissionClient = TransmissionClient(address: server.address)
+            destinationViewController.server = server
         }
     }
     
