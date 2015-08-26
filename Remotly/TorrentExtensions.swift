@@ -73,9 +73,16 @@ extension Torrent
             let sizeString = FormatHandler.formatSizeUnits(totalSize)
             let downloadedSizeString = FormatHandler.formatSizeUnits(downloadedSize)
             let downloadedPercentDoneString = FormatHandler.roundTwoPlaces(downloadedPercentDone * 100)
-            let secondsToFinishString = FormatHandler.formatTime(secondsToFinish)
             
-            return "\(downloadedSizeString) of \(sizeString) (\(downloadedPercentDoneString)%) - \(secondsToFinishString)"
+            var sizeInformation = "\(downloadedSizeString) of \(sizeString) (\(downloadedPercentDoneString)%)"
+            
+            if(isDownloading)
+            {
+                let secondsToFinishString = FormatHandler.formatTime(secondsToFinish)
+                sizeInformation = "\(sizeInformation) - \(secondsToFinishString)"
+            }
+            
+            return sizeInformation
         }
     }
     
@@ -92,12 +99,16 @@ extension Torrent
             
             switch(statusEnum!)
             {
-            case TorrentStatusEnum.Paused:
-                peersInformationValue = "Paused"
-            case TorrentStatusEnum.Downloading:
-                peersInformationValue = "Downloading from \(peersSendingToUs) of \(peersConnected) peers"
-            case TorrentStatusEnum.Finished:
-                peersInformationValue = "Seeding to \(peersGettingFromUs) of \(peersConnected) peers"
+                case TorrentStatusEnum.Paused:
+                    peersInformationValue = "Paused"
+                case TorrentStatusEnum.Verifying:
+                    peersInformationValue = "Verifying..."
+                case TorrentStatusEnum.Deleting:
+                    peersInformationValue = "Deleting..."
+                case TorrentStatusEnum.Downloading:
+                    peersInformationValue = "Downloading from \(peersSendingToUs) of \(peersConnected) peers"
+                case TorrentStatusEnum.Finished:
+                    peersInformationValue = "Seeding to \(peersGettingFromUs) of \(peersConnected) peers"
             }
             
             return peersInformationValue

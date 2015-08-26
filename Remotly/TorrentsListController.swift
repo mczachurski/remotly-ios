@@ -142,19 +142,19 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
                 case NSFetchedResultsChangeType.Insert:
                     tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
                     break;
-                
+
                 case NSFetchedResultsChangeType.Delete:
                     tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
                     break;
-                
+
                 case NSFetchedResultsChangeType.Update:
 
                     var cell = tableView.cellForRowAtIndexPath(indexPath!) as! TorrentsCell
                     let torrent = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Torrent
                     cell.setTorrent(torrent)
-                
+
                     break;
-                
+
                 case NSFetchedResultsChangeType.Move:
                     tableView.deleteRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
                     tableView.insertRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
@@ -268,61 +268,95 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?
     {
-        let torrentInformation = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Torrent
+        let torrent = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Torrent
 
-        var runAction:UITableViewRowAction
-        if(torrentInformation.isPaused)
-        {            
-            runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume", handler: { (action, indexPath) -> Void in
-                self.transmissionClient.reasumeTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
-                    
-                    if(error != nil)
-                    {
-                        var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                        alert.show()
-                    }
-                    
-                    self.reloadTorrents()
-                })
-                
-                tableView.setEditing(false, animated: true)
-            })
-            runAction.backgroundColor = ColorsHandler.getGrayColor()
-        }
-        else
-        {
-            runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Pause" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-                self.transmissionClient.pauseTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
-                    
-                    if(error != nil)
-                    {
-                        var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                        alert.show()
-                    }
-                    
-                    self.reloadTorrents()
-                })
-                
-                tableView.setEditing(false, animated: true)
-            })
-            runAction.backgroundColor = ColorsHandler.getGrayColor()
-        }
+        var runAction = torrent.isPaused ? createReasumeAction(torrent, tableView: tableView) : createPauseAction(torrent, tableView: tableView)
+        var deleteAction = createDeleteAction(torrent, tableView: tableView)
         
-        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            self.transmissionClient.removeTorrent(torrentInformation.id, onCompletion: { (error) -> Void in
-                
-                if(error != nil)
-                {
-                    var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                    alert.show()
-                }
-                
-                self.reloadTorrents()
+        return [deleteAction, runAction]
+    }
+    
+    private func createReasumeAction(torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
+    {
+        var runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume", handler: { (action, indexPath) -> Void in
+            self.transmissionClient.reasumeTorrent(torrent.id, onCompletion: { (error) -> Void in
+                self.reasumeAction(torrent, error: error)
             })
             
             tableView.setEditing(false, animated: true)
         })
         
-        return [deleteAction, runAction]
+        runAction.backgroundColor = ColorsHandler.getGrayColor()
+        return runAction
+    }
+    
+    private func reasumeAction(torrent:Torrent, error:NSError?)
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            if(error != nil)
+            {
+                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+                return
+            }
+            
+            torrent.status = TorrentStatusEnum.Downloading.rawValue
+            CoreDataHandler.save(self.context)
+        }
+    }
+    
+    private func createPauseAction(torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
+    {
+        var runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Pause" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.transmissionClient.pauseTorrent(torrent.id, onCompletion: { (error) -> Void in
+                self.pauseAction(torrent, error: error)
+            })
+            
+            tableView.setEditing(false, animated: true)
+        })
+        
+        runAction.backgroundColor = ColorsHandler.getGrayColor()
+        return runAction
+    }
+    
+    private func pauseAction(torrent:Torrent, error:NSError?)
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            if(error != nil)
+            {
+                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+            }
+            
+            torrent.status = TorrentStatusEnum.Paused.rawValue
+            CoreDataHandler.save(self.context)
+        }
+    }
+    
+    private func createDeleteAction(torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
+    {
+        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.transmissionClient.removeTorrent(torrent.id, onCompletion: { (error) -> Void in
+                self.deleteAction(torrent, error: error)
+            })
+            
+            tableView.setEditing(false, animated: true)
+        })
+        
+        return deleteAction
+    }
+    
+    private func deleteAction(torrent:Torrent, error:NSError?)
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            if(error != nil)
+            {
+                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+            }
+            
+            torrent.status = TorrentStatusEnum.Deleting.rawValue
+            CoreDataHandler.save(self.context)
+        }
     }
 }

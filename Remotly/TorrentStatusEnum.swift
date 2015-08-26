@@ -10,6 +10,8 @@ import Foundation
 
 enum TorrentStatusEnum:Int32 {
     case Paused = 0
+    case Verifying = 2
     case Downloading = 4
     case Finished = 6
+    case Deleting = 8
 }
