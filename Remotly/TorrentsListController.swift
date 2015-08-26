@@ -17,22 +17,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     private var reloadTimer:NSTimer?
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
-        
-        let fetchRequest = NSFetchRequest(entityName: "Torrent")
-        let primarySortDescriptor = NSSortDescriptor(key: "addedDate", ascending: true)
-        fetchRequest.sortDescriptors = [primarySortDescriptor]
-        
-        let predicate = NSPredicate(format: "server == %@", self.server)
-        fetchRequest.predicate = predicate
-        
-        let frc = NSFetchedResultsController(
-            fetchRequest: fetchRequest,
-            managedObjectContext: self.context,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        
-        frc.delegate = self
-        
+        let frc = CoreDataHandler.getTorrentFetchedResultsController(self.context, server: self.server, delegate: self)
         return frc
     }()
     
@@ -58,8 +43,11 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
                 transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
                     if(error != nil)
                     {
-                        var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                        alert.show()
+                        NotificationHandler.showError("Error", message: error!.localizedDescription)
+                    }
+                    else
+                    {
+                        NotificationHandler.showSuccess("Success", message: "Torrent was added")
                     }
                 })
             }
@@ -174,8 +162,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         {
             dispatch_async(dispatch_get_main_queue()) {
                 self.invalidateReloadTimer();
-                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: self, cancelButtonTitle: "OK")
-                alert.show()
+                NotificationHandler.showError("Error", message: error!.localizedDescription)
             }
             return
         }
@@ -295,8 +282,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         dispatch_async(dispatch_get_main_queue()) {
             if(error != nil)
             {
-                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                alert.show()
+                NotificationHandler.showError("Error", message: error!.localizedDescription)
                 return
             }
             
@@ -324,8 +310,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         dispatch_async(dispatch_get_main_queue()) {
             if(error != nil)
             {
-                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                alert.show()
+                NotificationHandler.showError("Error", message: error!.localizedDescription)
             }
             
             torrent.status = TorrentStatusEnum.Paused.rawValue
@@ -351,8 +336,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         dispatch_async(dispatch_get_main_queue()) {
             if(error != nil)
             {
-                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                alert.show()
+                NotificationHandler.showError("Error", message: error!.localizedDescription)
             }
             
             torrent.status = TorrentStatusEnum.Deleting.rawValue

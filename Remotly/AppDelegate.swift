@@ -61,8 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         
         if(configuration.defaultServer == nil)
         {
-            var alert = UIAlertView(title: "Error", message: "You have to set default server.", delegate: self, cancelButtonTitle: "OK")
-            alert.show()
+            NotificationHandler.showError("Error", message: "You have to set default server.")
             return nil
         }
         
@@ -95,8 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         transmissionClient.addTorrent(fileUrl!, isExternal:isExternal, onCompletion: { (error) -> Void in
             if(error != nil)
             {
-                var alert = UIAlertView(title: "Error", message: error!.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-                alert.show()
+                NotificationHandler.showError("Error", message: error!.localizedDescription)
             }
         })
     }

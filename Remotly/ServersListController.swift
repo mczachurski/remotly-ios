@@ -15,19 +15,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
     var configuration:Configuration?
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
-        
-        let serversFetchRequest = NSFetchRequest(entityName: "Server")
-        let primarySortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        serversFetchRequest.sortDescriptors = [primarySortDescriptor]
-        
-        let frc = NSFetchedResultsController(
-            fetchRequest: serversFetchRequest,
-            managedObjectContext: self.context,
-            sectionNameKeyPath: nil,
-            cacheName: nil)
-        
-        frc.delegate = self
-        
+        let frc = CoreDataHandler.getServerFetchedResultsController(self.context, delegate: self)
         return frc
     }()
     

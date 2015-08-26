@@ -48,23 +48,6 @@ class CoreDataHandler
         return torrent
     }
     
-    static func getAllTorrentFromServer(server:Server, managedContext:NSManagedObjectContext) -> [Torrent]
-    {
-        let fetchRequest = NSFetchRequest(entityName: "Torrent")
-        let predicate = NSPredicate(format: "server == %@", server)
-        fetchRequest.predicate = predicate
-        
-        var error: NSError?
-        var fetchedObjects = managedContext.executeFetchRequest(fetchRequest, error: &error)
-        
-        if(error != nil)
-        {
-            return [Torrent]()
-        }
-        
-        return fetchedObjects as! [Torrent]
-    }
-    
     static func getConfiguration(managedContext:NSManagedObjectContext) -> Configuration
     {
         let fetchRequest = NSFetchRequest(entityName: "Configuration")
@@ -80,5 +63,42 @@ class CoreDataHandler
         let entity =  NSEntityDescription.entityForName("Configuration", inManagedObjectContext: managedContext)
         let configuration = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
         return configuration as! Configuration
+    }
+    
+    static func getServerFetchedResultsController(context:NSManagedObjectContext, delegate:NSFetchedResultsControllerDelegate) -> NSFetchedResultsController
+    {
+        let serversFetchRequest = NSFetchRequest(entityName: "Server")
+        let primarySortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        serversFetchRequest.sortDescriptors = [primarySortDescriptor]
+        
+        let frc = NSFetchedResultsController(
+            fetchRequest: serversFetchRequest,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        frc.delegate = delegate
+        
+        return frc
+    }
+    
+    static func getTorrentFetchedResultsController(context:NSManagedObjectContext, server:Server, delegate:NSFetchedResultsControllerDelegate) -> NSFetchedResultsController
+    {
+        let fetchRequest = NSFetchRequest(entityName: "Torrent")
+        let primarySortDescriptor = NSSortDescriptor(key: "addedDate", ascending: true)
+        fetchRequest.sortDescriptors = [primarySortDescriptor]
+        
+        let predicate = NSPredicate(format: "server == %@", server)
+        fetchRequest.predicate = predicate
+        
+        let frc = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        
+        frc.delegate = delegate
+        
+        return frc
     }
 }

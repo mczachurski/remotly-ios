@@ -26,6 +26,8 @@
 		D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61241B8C99A0006B8762 /* Configuration.swift */; };
 		D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */; };
 		D3E8DFEC1B8DDB9F0002429D /* MagnetLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8DFEB1B8DDB9F0002429D /* MagnetLinkHandler.swift */; };
+		D3E8DFF01B8E32FC0002429D /* BRYXBanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E8DFEF1B8E32FC0002429D /* BRYXBanner.framework */; };
+		D3E8DFF21B8E40C60002429D /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8DFF11B8E40C60002429D /* NotificationHandler.swift */; };
 		D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */; };
 		D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */; };
 		D3FDEC851B67F64E00ADC986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FDEC831B67F64E00ADC986 /* Main.storyboard */; };
@@ -65,6 +67,9 @@
 		D3DA61241B8C99A0006B8762 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatHandler.swift; sourceTree = "<group>"; };
 		D3E8DFEB1B8DDB9F0002429D /* MagnetLinkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetLinkHandler.swift; sourceTree = "<group>"; };
+		D3E8DFED1B8E32E80002429D /* BRYXBanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BRYXBanner.framework; path = Carthage/Build/iOS/BRYXBanner.framework; sourceTree = "<group>"; };
+		D3E8DFEF1B8E32FC0002429D /* BRYXBanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BRYXBanner.framework; path = Carthage/Build/iOS/BRYXBanner.framework; sourceTree = "<group>"; };
+		D3E8DFF11B8E40C60002429D /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		D3FDEC771B67F64E00ADC986 /* Remotly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remotly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3FDEC7B1B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */,
+				D3E8DFF01B8E32FC0002429D /* BRYXBanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +105,7 @@
 		419654A1475282F6128423B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3E8DFED1B8E32E80002429D /* BRYXBanner.framework */,
 				02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */,
 			);
 			name = Frameworks;
@@ -152,6 +159,7 @@
 				D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */,
 				D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */,
 				D3E8DFEB1B8DDB9F0002429D /* MagnetLinkHandler.swift */,
+				D3E8DFF11B8E40C60002429D /* NotificationHandler.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -160,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				D32BF18A1B8B042D0027AC01 /* ReadMe.txt */,
+				D3E8DFEF1B8E32FC0002429D /* BRYXBanner.framework */,
 				D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */,
 				D3FDEC791B67F64E00ADC986 /* Remotly */,
 				D3FDEC921B67F64E00ADC986 /* RemotlyTests */,
@@ -326,6 +335,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BRYXBanner.framework",
 			);
 			name = "Run Script";
 			outputPaths = (
@@ -358,6 +368,7 @@
 				D30B77631B8D06A800A23067 /* Torrent.swift in Sources */,
 				D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */,
 				D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */,
+				D3E8DFF21B8E40C60002429D /* NotificationHandler.swift in Sources */,
 				D30B77621B8D06A800A23067 /* Server.swift in Sources */,
 				D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */,
 			);

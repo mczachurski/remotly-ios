@@ -84,8 +84,7 @@ class ServerDetailsController: UITableViewController
         
         if(!CoreDataHandler.save(managedContext))
         {
-            var alert = UIAlertView(title: "Error", message: "There is a problem during saving data", delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
+            NotificationHandler.showError("Error", message: "There is a problem during saving data")
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
