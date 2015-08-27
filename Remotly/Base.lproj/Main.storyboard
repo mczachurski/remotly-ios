@@ -384,13 +384,19 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
+                        <barButtonItem image="rabbit" id="XML-nu-4CX" userLabel="speedMode">
+                            <connections>
+                                <action selector="changeSpeedMode:" destination="EI7-cr-xlV" id="raP-vY-9Uj"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="qSx-fQ-LDz"/>
-                        <barButtonItem image="download" id="bEU-xJ-g5m"/>
-                        <barButtonItem title="0 byte/s" id="atf-d6-9Sl"/>
+                        <barButtonItem enabled="NO" image="download" id="bEU-xJ-g5m"/>
+                        <barButtonItem enabled="NO" title="0 byte/s" id="atf-d6-9Sl"/>
                         <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="poY-37-Hhm"/>
-                        <barButtonItem image="upload" id="4It-mf-5BN"/>
-                        <barButtonItem title="0 byte/s" id="fEi-Zs-ZIg"/>
+                        <barButtonItem enabled="NO" image="upload" id="4It-mf-5BN"/>
+                        <barButtonItem enabled="NO" title="0 byte/s" id="fEi-Zs-ZIg"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Uv6-g3-QP5"/>
+                        <barButtonItem image="settings" id="Owu-gE-Zky" userLabel="settings"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Torrents" id="a9S-Wu-8se">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZSf-GE-3YL">
@@ -401,6 +407,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="downloadToolbarOutlet" destination="atf-d6-9Sl" id="uH8-bp-do2"/>
+                        <outlet property="speedModeOutlet" destination="XML-nu-4CX" id="dmF-Vu-uYn"/>
                         <outlet property="uploadToolbarOutlet" destination="fEi-Zs-ZIg" id="0sx-6s-81w"/>
                     </connections>
                 </tableViewController>
@@ -856,6 +863,8 @@
         <image name="default" width="12" height="12"/>
         <image name="download" width="16" height="16"/>
         <image name="pause" width="16" height="16"/>
+        <image name="rabbit" width="25" height="25"/>
+        <image name="settings" width="25" height="25"/>
         <image name="upload" width="16" height="16"/>
         <image name="validation" width="8" height="8"/>
     </resources>

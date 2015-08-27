@@ -20,47 +20,18 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     private let deleteTorrentButtonIndex = 1
     private let deleteTorrentWitDataButtonIndex = 2
     private var torrentToDelete:Torrent? = nil
+    private var isAlternativeSpeedModeEnabled = false
     
     @IBOutlet weak var downloadToolbarOutlet: UIBarButtonItem!
     @IBOutlet weak var uploadToolbarOutlet: UIBarButtonItem!
+    @IBOutlet weak var speedModeOutlet: UIBarButtonItem!
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let frc = CoreDataHandler.getTorrentFetchedResultsController(self.context, server: self.server, delegate: self)
         return frc
     }()
     
-    @IBAction func addNewTorrentAction(sender: AnyObject)
-    {        
-        var alert = UIAlertView(title: "Torrent url", message: "Please enter url to torrent file", delegate: self, cancelButtonTitle: "Cancel")
-        alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
-        alert.tag = 1
-        alert.addButtonWithTitle("Add")
-        alert.show()
-    }
-    
-    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
-    {
-        if(alertView.tag == 1)
-        {
-            if(buttonIndex == 1)
-            {
-                var textfield = alertView.textFieldAtIndex(0)
-                var fileString = textfield?.text
-                var fileUrl = NSURL(string: fileString!)
-
-                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
-                    if(error != nil)
-                    {
-                        NotificationHandler.showError("Error", message: error!.localizedDescription)
-                    }
-                    else
-                    {
-                        NotificationHandler.showSuccess("Success", message: "Torrent was added")
-                    }
-                })
-            }
-        }
-    }
+    // MARK: Load view
     
     override func viewDidLoad()
     {
@@ -76,15 +47,9 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         }
 
         changeToolbarFontApperance()
+        setTransmissionSpeedMode()
         self.clearsSelectionOnViewWillAppear = true
         self.navigationItem.title = server.name
-    }
-
-    private func changeToolbarFontApperance()
-    {
-        var toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(12.0)]
-        downloadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
-        uploadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
     }
     
     override func viewDidAppear(animated: Bool)
@@ -109,6 +74,57 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         invalidateReloadTimer();
     }
     
+    // MARK: Actions
+    
+    @IBAction func addNewTorrentAction(sender: AnyObject)
+    {
+        var alert = UIAlertView(title: "Torrent url", message: "Please enter url to torrent file", delegate: self, cancelButtonTitle: "Cancel")
+        alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        alert.tag = 1
+        alert.addButtonWithTitle("Add")
+        alert.show()
+    }
+    
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
+    {
+        if(alertView.tag == 1)
+        {
+            if(buttonIndex == 1)
+            {
+                var textfield = alertView.textFieldAtIndex(0)
+                var fileString = textfield?.text
+                var fileUrl = NSURL(string: fileString!)
+                
+                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
+                    if(error != nil)
+                    {
+                        NotificationHandler.showError("Error", message: error!.localizedDescription)
+                    }
+                    else
+                    {
+                        NotificationHandler.showSuccess("Success", message: "Torrent was added")
+                    }
+                })
+            }
+        }
+    }
+    
+    @IBAction func changeSpeedMode(sender: AnyObject)
+    {
+        if(isAlternativeSpeedModeEnabled)
+        {
+            transmissionClient.setNormalTransmissionSpeed({ (error) -> Void in
+                self.setTransmissionSpeedMode()
+            })
+        }
+        else
+        {
+            transmissionClient.setAlternativeTransmissionSpeed({ (error) -> Void in
+                self.setTransmissionSpeedMode()
+            })
+        }
+    }
+    
     private func invalidateReloadTimer()
     {
         reloadTimer?.invalidate()
@@ -118,6 +134,42 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     func reloadTimer(timer:NSTimer)
     {
         self.reloadTorrents()
+    }
+    
+    private func changeToolbarFontApperance()
+    {
+        var toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(12.0)]
+        downloadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
+        uploadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
+    }
+    
+    private func setTransmissionSpeedMode()
+    {
+        transmissionClient.getTransmissionSessionInformation { (transmissionSession, error) -> Void in
+            if(error != nil)
+            {
+                NotificationHandler.showError("Error", message: error!.localizedDescription)
+            }
+            else
+            {
+                self.isAlternativeSpeedModeEnabled = transmissionSession.altSpeedEnabled
+                self.setTransmissionSpeedModeIcon()
+            }
+        }
+    }
+    
+    private func setTransmissionSpeedModeIcon()
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            if(self.isAlternativeSpeedModeEnabled)
+            {
+                self.speedModeOutlet.image = UIImage(named: "turtle")
+            }
+            else
+            {
+                self.speedModeOutlet.image = UIImage(named: "rabbit")
+            }
+        }
     }
     
     func controllerWillChangeContent(controller: NSFetchedResultsController)

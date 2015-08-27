@@ -243,6 +243,86 @@ class TransmissionClient
         })
     }
     
+    // MARK: Get transmission session
+    
+    func getTransmissionSessionInformation(onCompletion: ((TransmissionSession, NSError!) -> Void)?)
+    {
+        var requestJson = getTransmissionSessionInformationPrepareJson()
+        getTransmissionSessionInformationSendRequest(requestJson, onCompletion: onCompletion)
+    }
+    
+    private func getTransmissionSessionInformationPrepareJson() -> String
+    {
+        var requestJson = "{ \"method\": \"session-get\" }"
+        return requestJson
+    }
+    
+    private func getTransmissionSessionInformationSendRequest(requestJson:String, onCompletion:((TransmissionSession, NSError!) -> Void)?)
+    {
+        sendRequest(requestJson, completionHandler: { data, response, error -> Void in
+            
+            var transmissionSession = TransmissionSession()
+            var internalError = error
+            if(internalError == nil)
+            {
+                let json:JSON = JSON(data: data)
+                var result = json["result"].stringValue
+                
+                if(result != "success")
+                {
+                    internalError = TransmissionErrorsHandler.createError(NSTransmissionGetError, message: result)
+                }
+                else
+                {
+                    var sessionJson = json["arguments"]
+                    transmissionSession.altSpeedEnabled = sessionJson["alt-speed-enabled"].boolValue
+                }
+            }
+            
+            onCompletion?(transmissionSession, internalError)
+        })
+    }
+    
+    // MARK: Change transmission speeds
+    
+    func setNormalTransmissionSpeed(onCompletion:((NSError!) -> Void)?)
+    {
+        var requestJson = setTransmissionSpeedPrepareJson(false)
+        setTransmissionSpeedSendRequest(requestJson, onCompletion: onCompletion)
+    }
+    
+    func setAlternativeTransmissionSpeed(onCompletion:((NSError!) -> Void)?)
+    {
+        var requestJson = setTransmissionSpeedPrepareJson(true)
+        setTransmissionSpeedSendRequest(requestJson, onCompletion: onCompletion)
+    }
+    
+    private func setTransmissionSpeedPrepareJson(isAlternative:Bool) -> String
+    {
+        let isAlternativeValue = isAlternative ? "true" : "false"
+        var requestJson = "{ \"arguments\": {\"alt-speed-enabled\": \(isAlternativeValue) }, \"method\": \"session-set\" }"
+        return requestJson
+    }
+    
+    private func setTransmissionSpeedSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    {
+        sendRequest(requestJson, completionHandler: { data, response, error -> Void in
+            var internalError = error
+            if(internalError == nil)
+            {
+                let json:JSON = JSON(data: data)
+                var result = json["result"].stringValue
+                
+                if(result != "success")
+                {
+                    internalError = TransmissionErrorsHandler.createError(NSTransmissionPauseError, message: result)
+                }
+            }
+            
+            onCompletion?(internalError)
+        })
+    }
+    
     // MARK: Sending request
     
     private func sendRequest(requestJson: String, completionHandler: ((NSData!, NSURLResponse!, NSError!) -> Void)?)
@@ -301,7 +381,7 @@ class TransmissionClient
         return request
     }
     
-    // MARK: Manage sessions
+    // MARK: Manage sessions identifiers
     
     private func getSessionIdForServer() -> String?
     {
