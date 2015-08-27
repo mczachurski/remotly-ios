@@ -11,7 +11,7 @@
 		D30B77631B8D06A800A23067 /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77611B8D06A800A23067 /* Torrent.swift */; };
 		D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */; };
 		D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */; };
-		D32BF18B1B8B042D0027AC01 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = D32BF18A1B8B042D0027AC01 /* ReadMe.txt */; };
+		D32BF18B1B8B042D0027AC01 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D32BF18A1B8B042D0027AC01 /* README.md */; };
 		D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */; };
 		D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */; };
 		D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */; };
@@ -54,7 +54,7 @@
 		D30B77611B8D06A800A23067 /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
 		D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentExtensions.swift; sourceTree = "<group>"; };
 		D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionErrorsHandler.swift; sourceTree = "<group>"; };
-		D32BF18A1B8B042D0027AC01 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		D32BF18A1B8B042D0027AC01 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentStatusEnum.swift; sourceTree = "<group>"; };
 		D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsListController.swift; sourceTree = "<group>"; };
 		D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionClient.swift; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		D3FDEC6E1B67F64E00ADC986 = {
 			isa = PBXGroup;
 			children = (
-				D32BF18A1B8B042D0027AC01 /* ReadMe.txt */,
+				D32BF18A1B8B042D0027AC01 /* README.md */,
 				D3E8DFEF1B8E32FC0002429D /* BRYXBanner.framework */,
 				D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */,
 				D3FDEC791B67F64E00ADC986 /* Remotly */,
@@ -319,7 +319,7 @@
 			files = (
 				D3FDEC851B67F64E00ADC986 /* Main.storyboard in Resources */,
 				D3FDEC8A1B67F64E00ADC986 /* LaunchScreen.xib in Resources */,
-				D32BF18B1B8B042D0027AC01 /* ReadMe.txt in Resources */,
+				D32BF18B1B8B042D0027AC01 /* README.md in Resources */,
 				D3FDEC871B67F64E00ADC986 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
