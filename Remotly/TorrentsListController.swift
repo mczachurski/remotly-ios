@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetchedResultsControllerDelegate
+class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActionSheetDelegate, NSFetchedResultsControllerDelegate
 {
     var server:Server!
     private var transmissionClient:TransmissionClient!
@@ -17,6 +17,9 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     private var reloadTimer:NSTimer?
     private var rateDownload:Int64 = 0
     private var rateUpload:Int64 = 0
+    private let deleteTorrentButtonIndex = 1
+    private let deleteTorrentWitDataButtonIndex = 2
+    private var torrentToDelete:Torrent? = nil
     
     @IBOutlet weak var downloadToolbarOutlet: UIBarButtonItem!
     @IBOutlet weak var uploadToolbarOutlet: UIBarButtonItem!
@@ -363,14 +366,34 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     private func createDeleteAction(torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
     {
         var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            self.transmissionClient.removeTorrent(torrent.id, onCompletion: { (error) -> Void in
-                self.deleteAction(torrent, error: error)
-            })
-            
+            self.createDeleteActionSheet(torrent)
             tableView.setEditing(false, animated: true)
         })
-        
+
         return deleteAction
+    }
+    
+    private func createDeleteActionSheet(torrent:Torrent)
+    {
+        torrentToDelete = torrent
+        let actionSheet = UIActionSheet(title: "Choose delete method", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle:nil, otherButtonTitles: "Delete torrent", "Delete torrent and data")
+        actionSheet.showInView(self.view)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, didDismissWithButtonIndex buttonIndex: Int)
+    {
+        if(buttonIndex == deleteTorrentButtonIndex)
+        {
+            self.transmissionClient.removeTorrent(self.torrentToDelete!.id, deleteLocalData: false, onCompletion: { (error) -> Void in
+                self.deleteAction(self.torrentToDelete!, error: error)
+            })
+        }
+        else if(buttonIndex == deleteTorrentWitDataButtonIndex)
+        {
+            self.transmissionClient.removeTorrent(self.torrentToDelete!.id, deleteLocalData: true, onCompletion: { (error) -> Void in
+                self.deleteAction(self.torrentToDelete!, error: error)
+            })
+        }
     }
     
     private func deleteAction(torrent:Torrent, error:NSError?)

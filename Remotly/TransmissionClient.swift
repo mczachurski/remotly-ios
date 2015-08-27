@@ -84,15 +84,16 @@ class TransmissionClient
     
     // MARK: Remove torrent
     
-    func removeTorrent(torrentId:Int64, onCompletion:((NSError!) -> Void)?)
+    func removeTorrent(torrentId:Int64, deleteLocalData:Bool, onCompletion:((NSError!) -> Void)?)
     {
-        var requestJson = removeTorrentPrepareJson(torrentId)
+        var requestJson = removeTorrentPrepareJson(torrentId, deleteLocalData: deleteLocalData)
         removeTorrentSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func removeTorrentPrepareJson(torrentId:Int64) -> String
+    private func removeTorrentPrepareJson(torrentId:Int64, deleteLocalData:Bool) -> String
     {
-        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-remove\" }"
+        let deleteLocalDataValue = deleteLocalData ? "true" : "false"
+        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ], \"delete-local-data\": \(deleteLocalDataValue) }, \"method\": \"torrent-remove\" }"
         return requestJson
     }
     
