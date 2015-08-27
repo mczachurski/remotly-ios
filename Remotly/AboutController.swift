@@ -59,7 +59,7 @@ class AboutController: UITableViewController
         let appVersion = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as? String
         
         let recipients = "mailto:mczachurski@icloud.com?subject=My remarks for Remotly app"
-        let body = "&body=<br /><br />System: \(systemVersion)<br />Model: \(model)<br />FuelStat: \(appVersion)<br />"
+        let body = "&body=<br /><br />System: \(systemVersion)<br />Model: \(model)<br />Remotly: \(appVersion!)<br />"
         var email = "\(recipients)\(body)"
         email = email.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         
