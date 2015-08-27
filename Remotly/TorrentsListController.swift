@@ -15,6 +15,11 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     private var transmissionClient:TransmissionClient!
     private var context: NSManagedObjectContext!
     private var reloadTimer:NSTimer?
+    private var rateDownload:Int64 = 0
+    private var rateUpload:Int64 = 0
+    
+    @IBOutlet weak var downloadToolbarOutlet: UIBarButtonItem!
+    @IBOutlet weak var uploadToolbarOutlet: UIBarButtonItem!
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let frc = CoreDataHandler.getTorrentFetchedResultsController(self.context, server: self.server, delegate: self)
@@ -67,10 +72,18 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
             print("An error occurred: \(error?.localizedDescription)")
         }
 
+        changeToolbarFontApperance()
         self.clearsSelectionOnViewWillAppear = true
         self.navigationItem.title = server.name
     }
-        
+
+    private func changeToolbarFontApperance()
+    {
+        var toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(12.0)]
+        downloadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
+        uploadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
+    }
+    
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
@@ -114,8 +127,17 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     func controllerDidChangeContent(controller: NSFetchedResultsController)
     {
         dispatch_async(dispatch_get_main_queue()) {
+            self.refreshRates()
             self.tableView.endUpdates()
         }
+    }
+    
+    private func refreshRates()
+    {
+        var downloadValue = FormatHandler.formatSizeUnits(self.rateDownload)
+        var uploadValue = FormatHandler.formatSizeUnits(self.rateUpload)
+        self.downloadToolbarOutlet.title = "\(downloadValue)/s"
+        self.uploadToolbarOutlet.title = "\(uploadValue)/s"
     }
     
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType)
@@ -178,18 +200,24 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
                 self.invalidateReloadTimer();
                 NotificationHandler.showError("Error", message: error!.localizedDescription)
             }
-            return
         }
-
-        synchronizeWithCoreData(torrentInformations)
+        else
+        {
+            synchronizeWithCoreData(torrentInformations)
+        }
     }
     
     private func synchronizeWithCoreData(torrentInformations:[TorrentInformation]!)
     {
         var torrentsFromCoreData = fetchedResultsController.fetchedObjects as! [Torrent]
+        rateDownload = 0
+        rateUpload = 0
         
         for torrentFromServer in torrentInformations
         {
+            rateDownload += torrentFromServer.rateDownload
+            rateUpload += torrentFromServer.rateUpload
+            
             var wasSynchronized = false
             for torrentFromCoreData in torrentsFromCoreData
             {

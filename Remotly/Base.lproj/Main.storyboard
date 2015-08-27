@@ -383,6 +383,15 @@
                             <outlet property="delegate" destination="EI7-cr-xlV" id="IpV-wC-4Ew"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="qSx-fQ-LDz"/>
+                        <barButtonItem image="download" id="bEU-xJ-g5m"/>
+                        <barButtonItem title="0 byte/s" id="atf-d6-9Sl"/>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="poY-37-Hhm"/>
+                        <barButtonItem image="upload" id="4It-mf-5BN"/>
+                        <barButtonItem title="0 byte/s" id="fEi-Zs-ZIg"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Uv6-g3-QP5"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Torrents" id="a9S-Wu-8se">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZSf-GE-3YL">
                             <connections>
@@ -390,10 +399,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="downloadToolbarOutlet" destination="atf-d6-9Sl" id="uH8-bp-do2"/>
+                        <outlet property="uploadToolbarOutlet" destination="fEi-Zs-ZIg" id="0sx-6s-81w"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8e-5v-Cgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1681" y="-264"/>
+            <point key="canvasLocation" x="2437" y="-264"/>
         </scene>
         <!--New server-->
         <scene sceneID="jnP-TV-nXp">
@@ -763,7 +776,7 @@
                                     <outlet property="addressOutlet" destination="Mzy-AH-JLa" id="Zt9-aC-LYP"/>
                                     <outlet property="isDefaultOutlet" destination="Hsx-Br-ERc" id="6B9-hq-XEK"/>
                                     <outlet property="serverNameOutlet" destination="vpS-gP-qGX" id="r7o-H4-eJv"/>
-                                    <segue destination="EI7-cr-xlV" kind="show" identifier="TorrentsListSegue" id="TZ0-O3-Uhp"/>
+                                    <segue destination="Pst-TX-B7t" kind="show" identifier="TorrentsListSegue" id="TZ0-O3-Uhp"/>
                                     <segue destination="jzX-id-iYr" kind="presentation" identifier="EditServerSegue" trigger="accessoryAction" id="wRY-sP-Gyj"/>
                                 </connections>
                             </tableViewCell>
@@ -794,11 +807,17 @@
         <scene sceneID="S0T-q4-iIz">
             <objects>
                 <navigationController id="Rxa-we-qyC" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oD1-Y5-Oj2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="A5i-nZ-axt">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="tintColor" red="0.90588235294117647" green="0.17254901960784313" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="xDe-J2-c28" kind="relationship" relationship="rootViewController" id="hDS-6g-rbe"/>
                     </connections>
@@ -806,6 +825,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZaJ-e7-4XX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="115" y="-264"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WG9-wR-y5Q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Pst-TX-B7t" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mSL-q2-Tsl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ihW-9i-mVP">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="EI7-cr-xlV" kind="relationship" relationship="rootViewController" id="Eah-Em-hvZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3MY-Qm-iyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1681" y="-264"/>
         </scene>
     </scenes>
     <resources>

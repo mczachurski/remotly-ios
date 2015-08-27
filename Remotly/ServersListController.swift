@@ -121,10 +121,11 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         }
         else if(segue.identifier == "TorrentsListSegue")
         {
-            let destinationViewController = segue.destinationViewController as! TorrentsListController
+            let destinationViewController = segue.destinationViewController as! UINavigationController
+            let torrentsViewController = destinationViewController.viewControllers.first as! TorrentsListController
             
             var server = getServerForSender(sender)
-            destinationViewController.server = server
+            torrentsViewController.server = server
         }
     }
     
