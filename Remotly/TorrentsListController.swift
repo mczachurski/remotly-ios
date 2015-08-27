@@ -68,6 +68,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         }
 
         self.clearsSelectionOnViewWillAppear = true
+        self.navigationItem.title = server.name
     }
         
     override func viewDidAppear(animated: Bool)
