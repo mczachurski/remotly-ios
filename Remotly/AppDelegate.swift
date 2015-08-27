@@ -36,24 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         return true
     }
     
-    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
-    {
-        if(alertView.tag == 1 && buttonIndex == 1)
-        {
-            if let defaultServer = getDefaultServer()
-            {
-                addTorrent(defaultServer, isExternal: false)
-            }
-        }
-        else if(alertView.tag == 2 && buttonIndex == 1)
-        {
-            if let defaultServer = getDefaultServer()
-            {
-                addTorrent(defaultServer, isExternal: true)
-            }
-        }
-    }
-    
     private func getDefaultServer() -> Server?
     {
         var managedContext = CoreDataHandler.getManagedObjectContext()
@@ -88,6 +70,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         alert.show()
     }
     
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
+    {
+        if(alertView.tag == 1 && buttonIndex == 1)
+        {
+            if let defaultServer = getDefaultServer()
+            {
+                addTorrent(defaultServer, isExternal: false)
+            }
+        }
+        else if(alertView.tag == 2 && buttonIndex == 1)
+        {
+            if let defaultServer = getDefaultServer()
+            {
+                addTorrent(defaultServer, isExternal: true)
+            }
+        }
+    }
+    
     private func addTorrent(server:Server, isExternal:Bool)
     {
         var transmissionClient = TransmissionClient(address: server.address, userName:server.userName, password:server.password)
@@ -95,6 +95,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
             if(error != nil)
             {
                 NotificationHandler.showError("Error", message: error!.localizedDescription)
+            }
+            else
+            {
+                NotificationHandler.showSuccess("Success", message: "Torrent was added")
             }
         })
     }

@@ -538,6 +538,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Servers" id="agl-vu-iQL">
+                        <barButtonItem key="leftBarButtonItem" image="about" id="p2L-Y6-shk"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="kAK-SZ-Ucr">
                             <connections>
                                 <segue destination="jzX-id-iYr" kind="presentation" identifier="NewServerSegue" id="kcY-K3-vmb"/>
@@ -568,6 +569,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="about" width="25" height="25"/>
         <image name="default" width="12" height="12"/>
         <image name="download" width="16" height="16"/>
         <image name="pause" width="16" height="16"/>

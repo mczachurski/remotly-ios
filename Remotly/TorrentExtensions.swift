@@ -31,8 +31,13 @@ extension Torrent
     
     var downloadedPercentDone: Double {
         get {
-            let percent = Double(downloadedSize) / Double(totalSize)
-            return percent
+            if(totalSize > 0)
+            {
+                let percent = Double(downloadedSize) / Double(totalSize)
+                return percent
+            }
+            
+            return 0.0
         }
     }
     
@@ -117,8 +122,15 @@ extension Torrent
     
     var downloadInformationValue: String {
         get {
-            let rateDownloadString = FormatHandler.formatSizeUnits(rateDownload)
-            return "DL: \(rateDownloadString)/s"
+            if(status == TorrentStatusEnum.Finished.rawValue)
+            {
+                return "DL: downloaded"
+            }
+            else
+            {
+                let rateDownloadString = FormatHandler.formatSizeUnits(rateDownload)
+                return "DL: \(rateDownloadString)/s"
+            }
         }
     }
     

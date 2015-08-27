@@ -24,7 +24,8 @@ class TransmissionErrorsHandler
             NSLocalizedFailureReasonErrorKey: message
         ];
         
-        let error = NSError(domain: errorDomain, code: 1, userInfo: userInfo)
+        let errorCode = getErrorCodeForErrorDomain(errorDomain)
+        let error = NSError(domain: errorDomain, code: errorCode, userInfo: userInfo)
         return error
     }
     
@@ -46,6 +47,27 @@ class TransmissionErrorsHandler
                 return "Unknown error"
             default:
                 return "Unknown error"
+        }
+    }
+    
+    private static func getErrorCodeForErrorDomain(errorDomain:String) -> Int
+    {
+        switch(errorDomain)
+        {
+        case NSTransmissionAddErrorDomain:
+            return 1
+        case NSTransmissionRemoveErrorDomain:
+            return 2
+        case NSTransmissionReasumeErrorDomain:
+            return 3
+        case NSTransmissionPauseErrorDomain:
+            return 4
+        case NSTransmissionGetErrorDomain:
+            return 5
+        case NSTransmissionUnknownErrorDomain:
+            return 6
+        default:
+            return -1
         }
     }
 }
