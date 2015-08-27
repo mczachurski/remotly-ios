@@ -35,6 +35,14 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    override func viewWillAppear(animated: Bool)
+    {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        {
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
+    }
+    
     func controllerDidChangeContent(controller: NSFetchedResultsController)
     {
         configuration = CoreDataHandler.getConfiguration(context)

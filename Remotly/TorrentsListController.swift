@@ -75,6 +75,14 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         reloadTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(4.0), target: self, selector: Selector("reloadTimer:"), userInfo: nil, repeats: true)
     }
 
+    override func viewWillAppear(animated: Bool)
+    {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        {
+            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
+    }
+    
     override func viewWillDisappear(animated: Bool)
     {
         invalidateReloadTimer();
