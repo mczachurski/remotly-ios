@@ -37,6 +37,8 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
     
     override func viewWillAppear(animated: Bool)
     {
+        super.viewWillAppear(animated)
+        
         if let selectedIndexPath = tableView.indexPathForSelectedRow()
         {
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)

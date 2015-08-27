@@ -22,6 +22,8 @@ class ServerDetailsController: UITableViewController
     
     override func viewWillAppear(animated: Bool)
     {
+        super.viewWillAppear(animated)
+        
         if(server != nil)
         {
             nameOutlet.text = server!.name

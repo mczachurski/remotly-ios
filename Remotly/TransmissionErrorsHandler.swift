@@ -8,66 +8,46 @@
 
 import Foundation
 
-let NSTransmissionAddErrorDomain:String = "NSTransmissionAddErrorDomain"
-let NSTransmissionRemoveErrorDomain:String = "NSTransmissionRemoveErrorDomain"
-let NSTransmissionReasumeErrorDomain:String = "NSTransmissionReasumeErrorDomain"
-let NSTransmissionPauseErrorDomain:String = "NSTransmissionPauseErrorDomain"
-let NSTransmissionGetErrorDomain:String = "NSTransmissionGetErrorDomain"
-let NSTransmissionUnknownErrorDomain:String = "NSTransmissionUnknownErrorDomain"
+let NSTransmissionErrorDomain:String = "NSTransmissionErrorDomain"
+
+let NSTransmissionAddError:Int = 1
+let NSTransmissionRemoveError:Int = 2
+let NSTransmissionReasumeError:Int = 3
+let NSTransmissionPauseError:Int = 4
+let NSTransmissionGetError:Int = 5
+let NSTransmissionUnknownError:Int = 6
 
 class TransmissionErrorsHandler
 {
-    static func createError(errorDomain:String, message:String) -> NSError
+    static func createError(errorCode:Int, message:String) -> NSError
     {
         var userInfo = [
-            NSLocalizedDescriptionKey: TransmissionErrorsHandler.getUserMessageForErrorDomain(errorDomain),
+            NSLocalizedDescriptionKey: TransmissionErrorsHandler.getUserMessageForErrorCode(errorCode),
             NSLocalizedFailureReasonErrorKey: message
         ];
         
-        let errorCode = getErrorCodeForErrorDomain(errorDomain)
-        let error = NSError(domain: errorDomain, code: errorCode, userInfo: userInfo)
+        let error = NSError(domain: NSTransmissionErrorDomain, code: errorCode, userInfo: userInfo)
         return error
     }
     
-    private static func getUserMessageForErrorDomain(errorDomain:String) -> String
+    private static func getUserMessageForErrorCode(errorCode:Int) -> String
     {
-        switch(errorDomain)
+        switch(errorCode)
         {
-            case NSTransmissionAddErrorDomain:
-                return "Error during adding new torrent file"
-            case NSTransmissionRemoveErrorDomain:
-                return "Error during removing torrent file"
-            case NSTransmissionReasumeErrorDomain:
-                return "Error during reasumig torrent file"
-            case NSTransmissionPauseErrorDomain:
-                return "Error during pausing torrent file"
-            case NSTransmissionGetErrorDomain:
-                return "Error during getting torrent files"
-            case NSTransmissionUnknownErrorDomain:
-                return "Unknown error"
-            default:
-                return "Unknown error"
-        }
-    }
-    
-    private static func getErrorCodeForErrorDomain(errorDomain:String) -> Int
-    {
-        switch(errorDomain)
-        {
-        case NSTransmissionAddErrorDomain:
-            return 1
-        case NSTransmissionRemoveErrorDomain:
-            return 2
-        case NSTransmissionReasumeErrorDomain:
-            return 3
-        case NSTransmissionPauseErrorDomain:
-            return 4
-        case NSTransmissionGetErrorDomain:
-            return 5
-        case NSTransmissionUnknownErrorDomain:
-            return 6
+        case NSTransmissionAddError:
+            return "Error during adding new torrent file"
+        case NSTransmissionRemoveError:
+            return "Error during removing torrent file"
+        case NSTransmissionReasumeError:
+            return "Error during reasumig torrent file"
+        case NSTransmissionPauseError:
+            return "Error during pausing torrent file"
+        case NSTransmissionGetError:
+            return "Error during getting torrent files"
+        case NSTransmissionUnknownError:
+            return "Unknown error"
         default:
-            return -1
+            return "Unknown error"
         }
     }
 }

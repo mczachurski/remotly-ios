@@ -73,11 +73,14 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
         
     override func viewDidAppear(animated: Bool)
     {
+        super.viewDidAppear(animated)
         reloadTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(4.0), target: self, selector: Selector("reloadTimer:"), userInfo: nil, repeats: true)
     }
 
     override func viewWillAppear(animated: Bool)
     {
+        super.viewWillAppear(animated)
+        
         if let selectedIndexPath = tableView.indexPathForSelectedRow()
         {
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
@@ -86,6 +89,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, NSFetc
     
     override func viewWillDisappear(animated: Bool)
     {
+        super.viewWillDisappear(animated)
         invalidateReloadTimer();
     }
     

@@ -18,6 +18,8 @@
 		D35D06011B6A9C3400E4C72B /* TorrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */; };
 		D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */; };
 		D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */; };
+		D39A44341B8F08D10010C095 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A44331B8F08D10010C095 /* AboutController.swift */; };
+		D39A44361B8F14190010C095 /* ThirdPartyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A44351B8F14190010C095 /* ThirdPartyController.swift */; };
 		D3DA61151B8C48D5006B8762 /* ServerDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */; };
 		D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61191B8C52E5006B8762 /* ServersListController.swift */; };
 		D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */; };
@@ -59,6 +61,8 @@
 		D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentInformation.swift; sourceTree = "<group>"; };
 		D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsCell.swift; sourceTree = "<group>"; };
 		D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D39A44331B8F08D10010C095 /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
+		D39A44351B8F14190010C095 /* ThirdPartyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyController.swift; sourceTree = "<group>"; };
 		D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDetailsController.swift; sourceTree = "<group>"; };
 		D3DA61191B8C52E5006B8762 /* ServersListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersListController.swift; sourceTree = "<group>"; };
 		D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 		D3DA61111B8C4827006B8762 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D39A44331B8F08D10010C095 /* AboutController.swift */,
+				D39A44351B8F14190010C095 /* ThirdPartyController.swift */,
 				D3DA61191B8C52E5006B8762 /* ServersListController.swift */,
 				D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */,
 				D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */,
@@ -356,12 +362,14 @@
 				D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */,
 				D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */,
 				D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */,
+				D39A44341B8F08D10010C095 /* AboutController.swift in Sources */,
 				D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */,
 				D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */,
 				D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */,
 				D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */,
 				D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */,
 				D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */,
+				D39A44361B8F14190010C095 /* ThirdPartyController.swift in Sources */,
 				D3E8DFEC1B8DDB9F0002429D /* MagnetLinkHandler.swift in Sources */,
 				D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */,
 				D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */,

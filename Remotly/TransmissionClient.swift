@@ -74,7 +74,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionAddErrorDomain, message: result)
+                    internalError = TransmissionErrorsHandler.createError(NSTransmissionAddError, message: result)
                 }
             }
             
@@ -107,7 +107,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionRemoveErrorDomain, message: result)
+                    internalError = TransmissionErrorsHandler.createError(NSTransmissionRemoveError, message: result)
                 }
             }
             
@@ -140,7 +140,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionReasumeErrorDomain, message: result)
+                    internalError = TransmissionErrorsHandler.createError(NSTransmissionReasumeError, message: result)
                 }
             }
             
@@ -173,7 +173,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionPauseErrorDomain, message: result)
+                    internalError = TransmissionErrorsHandler.createError(NSTransmissionPauseError, message: result)
                 }
             }
             
@@ -208,7 +208,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionGetErrorDomain, message: result)
+                    internalError = TransmissionErrorsHandler.createError(NSTransmissionGetError, message: result)
                 }
                 else
                 {
