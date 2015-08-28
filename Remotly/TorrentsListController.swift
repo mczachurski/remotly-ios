@@ -462,4 +462,14 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
             CoreDataHandler.save(self.context)
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if(segue.identifier == "PreferencesSegue")
+        {
+            let destinationViewController = segue.destinationViewController as! UINavigationController
+            let preferencesController = destinationViewController.viewControllers.first as! PreferencesController
+            preferencesController.server = server
+        }
+    }
 }

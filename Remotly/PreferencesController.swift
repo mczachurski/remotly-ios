@@ -10,6 +10,9 @@ import UIKit
 
 class PreferencesController : UITableViewController
 {
+    var server:Server!
+    var transmissionClient:TransmissionClient!
+    
     @IBOutlet weak var globalDownloadRateCellOutlet: UITableViewCell!
     @IBOutlet weak var globalUploadRataCellOutlet: UITableViewCell!
     @IBOutlet weak var globalDownloadRateSwitchOutlet: UISwitch!
@@ -22,7 +25,29 @@ class PreferencesController : UITableViewController
     
     override func viewDidLoad()
     {
-        reloadRatesCellVisibility()
+        transmissionClient = TransmissionClient(address: server.address, userName: server.userName, password: server.password)
+        getTransmissionPreferences();
+    }
+    
+    private func getTransmissionPreferences()
+    {
+        transmissionClient.getTransmissionSessionInformation { (transmissionSession, error) -> Void in
+            if(error != nil)
+            {
+                NotificationHandler.showError("Error", message: error!.localizedDescription)
+            }
+            else
+            {
+                self.globalDownloadRateSwitchOutlet.on = transmissionSession.speedLimitDownEnabled
+                self.globalUploadRateSwitchOutlet.on = transmissionSession.speedLimitUpEnabled
+                self.globalDownloadRateOutlet.text = "\(transmissionSession.speedLimitDown)"
+                self.globalUploadRateOutlet.text = "\(transmissionSession.speedLimitUp)"
+                self.limitDownloadRateOutlet.text = "\(transmissionSession.altSpeedDown)"
+                self.limitUploadRateOutlet.text = "\(transmissionSession.altSpeedUp)"
+                
+                self.reloadRatesCellVisibility()
+            }
+        }
     }
     
     @IBAction func cancelAction(sender: AnyObject)
@@ -35,16 +60,13 @@ class PreferencesController : UITableViewController
         reloadRatesCellVisibility()
         tableView.reloadData()
     }
-    
-    @IBAction func scheduleSpeedLimitChanged(sender: AnyObject)
-    {
-        
-    }
 
     private func reloadRatesCellVisibility()
     {
-        globalDownloadRateCellOutlet.hidden = !globalDownloadRateSwitchOutlet.on
-        globalUploadRataCellOutlet.hidden = !globalUploadRateSwitchOutlet.on
+        dispatch_async(dispatch_get_main_queue()) {
+            self.globalDownloadRateCellOutlet.hidden = !self.globalDownloadRateSwitchOutlet.on
+            self.globalUploadRataCellOutlet.hidden = !self.globalUploadRateSwitchOutlet.on
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat

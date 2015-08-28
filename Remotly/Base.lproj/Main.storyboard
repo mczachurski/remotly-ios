@@ -398,7 +398,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Uv6-g3-QP5"/>
                         <barButtonItem image="settings" id="Owu-gE-Zky" userLabel="settings">
                             <connections>
-                                <segue destination="zmg-QI-4wX" kind="showDetail" id="NJx-dG-puP"/>
+                                <segue destination="zmg-QI-4wX" kind="showDetail" identifier="PreferencesSegue" id="NJx-dG-puP"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -618,7 +618,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Vw-G2-Hcv" id="ejA-QY-D2t">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPg-aL-UdG">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPg-aL-UdG">
                                                     <rect key="frame" x="389" y="7" width="150" height="30"/>
                                                     <animations/>
                                                     <constraints>
@@ -668,7 +668,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sk7-en-aFu" id="a96-nK-ZQY">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lar-nm-Acg">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lar-nm-Acg">
                                                     <rect key="frame" x="389" y="7" width="150" height="30"/>
                                                     <animations/>
                                                     <constraints>
