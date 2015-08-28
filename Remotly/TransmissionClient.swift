@@ -276,6 +276,17 @@ class TransmissionClient
                 {
                     var sessionJson = json["arguments"]
                     transmissionSession.altSpeedEnabled = sessionJson["alt-speed-enabled"].boolValue
+                    transmissionSession.altSpeedDown = sessionJson["alt-speed-down"].int32Value
+                    transmissionSession.altSpeedTimeBegin = sessionJson["alt-speed-time-begin"].int32Value
+                    transmissionSession.altSpeedTimeEnabled = sessionJson["alt-speed-time-enabled"].boolValue
+                    transmissionSession.altSpeedTimeDay = sessionJson["alt-speed-time-day"].int32Value
+                    transmissionSession.altSpeedUp = sessionJson["alt-speed-up"].int32Value
+                    transmissionSession.rpcVersion = sessionJson["rpc-version"].doubleValue
+                    transmissionSession.speedLimitDown = sessionJson["speed-limit-down"].int32Value
+                    transmissionSession.speedLimitUp = sessionJson["speed-limit-up"].int32Value
+                    transmissionSession.speedLimitDownEnabled = sessionJson["speed-limit-down-enabled"].boolValue
+                    transmissionSession.speedLimitUpEnabled = sessionJson["speed-limit-up-enabled"].boolValue
+                    transmissionSession.version = sessionJson["version"].stringValue
                 }
             }
             

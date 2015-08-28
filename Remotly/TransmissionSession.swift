@@ -11,4 +11,15 @@ import Foundation
 class TransmissionSession
 {
     var altSpeedEnabled:Bool = false
+    var altSpeedDown:Int32 = 0
+    var altSpeedTimeBegin:Int32 = 0
+    var altSpeedTimeEnabled:Bool = false
+    var altSpeedTimeDay:Int32 = 0
+    var altSpeedUp:Int32 = 0
+    var rpcVersion:Double = 0.0
+    var speedLimitDown:Int32 = 0
+    var speedLimitDownEnabled:Bool = false
+    var speedLimitUp:Int32 = 0
+    var speedLimitUpEnabled:Bool = false
+    var version:String = ""
 }

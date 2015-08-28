@@ -25,6 +25,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     @IBOutlet weak var downloadToolbarOutlet: UIBarButtonItem!
     @IBOutlet weak var uploadToolbarOutlet: UIBarButtonItem!
     @IBOutlet weak var speedModeOutlet: UIBarButtonItem!
+    @IBOutlet weak var downloadImageOutlet: UIBarButtonItem!
+    @IBOutlet weak var uploadImageOutlet: UIBarButtonItem!
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let frc = CoreDataHandler.getTorrentFetchedResultsController(self.context, server: self.server, delegate: self)
@@ -138,7 +140,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     private func changeToolbarFontApperance()
     {
-        var toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(12.0)]
+        var toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(13.0)]
         downloadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
         uploadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
     }

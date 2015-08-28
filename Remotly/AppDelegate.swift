@@ -103,8 +103,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         })
     }
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
+        UISwitch.appearance().tintColor = ColorsHandler.getMainColor()
+        UISwitch.appearance().onTintColor = ColorsHandler.getMainColor()
+        
         return true
     }
 
