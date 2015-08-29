@@ -425,11 +425,12 @@
         <scene sceneID="Gdg-a8-3Qh">
             <objects>
                 <tableViewController id="f2S-ud-FCu" userLabel="Preferences" customClass="PreferencesController" customModule="Remotly" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="IvX-XS-SdM">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="IvX-XS-SdM" customClass="BaseTableView" customModule="Remotly" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <sections>
                             <tableViewSection headerTitle="Global bandwitch limits" id="FCi-Qz-W6y">
                                 <cells>

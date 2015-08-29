@@ -38,11 +38,21 @@ class PreferencesController : UITableViewController
     
     override func viewDidLoad()
     {
+        super.viewDidLoad()
+        
         timeFromPickerOutlet.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         timeToPickerOutlet.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         
         getTransmissionPreferences();
         reloadRatesCellVisibility()
+    }
+    
+    func dismissKeyboard()
+    {
+        globalDownloadRateOutlet.resignFirstResponder()
+        globalUploadRateOutlet.resignFirstResponder()
+        limitDownloadRateOutlet.resignFirstResponder()
+        limitUploadRateOutlet.resignFirstResponder()
     }
     
     private func getTransmissionPreferences()
