@@ -419,7 +419,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s8e-5v-Cgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2437" y="-264"/>
+            <point key="canvasLocation" x="1681" y="-264"/>
         </scene>
         <!--Preferences-->
         <scene sceneID="Gdg-a8-3Qh">
@@ -887,7 +887,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Zr-jZ-bRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4019" y="-264"/>
+            <point key="canvasLocation" x="3263" y="-264"/>
         </scene>
         <!--Schedule speed limit-->
         <scene sceneID="vWl-kH-2qx">
@@ -1124,7 +1124,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGa-Cl-ViZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="qrO-jL-Afn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4758" y="-264"/>
+            <point key="canvasLocation" x="4002" y="-264"/>
         </scene>
         <!--New server-->
         <scene sceneID="jnP-TV-nXp">
@@ -1494,8 +1494,8 @@
                                     <outlet property="addressOutlet" destination="Mzy-AH-JLa" id="Zt9-aC-LYP"/>
                                     <outlet property="isDefaultOutlet" destination="Hsx-Br-ERc" id="6B9-hq-XEK"/>
                                     <outlet property="serverNameOutlet" destination="vpS-gP-qGX" id="r7o-H4-eJv"/>
-                                    <segue destination="Pst-TX-B7t" kind="show" identifier="TorrentsListSegue" id="TZ0-O3-Uhp"/>
                                     <segue destination="jzX-id-iYr" kind="presentation" identifier="EditServerSegue" trigger="accessoryAction" id="wRY-sP-Gyj"/>
+                                    <segue destination="EI7-cr-xlV" kind="show" identifier="TorrentsListSegue" id="1W6-8x-Mjw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1524,7 +1524,7 @@
         <!--Navigation Controller-->
         <scene sceneID="S0T-q4-iIz">
             <objects>
-                <navigationController id="Rxa-we-qyC" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="Rxa-we-qyC" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oD1-Y5-Oj2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1545,30 +1545,6 @@
             <point key="canvasLocation" x="115" y="-264"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="WG9-wR-y5Q">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Pst-TX-B7t" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mSL-q2-Tsl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ihW-9i-mVP">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="EI7-cr-xlV" kind="relationship" relationship="rootViewController" id="Eah-Em-hvZ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3MY-Qm-iyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1681" y="-264"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="5DA-tY-5qh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zmg-QI-4wX" sceneMemberID="viewController">
@@ -1585,7 +1561,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EE4-QH-QZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3207" y="-264"/>
+            <point key="canvasLocation" x="2437" y="-264"/>
         </scene>
     </scenes>
     <resources>

@@ -38,11 +38,18 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        self.navigationController?.setToolbarHidden(true, animated: animated)
         
         if let selectedIndexPath = tableView.indexPathForSelectedRow()
         {
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setToolbarHidden(false, animated: animated)
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController)
@@ -121,8 +128,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         }
         else if(segue.identifier == "TorrentsListSegue")
         {
-            let destinationViewController = segue.destinationViewController as! UINavigationController
-            let torrentsViewController = destinationViewController.viewControllers.first as! TorrentsListController
+            let torrentsViewController = segue.destinationViewController as! TorrentsListController
             
             var server = getServerForSender(sender)
             torrentsViewController.server = server
