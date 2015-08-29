@@ -10,7 +10,7 @@ import Foundation
 
 enum ScheduleSpeedDayEnum:Int32
 {
-    case Unknown = 0
+    case Off = 0
     case Sunday = 1
     case Monday = 2
     case Tuesday = 4

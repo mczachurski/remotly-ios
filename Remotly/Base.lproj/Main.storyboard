@@ -737,7 +737,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <segue destination="BeK-CE-Eqx" kind="show" id="yBv-oZ-Mal"/>
+                                            <segue destination="BeK-CE-Eqx" kind="show" identifier="ScheduleSpeedLimitSegue" id="yBv-oZ-Mal"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="1AE-p9-Es5" detailTextLabel="fY4-2V-pa2" style="IBUITableViewCellStyleValue1" id="rhV-0x-iZl">
@@ -888,7 +888,7 @@
         <!--Schedule speed limit-->
         <scene sceneID="vWl-kH-2qx">
             <objects>
-                <tableViewController id="BeK-CE-Eqx" sceneMemberID="viewController">
+                <tableViewController id="BeK-CE-Eqx" customClass="ScheduleSpeedDaysController" customModule="Remotly" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AXa-Ei-tPG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -897,7 +897,7 @@
                         <sections>
                             <tableViewSection id="PbO-BO-GX7">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" textLabel="Ayv-Wz-6sr" style="IBUITableViewCellStyleDefault" id="7C8-QN-b6e">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" textLabel="Ayv-Wz-6sr" style="IBUITableViewCellStyleDefault" id="7C8-QN-b6e" userLabel="Off">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7C8-QN-b6e" id="PJ9-Dh-1vH">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -914,7 +914,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="oYT-Xq-D1C" style="IBUITableViewCellStyleDefault" id="TQG-8s-Wlx">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="oYT-Xq-D1C" style="IBUITableViewCellStyleDefault" id="TQG-8s-Wlx" userLabel="Every day">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TQG-8s-Wlx" id="DKl-74-loj">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -931,7 +931,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="PpX-CN-c91" style="IBUITableViewCellStyleDefault" id="eRX-6r-E8V">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="PpX-CN-c91" style="IBUITableViewCellStyleDefault" id="eRX-6r-E8V" userLabel="Weekdays">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eRX-6r-E8V" id="LFl-5U-nyq">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -948,7 +948,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="03g-15-9kj" style="IBUITableViewCellStyleDefault" id="XFU-BO-4kS">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="03g-15-9kj" style="IBUITableViewCellStyleDefault" id="XFU-BO-4kS" userLabel="Weekends">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XFU-BO-4kS" id="cyC-6b-vJM">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -969,7 +969,7 @@
                             </tableViewSection>
                             <tableViewSection id="OaC-TV-O7Q">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="p1h-CA-5M1" style="IBUITableViewCellStyleDefault" id="bas-1R-b58">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="p1h-CA-5M1" style="IBUITableViewCellStyleDefault" id="bas-1R-b58" userLabel="Monday">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bas-1R-b58" id="QP8-7e-M5c">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -986,7 +986,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="RUa-Se-PmY" style="IBUITableViewCellStyleDefault" id="l03-F6-Wqk">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="RUa-Se-PmY" style="IBUITableViewCellStyleDefault" id="l03-F6-Wqk" userLabel="Tuesday">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="l03-F6-Wqk" id="ch0-w3-s9t">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1003,7 +1003,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="XLn-hm-eg3" style="IBUITableViewCellStyleDefault" id="Olk-tN-tLM">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="XLn-hm-eg3" style="IBUITableViewCellStyleDefault" id="Olk-tN-tLM" userLabel="Wednesday">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Olk-tN-tLM" id="qDs-qI-HeK">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1020,7 +1020,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="qcU-Vy-u6M" style="IBUITableViewCellStyleDefault" id="BZy-4Y-KJR">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="qcU-Vy-u6M" style="IBUITableViewCellStyleDefault" id="BZy-4Y-KJR" userLabel="Thursday">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BZy-4Y-KJR" id="BDg-fN-Nsb">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1037,7 +1037,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="kf5-8d-KF9" style="IBUITableViewCellStyleDefault" id="yd1-Lv-HfD">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="kf5-8d-KF9" style="IBUITableViewCellStyleDefault" id="yd1-Lv-HfD" userLabel="Friday">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yd1-Lv-HfD" id="00b-yt-SDW">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1054,7 +1054,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="i5t-cD-Pmr" style="IBUITableViewCellStyleDefault" id="uME-GP-LCw">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="i5t-cD-Pmr" style="IBUITableViewCellStyleDefault" id="uME-GP-LCw" userLabel="Saturday">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uME-GP-LCw" id="YzR-SD-s0E">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1071,7 +1071,7 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Tae-hc-CU0" style="IBUITableViewCellStyleDefault" id="ATK-3x-rle">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Tae-hc-CU0" style="IBUITableViewCellStyleDefault" id="ATK-3x-rle" userLabel="Sunday">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ATK-3x-rle" id="CsY-S9-kTj">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1096,9 +1096,29 @@
                             <outlet property="delegate" destination="BeK-CE-Eqx" id="t4V-bR-H8Q"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Schedule speed limit" id="VoD-IY-Xdv"/>
+                    <navigationItem key="navigationItem" title="Schedule speed limit" id="VoD-IY-Xdv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Cwb-7M-VbG">
+                            <connections>
+                                <segue destination="qrO-jL-Afn" kind="unwind" unwindAction="setScheduleDay:" id="nvq-2Z-Hzk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="everydayCellOutlet" destination="TQG-8s-Wlx" id="xnA-QB-Ltk"/>
+                        <outlet property="fridayCellOutlet" destination="yd1-Lv-HfD" id="jAH-0I-OWy"/>
+                        <outlet property="mondayCellOutlet" destination="bas-1R-b58" id="Jy2-qN-zB2"/>
+                        <outlet property="offCellOutlet" destination="7C8-QN-b6e" id="kyG-pt-tqe"/>
+                        <outlet property="saturdayCellOutlet" destination="uME-GP-LCw" id="AV9-eW-vhf"/>
+                        <outlet property="sundayCellOutlet" destination="ATK-3x-rle" id="nef-sG-HOF"/>
+                        <outlet property="thursdayCellOutlet" destination="BZy-4Y-KJR" id="x3W-KB-SyO"/>
+                        <outlet property="tuesdayCellOutlet" destination="l03-F6-Wqk" id="wOR-iM-j1k"/>
+                        <outlet property="wednesdayCellOutlet" destination="Olk-tN-tLM" id="lnP-Xg-hJy"/>
+                        <outlet property="weekdaysCellOutlet" destination="eRX-6r-E8V" id="BX6-Bp-G1j"/>
+                        <outlet property="weekendsCellOutlet" destination="XFU-BO-4kS" id="2RB-fU-hub"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGa-Cl-ViZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qrO-jL-Afn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4758" y="-264"/>
         </scene>

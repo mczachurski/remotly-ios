@@ -16,6 +16,7 @@ class PreferencesController : UITableViewController
     private var isEditingToTime = false
     private var transmissionVersion = "-"
     private var rpcVersion = "-"
+    private var secheduleSpeedDay = ScheduleSpeedDayEnum.Off
     
     @IBOutlet weak var globalDownloadRateCellOutlet: UITableViewCell!
     @IBOutlet weak var globalUploadRataCellOutlet: UITableViewCell!
@@ -54,31 +55,38 @@ class PreferencesController : UITableViewController
             }
             else
             {
-                self.transmissionVersion = transmissionSession.version
-                self.rpcVersion = "\(transmissionSession.rpcVersion)"
-                self.globalDownloadRateSwitchOutlet.on = transmissionSession.speedLimitDownEnabled
-                self.globalUploadRateSwitchOutlet.on = transmissionSession.speedLimitUpEnabled
-                self.globalDownloadRateOutlet.text = "\(transmissionSession.speedLimitDown)"
-                self.globalUploadRateOutlet.text = "\(transmissionSession.speedLimitUp)"
-                self.limitDownloadRateOutlet.text = "\(transmissionSession.altSpeedDown)"
-                self.limitUploadRateOutlet.text = "\(transmissionSession.altSpeedUp)"
-                
-                let minutesFrom = transmissionSession.altSpeedTimeBegin
-                let dateFrom = NSDate(timeIntervalSinceReferenceDate: Double(minutesFrom * 60))
-                self.timeFromPickerOutlet.date = dateFrom
-                let dateFromValue = FormatHandler.getHoursAndMinutesFormat(dateFrom)
-                self.timeFromOutlet.text = dateFromValue
-
-                let minutesTo = transmissionSession.altSpeedTimeEnd
-                let dateTo = NSDate(timeIntervalSinceReferenceDate: Double(minutesTo * 60))
-                self.timeToPickerOutlet.date = dateTo
-                let dateToValue = FormatHandler.getHoursAndMinutesFormat(dateTo)
-                self.timeToOutlet.text = dateToValue
-                
-                self.scheduleSpeedLimitValueOutlet.text = self.getSecheduleSpeedLimitValue(transmissionSession)
-                
-                self.reloadRatesCellVisibility()
+                self.reloadView(transmissionSession)
             }
+        }
+    }
+    
+    private func reloadView(transmissionSession:TransmissionSession)
+    {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.transmissionVersion = transmissionSession.version
+            self.rpcVersion = "\(transmissionSession.rpcVersion)"
+            self.globalDownloadRateSwitchOutlet.on = transmissionSession.speedLimitDownEnabled
+            self.globalUploadRateSwitchOutlet.on = transmissionSession.speedLimitUpEnabled
+            self.globalDownloadRateOutlet.text = "\(transmissionSession.speedLimitDown)"
+            self.globalUploadRateOutlet.text = "\(transmissionSession.speedLimitUp)"
+            self.limitDownloadRateOutlet.text = "\(transmissionSession.altSpeedDown)"
+            self.limitUploadRateOutlet.text = "\(transmissionSession.altSpeedUp)"
+            
+            let minutesFrom = transmissionSession.altSpeedTimeBegin
+            let dateFrom = NSDate(timeIntervalSinceReferenceDate: Double(minutesFrom * 60))
+            self.timeFromPickerOutlet.date = dateFrom
+            let dateFromValue = FormatHandler.getHoursAndMinutesFormat(dateFrom)
+            self.timeFromOutlet.text = dateFromValue
+            
+            let minutesTo = transmissionSession.altSpeedTimeEnd
+            let dateTo = NSDate(timeIntervalSinceReferenceDate: Double(minutesTo * 60))
+            self.timeToPickerOutlet.date = dateTo
+            let dateToValue = FormatHandler.getHoursAndMinutesFormat(dateTo)
+            self.timeToOutlet.text = dateToValue
+            
+            self.reloadScheduleSpeedDay(transmissionSession.altSpeedTimeDay)
+            self.reloadRatesCellVisibility()
+            self.tableView.reloadData()
         }
     }
     
@@ -107,14 +115,18 @@ class PreferencesController : UITableViewController
     
     private func reloadRatesCellVisibility()
     {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.globalDownloadRateCellOutlet.hidden = !self.globalDownloadRateSwitchOutlet.on
-            self.globalUploadRataCellOutlet.hidden = !self.globalUploadRateSwitchOutlet.on
-            self.timeFromPickerCellOutlet.hidden = !self.isEditingFromTime
-            self.timeToPickerCellOutlet.hidden = !self.isEditingToTime
-            self.scheduleSpeedLimitFromCellOutlet.hidden = self.scheduleSpeedLimitValueOutlet.text == "Off"
-            self.scheduleSpeedLimitToCellOutlet.hidden = self.scheduleSpeedLimitValueOutlet.text == "Off"
-        }
+        self.globalDownloadRateCellOutlet.hidden = !self.globalDownloadRateSwitchOutlet.on
+        self.globalUploadRataCellOutlet.hidden = !self.globalUploadRateSwitchOutlet.on
+        self.timeFromPickerCellOutlet.hidden = !self.isEditingFromTime
+        self.timeToPickerCellOutlet.hidden = !self.isEditingToTime
+        self.scheduleSpeedLimitFromCellOutlet.hidden = self.secheduleSpeedDay == .Off
+        self.scheduleSpeedLimitToCellOutlet.hidden = self.secheduleSpeedDay == .Off
+    }
+    
+    private func reloadScheduleSpeedDay(scheduleSpeedDay:ScheduleSpeedDayEnum)
+    {
+        self.secheduleSpeedDay = scheduleSpeedDay
+        self.scheduleSpeedLimitValueOutlet.text = self.getSecheduleSpeedLimitValue(scheduleSpeedDay)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -193,15 +205,12 @@ class PreferencesController : UITableViewController
         }
     }
     
-    private func getSecheduleSpeedLimitValue(transmissionSession:TransmissionSession) -> String
+    private func getSecheduleSpeedLimitValue(scheduleSpeedDay:ScheduleSpeedDayEnum) -> String
     {
-        if(!transmissionSession.altSpeedTimeEnabled)
+        switch(scheduleSpeedDay)
         {
-            return "Off"
-        }
-        
-        switch(transmissionSession.altSpeedTimeDay)
-        {
+            case .Off:
+                return "Off"
             case .EveryDay:
                 return "Every day"
             case .Friday:
@@ -235,5 +244,28 @@ class PreferencesController : UITableViewController
         }
         
         return nil
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if(segue.identifier == "ScheduleSpeedLimitSegue")
+        {
+            var destinationController = segue.destinationViewController as? ScheduleSpeedDaysController
+            if(destinationController != nil)
+            {
+                destinationController!.scheduleSpeedDay = self.secheduleSpeedDay
+            }
+        }
+    }
+    
+    @IBAction func setScheduleDay(segue: UIStoryboardSegue)
+    {
+        var controller = segue.sourceViewController as? ScheduleSpeedDaysController
+        if(controller != nil)
+        {
+            reloadScheduleSpeedDay(controller!.scheduleSpeedDay)
+            reloadRatesCellVisibility()
+            tableView.reloadData()
+        }
     }
 }

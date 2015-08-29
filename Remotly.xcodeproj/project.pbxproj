@@ -12,6 +12,7 @@
 		D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */; };
 		D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */; };
 		D3207C871B9195CD00940E0F /* ScheduleSpeedDayEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C861B9195CD00940E0F /* ScheduleSpeedDayEnum.swift */; };
+		D3207C891B91AE9700940E0F /* ScheduleSpeedDaysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */; };
 		D32BF18B1B8B042D0027AC01 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D32BF18A1B8B042D0027AC01 /* README.md */; };
 		D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */; };
 		D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */; };
@@ -58,6 +59,7 @@
 		D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentExtensions.swift; sourceTree = "<group>"; };
 		D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionErrorsHandler.swift; sourceTree = "<group>"; };
 		D3207C861B9195CD00940E0F /* ScheduleSpeedDayEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleSpeedDayEnum.swift; sourceTree = "<group>"; };
+		D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleSpeedDaysController.swift; sourceTree = "<group>"; };
 		D32BF18A1B8B042D0027AC01 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentStatusEnum.swift; sourceTree = "<group>"; };
 		D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsListController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */,
 				D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */,
 				D37D29201B9047FE0061B496 /* PreferencesController.swift */,
+				D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */,
 				D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */,
 				D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */,
+				D3207C891B91AE9700940E0F /* ScheduleSpeedDaysController.swift in Sources */,
 				D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */,
 				D37D29211B9047FE0061B496 /* PreferencesController.swift in Sources */,
 				D39A44361B8F14190010C095 /* ThirdPartyController.swift in Sources */,

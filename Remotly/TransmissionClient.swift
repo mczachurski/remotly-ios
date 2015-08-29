@@ -288,11 +288,15 @@ class TransmissionClient
                     transmissionSession.speedLimitUpEnabled = sessionJson["speed-limit-up-enabled"].boolValue
                     transmissionSession.version = sessionJson["version"].stringValue
                     
-                    var speedTimeDay = sessionJson["alt-speed-time-day"].int32Value
-                    var speedTimeDayEnum = ScheduleSpeedDayEnum(rawValue: speedTimeDay)
-                    if(speedTimeDayEnum != nil)
+                    transmissionSession.altSpeedTimeDay = ScheduleSpeedDayEnum.Off
+                    if(transmissionSession.altSpeedTimeEnabled)
                     {
-                        transmissionSession.altSpeedTimeDay = speedTimeDayEnum!
+                        var speedTimeDay = sessionJson["alt-speed-time-day"].int32Value
+                        var speedTimeDayEnum = ScheduleSpeedDayEnum(rawValue: speedTimeDay)
+                        if(speedTimeDayEnum != nil)
+                        {
+                            transmissionSession.altSpeedTimeDay = speedTimeDayEnum!
+                        }
                     }
                 }
             }
