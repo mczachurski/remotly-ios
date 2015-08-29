@@ -8,14 +8,16 @@
 
 import Foundation
 
-let NSTransmissionErrorDomain:String = "NSTransmissionErrorDomain"
+let RTTransmissionErrorDomain:String = "RTTransmissionErrorDomain"
 
-let NSTransmissionAddError:Int = 1
-let NSTransmissionRemoveError:Int = 2
-let NSTransmissionReasumeError:Int = 3
-let NSTransmissionPauseError:Int = 4
-let NSTransmissionGetError:Int = 5
-let NSTransmissionUnknownError:Int = 6
+let RTTransmissionUnknownError:Int = -1
+let RTTransmissionAddError:Int = 1
+let RTTransmissionRemoveError:Int = 2
+let RTTransmissionReasumeError:Int = 3
+let RTTransmissionPauseError:Int = 4
+let RTTransmissionGetError:Int = 5
+let RTTransmissionSetSessionError:Int = 6
+let RTTransmissionSetAlternativeSpeedLimitError:Int = 7
 
 class TransmissionErrorsHandler
 {
@@ -26,7 +28,7 @@ class TransmissionErrorsHandler
             NSLocalizedFailureReasonErrorKey: message
         ];
         
-        let error = NSError(domain: NSTransmissionErrorDomain, code: errorCode, userInfo: userInfo)
+        let error = NSError(domain: RTTransmissionErrorDomain, code: errorCode, userInfo: userInfo)
         return error
     }
     
@@ -34,17 +36,17 @@ class TransmissionErrorsHandler
     {
         switch(errorCode)
         {
-        case NSTransmissionAddError:
+        case RTTransmissionAddError:
             return "Error during adding new torrent file"
-        case NSTransmissionRemoveError:
+        case RTTransmissionRemoveError:
             return "Error during removing torrent file"
-        case NSTransmissionReasumeError:
+        case RTTransmissionReasumeError:
             return "Error during reasumig torrent file"
-        case NSTransmissionPauseError:
+        case RTTransmissionPauseError:
             return "Error during pausing torrent file"
-        case NSTransmissionGetError:
+        case RTTransmissionGetError:
             return "Error during getting torrent files"
-        case NSTransmissionUnknownError:
+        case RTTransmissionUnknownError:
             return "Unknown error"
         default:
             return "Unknown error"

@@ -74,7 +74,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionAddError, message: result)
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionAddError, message: result)
                 }
             }
             
@@ -108,7 +108,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionRemoveError, message: result)
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionRemoveError, message: result)
                 }
             }
             
@@ -141,7 +141,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionReasumeError, message: result)
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionReasumeError, message: result)
                 }
             }
             
@@ -174,7 +174,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionPauseError, message: result)
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionPauseError, message: result)
                 }
             }
             
@@ -209,7 +209,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionGetError, message: result)
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionGetError, message: result)
                 }
                 else
                 {
@@ -270,7 +270,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionGetError, message: result)
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionGetError, message: result)
                 }
                 else
                 {
@@ -305,6 +305,44 @@ class TransmissionClient
         })
     }
     
+    // MARK: Set transmission session
+    
+    func setTransmissionSession(transmissionSession:TransmissionSession, onCompletion:((NSError!) -> Void)?)
+    {
+        var requestJson = getTransmissionSessionPrepareJson(transmissionSession)
+        setTransmissionSessionSendRequest(requestJson, onCompletion: onCompletion)
+    }
+    
+    private func getTransmissionSessionPrepareJson(transmissionSession:TransmissionSession) -> String
+    {
+        let altSpeedTimeEnabledValue = transmissionSession.altSpeedTimeEnabled ? "true" : "false"
+        let speedLimitDownEnabledValue = transmissionSession.speedLimitDownEnabled ? "true" : "false"
+        let speedLimitUpEnabledValue = transmissionSession.speedLimitUpEnabled ? "true" : "false"
+        
+        var requestJson = "{ \"arguments\": {\"alt-speed-down\": \(transmissionSession.altSpeedDown), \"alt-speed-time-begin\": \(transmissionSession.altSpeedTimeBegin), \"alt-speed-time-enabled\": \(altSpeedTimeEnabledValue), \"alt-speed-time-end\": \(transmissionSession.altSpeedTimeEnd), \"alt-speed-time-day\": \(transmissionSession.altSpeedTimeDay.rawValue), \"alt-speed-up\": \(transmissionSession.altSpeedUp), \"speed-limit-down-enabled\": \(speedLimitDownEnabledValue), \"speed-limit-down\": \(transmissionSession.speedLimitDown), \"speed-limit-up-enabled\": \(speedLimitUpEnabledValue), \"speed-limit-up\": \(transmissionSession.speedLimitUp) }, \"method\": \"session-set\" }"
+        
+        return requestJson
+    }
+    
+    
+    private func setTransmissionSessionSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    {
+        sendRequest(requestJson, completionHandler: { data, response, error -> Void in
+            var internalError = error
+            if(internalError == nil)
+            {
+                let json:JSON = JSON(data: data)
+                var result = json["result"].stringValue
+                
+                if(result != "success")
+                {
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionSetSessionError, message: result)
+                }
+            }
+            
+            onCompletion?(internalError)
+        })
+    }
     // MARK: Change transmission speeds
     
     func setNormalTransmissionSpeed(onCompletion:((NSError!) -> Void)?)
@@ -337,7 +375,7 @@ class TransmissionClient
                 
                 if(result != "success")
                 {
-                    internalError = TransmissionErrorsHandler.createError(NSTransmissionPauseError, message: result)
+                    internalError = TransmissionErrorsHandler.createError(RTTransmissionSetAlternativeSpeedLimitError, message: result)
                 }
             }
             

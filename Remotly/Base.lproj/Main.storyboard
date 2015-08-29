@@ -858,7 +858,11 @@
                                 <action selector="cancelAction:" destination="f2S-ud-FCu" id="ix3-bE-wBI"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="EXO-mN-hvw"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="EXO-mN-hvw">
+                            <connections>
+                                <action selector="saveAction:" destination="f2S-ud-FCu" id="ZTO-At-cg7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
