@@ -142,6 +142,7 @@ class PreferencesController : UITableViewController
             }
             else
             {
+                self.dismissViewControllerAnimated(true, completion: nil)
                 dispatch_async(dispatch_get_main_queue()) {
                     NotificationHandler.showSuccess("Success", message: "Session data was saved successfully")
                 }
