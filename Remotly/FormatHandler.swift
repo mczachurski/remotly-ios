@@ -95,4 +95,14 @@ class FormatHandler
         
         return timeString
     }
+    
+    static func getHoursAndMinutesFormat(date:NSDate) -> String
+    {
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "hh:mm"
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        
+        let formattedDate = formatter.stringFromDate(date)
+        return formattedDate
+    }
 }
