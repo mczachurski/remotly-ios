@@ -403,9 +403,9 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Torrents" id="a9S-Wu-8se">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZSf-GE-3YL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="y6D-GK-AHy">
                             <connections>
-                                <action selector="addNewTorrentAction:" destination="EI7-cr-xlV" id="8a2-pr-jjt"/>
+                                <action selector="addNewTorrentAction:" destination="EI7-cr-xlV" id="xp2-OQ-QgI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

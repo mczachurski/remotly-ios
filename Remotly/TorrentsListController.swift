@@ -57,8 +57,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
-        reloadTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(4.0), target: self, selector: Selector("reloadTimer:"), userInfo: nil, repeats: true)
-        reloadTimer?.fire()
+        enableRefreshAction()
     }
 
     override func viewWillAppear(animated: Bool)
@@ -77,6 +76,23 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         invalidateReloadTimer();
     }
     
+    private func addRefreshButtonToNavigationBar()
+    {
+        if(self.navigationItem.rightBarButtonItems?.count == 1)
+        {
+            var refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "enableRefreshAction")
+            self.navigationItem.rightBarButtonItems?.append(refreshButton)
+        }
+    }
+    
+    private func removeRefreshButtonFromNavigationBar()
+    {
+        if(self.navigationItem.rightBarButtonItems?.count == 2)
+        {
+           self.navigationItem.rightBarButtonItems?.removeLast()
+        }
+    }
+    
     // MARK: Actions
     
     @IBAction func addNewTorrentAction(sender: AnyObject)
@@ -86,6 +102,17 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         alert.tag = 1
         alert.addButtonWithTitle("Add")
         alert.show()
+    }
+    
+    func enableRefreshAction()
+    {
+        self.removeRefreshButtonFromNavigationBar()
+        
+        if(reloadTimer == nil)
+        {
+            reloadTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(4.0), target: self, selector: Selector("reloadTimer:"), userInfo: nil, repeats: true)
+            reloadTimer?.fire()
+        }
     }
     
     func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
@@ -260,8 +287,9 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     {
         if(error != nil)
         {
+            self.invalidateReloadTimer();
             dispatch_async(dispatch_get_main_queue()) {
-                self.invalidateReloadTimer();
+                self.addRefreshButtonToNavigationBar()
                 NotificationHandler.showError("Error", message: error!.localizedDescription)
             }
         }
