@@ -58,6 +58,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     {
         super.viewDidAppear(animated)
         reloadTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(4.0), target: self, selector: Selector("reloadTimer:"), userInfo: nil, repeats: true)
+        reloadTimer?.fire()
     }
 
     override func viewWillAppear(animated: Bool)
@@ -147,7 +148,10 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     private func setTransmissionSpeedMode()
     {
+        SwiftLoader.show(title: "Loading...", animated: true)
         transmissionClient.getTransmissionSessionInformation { (transmissionSession, error) -> Void in
+            
+            SwiftLoader.hide()
             if(error != nil)
             {
                 NotificationHandler.showError("Error", message: error!.localizedDescription)
@@ -230,10 +234,13 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
 
                 case NSFetchedResultsChangeType.Update:
 
-                    var cell = tableView.cellForRowAtIndexPath(indexPath!) as! TorrentsCell
-                    let torrent = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Torrent
-                    cell.setTorrent(torrent)
-
+                    var cell = tableView.cellForRowAtIndexPath(indexPath!) as? TorrentsCell
+                    
+                    if(cell != nil)
+                    {
+                        let torrent = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Torrent
+                        cell!.setTorrent(torrent)
+                    }
                     break;
 
                 case NSFetchedResultsChangeType.Move:

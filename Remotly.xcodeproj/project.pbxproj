@@ -14,6 +14,7 @@
 		D3207C871B9195CD00940E0F /* ScheduleSpeedDayEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C861B9195CD00940E0F /* ScheduleSpeedDayEnum.swift */; };
 		D3207C891B91AE9700940E0F /* ScheduleSpeedDaysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */; };
 		D3207C8B1B922B0600940E0F /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C8A1B922B0600940E0F /* BaseTableView.swift */; };
+		D3207C8E1B9235CE00940E0F /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C8D1B9235CE00940E0F /* SwiftLoader.swift */; };
 		D32BF18B1B8B042D0027AC01 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D32BF18A1B8B042D0027AC01 /* README.md */; };
 		D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */; };
 		D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */; };
@@ -62,6 +63,7 @@
 		D3207C861B9195CD00940E0F /* ScheduleSpeedDayEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleSpeedDayEnum.swift; sourceTree = "<group>"; };
 		D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleSpeedDaysController.swift; sourceTree = "<group>"; };
 		D3207C8A1B922B0600940E0F /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
+		D3207C8D1B9235CE00940E0F /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
 		D32BF18A1B8B042D0027AC01 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentStatusEnum.swift; sourceTree = "<group>"; };
 		D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsListController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				D3207C8A1B922B0600940E0F /* BaseTableView.swift */,
+				D3207C8D1B9235CE00940E0F /* SwiftLoader.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */,
 				D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */,
 				D39A44341B8F08D10010C095 /* AboutController.swift in Sources */,
+				D3207C8E1B9235CE00940E0F /* SwiftLoader.swift in Sources */,
 				D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */,
 				D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */,
 				D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */,

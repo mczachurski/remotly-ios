@@ -107,10 +107,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     {
         UISwitch.appearance().tintColor = ColorsHandler.getMainColor()
         UISwitch.appearance().onTintColor = ColorsHandler.getMainColor()
+        changeSwiftLoaderApperance()
         
         return true
     }
 
+    private func changeSwiftLoaderApperance()
+    {
+        var config : SwiftLoader.Config = SwiftLoader.Config()
+        config.spinnerColor = UIColor.whiteColor()
+        config.titleTextColor = UIColor.whiteColor()
+        config.backgroundColor = UIColor(red: 60.0/255.0, green: 60.0/255.0, blue: 60.0/255.0, alpha: 0.9)
+        
+        SwiftLoader.setConfig(config)
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

@@ -39,7 +39,7 @@ class PreferencesController : UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+           
         timeFromPickerOutlet.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         timeToPickerOutlet.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         
@@ -57,8 +57,11 @@ class PreferencesController : UITableViewController
     
     private func getTransmissionPreferences()
     {
+        SwiftLoader.show(title: "Loading...", animated: true)
         transmissionClient = TransmissionClient(address: server.address, userName: server.userName, password: server.password)
         transmissionClient.getTransmissionSessionInformation { (transmissionSession, error) -> Void in
+            
+            SwiftLoader.hide()
             if(error != nil)
             {
                 NotificationHandler.showError("Error", message: error!.localizedDescription)
@@ -143,7 +146,10 @@ class PreferencesController : UITableViewController
         var altSpeedTimeEnd = components.hour * 60 + components.minute
         transmissionSession.altSpeedTimeEnd = Int32(altSpeedTimeEnd)
         
+        SwiftLoader.show(title: "Saving...", animated: true)
         transmissionClient.setTransmissionSession(transmissionSession) { (error) -> Void in
+            
+            SwiftLoader.hide()
             if(error != nil)
             {
                 dispatch_async(dispatch_get_main_queue()) {
