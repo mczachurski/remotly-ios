@@ -21,6 +21,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     private let deleteTorrentWitDataButtonIndex = 2
     private var torrentToDelete:Torrent? = nil
     private var isAlternativeSpeedModeEnabled = false
+    private var isDuringRequest = false
     
     @IBOutlet weak var downloadToolbarOutlet: UIBarButtonItem!
     @IBOutlet weak var uploadToolbarOutlet: UIBarButtonItem!
@@ -161,11 +162,6 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         reloadTimer = nil
     }
     
-    func reloadTimer(timer:NSTimer)
-    {
-        self.reloadTorrents()
-    }
-    
     private func changeToolbarFontApperance()
     {
         var toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(13.0)]
@@ -278,9 +274,12 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         }
     }
     
-    func reloadTorrents()
+    func reloadTimer(timer:NSTimer)
     {
-        transmissionClient.getTorrents(torrentsLoadedCallback)
+        if(!isDuringRequest)
+        {
+            transmissionClient.getTorrents(torrentsLoadedCallback)
+        }
     }
     
     func torrentsLoadedCallback(torrentInformations:[TorrentInformation]!, error:NSError?)
@@ -297,6 +296,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         {
             synchronizeWithCoreData(torrentInformations)
         }
+        
+        isDuringRequest = false
     }
     
     private func synchronizeWithCoreData(torrentInformations:[TorrentInformation]!)
