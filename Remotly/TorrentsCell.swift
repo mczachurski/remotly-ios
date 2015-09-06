@@ -15,8 +15,8 @@ class TorrentsCell: UITableViewCell
     @IBOutlet weak var sizeOutlet: UILabel!
     @IBOutlet weak var downloadOutlet: UILabel!
     @IBOutlet weak var uploadOutlet: UILabel!
-    @IBOutlet weak var progressOutlet: UIProgressView!
     @IBOutlet weak var imageStatusOutlet: UIImageView!
+    @IBOutlet weak var progressOutlet: CircleProgressView!
     
     func setTorrent(torrent:Torrent)
     {
@@ -25,7 +25,7 @@ class TorrentsCell: UITableViewCell
         peerOutlet.text = torrent.peersInformationValue
         downloadOutlet.text = torrent.downloadInformationValue
         uploadOutlet.text = torrent.uploadInformationValue
-        progressOutlet.progress = Float(torrent.downloadedPercentDone)
+        progressOutlet.progress = torrent.downloadedPercentDone
         
         if(torrent.isDownloading)
         {

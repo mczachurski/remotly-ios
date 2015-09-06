@@ -77,9 +77,8 @@ extension Torrent
         get {
             let sizeString = FormatHandler.formatSizeUnits(totalSize)
             let downloadedSizeString = FormatHandler.formatSizeUnits(downloadedSize)
-            let downloadedPercentDoneString = FormatHandler.roundTwoPlaces(downloadedPercentDone * 100)
             
-            var sizeInformation = "\(downloadedSizeString) of \(sizeString) (\(downloadedPercentDoneString)%)"
+            var sizeInformation = "\(downloadedSizeString) of \(sizeString)"
             
             if(isDownloading)
             {

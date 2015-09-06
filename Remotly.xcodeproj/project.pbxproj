@@ -22,6 +22,7 @@
 		D35D06011B6A9C3400E4C72B /* TorrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */; };
 		D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */; };
 		D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */; };
+		D371FC701B94304800C2E5AE /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D371FC6F1B94304800C2E5AE /* CircleProgressView.swift */; };
 		D37D29211B9047FE0061B496 /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37D29201B9047FE0061B496 /* PreferencesController.swift */; };
 		D39A44341B8F08D10010C095 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A44331B8F08D10010C095 /* AboutController.swift */; };
 		D39A44361B8F14190010C095 /* ThirdPartyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A44351B8F14190010C095 /* ThirdPartyController.swift */; };
@@ -71,6 +72,7 @@
 		D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentInformation.swift; sourceTree = "<group>"; };
 		D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsCell.swift; sourceTree = "<group>"; };
 		D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D371FC6F1B94304800C2E5AE /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		D37D29201B9047FE0061B496 /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
 		D39A44331B8F08D10010C095 /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		D39A44351B8F14190010C095 /* ThirdPartyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				D3207C8A1B922B0600940E0F /* BaseTableView.swift */,
 				D3207C8D1B9235CE00940E0F /* SwiftLoader.swift */,
+				D371FC6F1B94304800C2E5AE /* CircleProgressView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				D3DA61151B8C48D5006B8762 /* ServerDetailsController.swift in Sources */,
 				D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */,
 				D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */,
+				D371FC701B94304800C2E5AE /* CircleProgressView.swift in Sources */,
 				D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */,
 				D39A44341B8F08D10010C095 /* AboutController.swift in Sources */,
 				D3207C8E1B9235CE00940E0F /* SwiftLoader.swift in Sources */,
