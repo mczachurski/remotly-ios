@@ -14,16 +14,18 @@ class CoreDataHandler
 {
     static func getManagedObjectContext() -> NSManagedObjectContext
     {
-        var managedContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let managedContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
         return managedContext
     }
     
     static func save(managedContext:NSManagedObjectContext) -> Bool
     {
         var error: NSError?
-        if !managedContext.save(&error)
-        {
-            println("Could not save \(error), \(error?.userInfo)")
+        do {
+            try managedContext.save()
+        } catch let error1 as NSError {
+            error = error1
+            print("Could not save \(error), \(error?.userInfo)")
             return false
         }
         
@@ -42,7 +44,7 @@ class CoreDataHandler
         let entity =  NSEntityDescription.entityForName("Torrent", inManagedObjectContext: managedContext)
         let torrentEntity = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
 
-        var torrent = torrentEntity as! Torrent
+        let torrent = torrentEntity as! Torrent
         torrent.server = server
         
         return torrent
@@ -52,8 +54,12 @@ class CoreDataHandler
     {
         let fetchRequest = NSFetchRequest(entityName: "Configuration")
         
-        var error: NSError?
-        var fetchedObjects = managedContext.executeFetchRequest(fetchRequest, error: &error)
+        var fetchedObjects: [AnyObject]?
+        do {
+            fetchedObjects = try managedContext.executeFetchRequest(fetchRequest)
+        } catch {
+            fetchedObjects = nil
+        }
         
         if(fetchedObjects?.count == 1)
         {

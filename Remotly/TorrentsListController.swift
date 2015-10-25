@@ -43,10 +43,10 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         
         super.viewDidLoad()
         
-        var error: NSError? = nil
-        if (fetchedResultsController.performFetch(&error) == false)
-        {
-            print("An error occurred: \(error?.localizedDescription)")
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("An error occurred: \(error.localizedDescription)", terminator: "")
         }
 
         changeToolbarFontApperance()
@@ -65,7 +65,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     {
         super.viewWillAppear(animated)
         
-        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        if let selectedIndexPath = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
@@ -81,7 +81,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     {
         if(self.navigationItem.rightBarButtonItems?.count == 1)
         {
-            var refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "enableRefreshAction")
+            let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "enableRefreshAction")
             self.navigationItem.rightBarButtonItems?.append(refreshButton)
         }
     }
@@ -98,7 +98,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     @IBAction func addNewTorrentAction(sender: AnyObject)
     {
-        var alert = UIAlertView(title: "Torrent url", message: "Please enter url to torrent file", delegate: self, cancelButtonTitle: "Cancel")
+        let alert = UIAlertView(title: "Torrent url", message: "Please enter url to torrent file", delegate: self, cancelButtonTitle: "Cancel")
         alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
         alert.tag = 1
         alert.addButtonWithTitle("Add")
@@ -122,9 +122,9 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         {
             if(buttonIndex == 1)
             {
-                var textfield = alertView.textFieldAtIndex(0)
-                var fileString = textfield?.text
-                var fileUrl = NSURL(string: fileString!)
+                let textfield = alertView.textFieldAtIndex(0)
+                let fileString = textfield?.text
+                let fileUrl = NSURL(string: fileString!)
                 
                 transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
                     if(error != nil)
@@ -164,7 +164,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     private func changeToolbarFontApperance()
     {
-        var toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(13.0)]
+        let toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(13.0)]
         downloadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
         uploadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, forState: UIControlState.Normal)
     }
@@ -218,8 +218,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     private func refreshRates()
     {
-        var downloadValue = FormatHandler.formatSizeUnits(self.rateDownload)
-        var uploadValue = FormatHandler.formatSizeUnits(self.rateUpload)
+        let downloadValue = FormatHandler.formatSizeUnits(self.rateDownload)
+        let uploadValue = FormatHandler.formatSizeUnits(self.rateUpload)
         self.downloadToolbarOutlet.title = "\(downloadValue)/s"
         self.uploadToolbarOutlet.title = "\(uploadValue)/s"
     }
@@ -240,24 +240,23 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?)
-    {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         dispatch_async(dispatch_get_main_queue()) {
-            var tableView = self.tableView
+            let tableView = self.tableView
             
             switch(type)
             {
                 case NSFetchedResultsChangeType.Insert:
-                    tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+                    tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
                     break;
 
                 case NSFetchedResultsChangeType.Delete:
-                    tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+                    tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
                     break;
 
                 case NSFetchedResultsChangeType.Update:
 
-                    var cell = tableView.cellForRowAtIndexPath(indexPath!) as? TorrentsCell
+                    let cell = tableView.cellForRowAtIndexPath(indexPath!) as? TorrentsCell
                     
                     if(cell != nil)
                     {
@@ -267,8 +266,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
                     break;
 
                 case NSFetchedResultsChangeType.Move:
-                    tableView.deleteRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
-                    tableView.insertRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+                    tableView.deleteRowsAtIndexPaths(NSArray(object: newIndexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                    tableView.insertRowsAtIndexPaths(NSArray(object: indexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
                     break;
             }
         }
@@ -302,7 +301,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     private func synchronizeWithCoreData(torrentInformations:[TorrentInformation]!)
     {
-        var torrentsFromCoreData = fetchedResultsController.fetchedObjects as! [Torrent]
+        let torrentsFromCoreData = fetchedResultsController.fetchedObjects as! [Torrent]
         rateDownload = 0
         rateUpload = 0
         
@@ -324,7 +323,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
             
             if(!wasSynchronized)
             {
-                var newTorrent = CoreDataHandler.createTorrentEntity(server, managedContext: context)
+                let newTorrent = CoreDataHandler.createTorrentEntity(server, managedContext: context)
                 newTorrent.synchronizeData(torrentFromServer)
             }
         }
@@ -365,7 +364,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     {
         if let sections = fetchedResultsController.sections
         {
-            let currentSection = sections[section] as! NSFetchedResultsSectionInfo
+            let currentSection = sections[section] 
             return currentSection.numberOfObjects
         }
         
@@ -388,19 +387,19 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
     {
         let torrent = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Torrent
 
-        var runAction = torrent.isPaused ? createReasumeAction(torrent, tableView: tableView) : createPauseAction(torrent, tableView: tableView)
-        var deleteAction = createDeleteAction(torrent, tableView: tableView)
+        let runAction = torrent.isPaused ? createReasumeAction(torrent, tableView: tableView) : createPauseAction(torrent, tableView: tableView)
+        let deleteAction = createDeleteAction(torrent, tableView: tableView)
         
         return [deleteAction, runAction]
     }
     
     private func createReasumeAction(torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
     {
-        var runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume", handler: { (action, indexPath) -> Void in
+        let runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Reasume", handler: { (action, indexPath) -> Void in
             self.transmissionClient.reasumeTorrent(torrent.id, onCompletion: { (error) -> Void in
                 self.reasumeAction(torrent, error: error)
             })
@@ -428,7 +427,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     private func createPauseAction(torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
     {
-        var runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Pause" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let runAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Pause" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             self.transmissionClient.pauseTorrent(torrent.id, onCompletion: { (error) -> Void in
                 self.pauseAction(torrent, error: error)
             })
@@ -455,7 +454,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     private func createDeleteAction(torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
     {
-        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             self.createDeleteActionSheet(torrent)
             tableView.setEditing(false, animated: true)
         })

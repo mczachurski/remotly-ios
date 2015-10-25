@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     var window: UIWindow?
     var fileUrl:NSURL?
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
     {
         fileUrl = url
         
@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     
     private func getDefaultServer() -> Server?
     {
-        var managedContext = CoreDataHandler.getManagedObjectContext()
-        var configuration = CoreDataHandler.getConfiguration(managedContext)
+        let managedContext = CoreDataHandler.getManagedObjectContext()
+        let configuration = CoreDataHandler.getConfiguration(managedContext)
         
         if(configuration.defaultServer == nil)
         {
@@ -52,8 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     
     private func addTorrentViaFile()
     {
-        var fileName = fileUrl!.lastPathComponent!
-        var alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName)'?", delegate: self, cancelButtonTitle: "Cancel")
+        let fileName = fileUrl!.lastPathComponent!
+        let alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName)'?", delegate: self, cancelButtonTitle: "Cancel")
         alert.alertViewStyle = UIAlertViewStyle.Default
         alert.tag = 1
         alert.addButtonWithTitle("Yes")
@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     
     private func addTorrentViaMagnetLink()
     {
-        var fileName = MagnetLinkHander.getFileName(fileUrl!)
-        var alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName)'?", delegate: self, cancelButtonTitle: "Cancel")
+        let fileName = MagnetLinkHander.getFileName(fileUrl!)
+        let alert = UIAlertView(title: "Torrent file", message: "Do you want to download torrent: '\(fileName)'?", delegate: self, cancelButtonTitle: "Cancel")
         alert.alertViewStyle = UIAlertViewStyle.Default
         alert.tag = 2
         alert.addButtonWithTitle("Yes")
@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     
     private func addTorrent(server:Server, isExternal:Bool)
     {
-        var transmissionClient = TransmissionClient(address: server.address, userName:server.userName, password:server.password)
+        let transmissionClient = TransmissionClient(address: server.address, userName:server.userName, password:server.password)
         transmissionClient.addTorrent(fileUrl!, isExternal:isExternal, onCompletion: { (error) -> Void in
             if(error != nil)
             {
@@ -151,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "net.sltch.Remotly" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -167,7 +167,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Remotly.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+        } catch var error1 as NSError {
+            error = error1
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -179,6 +182,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
         
         return coordinator
@@ -200,11 +205,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIAlertViewDelegate {
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                } catch let error1 as NSError {
+                    error = error1
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                }
             }
         }
     }

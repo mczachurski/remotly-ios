@@ -110,40 +110,40 @@ class PreferencesController : UITableViewController
     
     @IBAction func saveAction(sender: AnyObject)
     {
-        var transmissionSession = TransmissionSession()
-        var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let transmissionSession = TransmissionSession()
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         
         transmissionSession.altSpeedTimeDay = scheduleSpeedDay == .Off ? ScheduleSpeedDayEnum.EveryDay : scheduleSpeedDay
         transmissionSession.altSpeedTimeEnabled = scheduleSpeedDay != .Off
         transmissionSession.speedLimitDownEnabled = globalDownloadRateSwitchOutlet.on
         transmissionSession.speedLimitUpEnabled = globalUploadRateSwitchOutlet.on
         
-        if let altSpeedDown = limitDownloadRateOutlet.text.toInt()
+        if let altSpeedDown = Int(limitDownloadRateOutlet.text!)
         {
             transmissionSession.altSpeedDown = Int32(altSpeedDown)
         }
         
-        if let altSpeedUp = limitUploadRateOutlet.text.toInt()
+        if let altSpeedUp = Int(limitUploadRateOutlet.text!)
         {
             transmissionSession.altSpeedUp = Int32(altSpeedUp)
         }
         
-        if let speedLimitDown = globalDownloadRateOutlet.text.toInt()
+        if let speedLimitDown = Int(globalDownloadRateOutlet.text!)
         {
             transmissionSession.speedLimitDown = Int32(speedLimitDown)
         }
         
-        if let speedLimitUp = globalUploadRateOutlet.text.toInt()
+        if let speedLimitUp = Int(globalUploadRateOutlet.text!)
         {
             transmissionSession.speedLimitUp = Int32(speedLimitUp)
         }
         
         var components = calendar.componentsInTimeZone(NSTimeZone(forSecondsFromGMT: 0), fromDate: timeFromPickerOutlet.date)
-        var altSpeedTimeBegin = components.hour * 60 + components.minute
+        let altSpeedTimeBegin = components.hour * 60 + components.minute
         transmissionSession.altSpeedTimeBegin = Int32(altSpeedTimeBegin)
         
         components = calendar.componentsInTimeZone(NSTimeZone(forSecondsFromGMT: 0), fromDate: timeToPickerOutlet.date)
-        var altSpeedTimeEnd = components.hour * 60 + components.minute
+        let altSpeedTimeEnd = components.hour * 60 + components.minute
         transmissionSession.altSpeedTimeEnd = Int32(altSpeedTimeEnd)
         
         SwiftLoader.show(title: "Saving...", animated: true)
@@ -175,13 +175,13 @@ class PreferencesController : UITableViewController
 
     @IBAction func timeFromChanged(sender: AnyObject)
     {
-        var date = FormatHandler.getHoursAndMinutesFormat(timeFromPickerOutlet.date)
+        let date = FormatHandler.getHoursAndMinutesFormat(timeFromPickerOutlet.date)
         timeFromOutlet.text = date
     }
     
     @IBAction func timeToChanged(sender: AnyObject)
     {
-        var date = FormatHandler.getHoursAndMinutesFormat(timeToPickerOutlet.date)
+        let date = FormatHandler.getHoursAndMinutesFormat(timeToPickerOutlet.date)
         timeToOutlet.text = date
     }
     
@@ -281,8 +281,6 @@ class PreferencesController : UITableViewController
     {
         switch(scheduleSpeedDay)
         {
-            case .Off:
-                return "Off"
             case .EveryDay:
                 return "Every day"
             case .Friday:
@@ -304,7 +302,7 @@ class PreferencesController : UITableViewController
             case .Weekends:
                 return "Weekends"
             default:
-                return "Unknown"
+                return "Off"
         }
     }
     
@@ -322,7 +320,7 @@ class PreferencesController : UITableViewController
     {
         if(segue.identifier == "ScheduleSpeedLimitSegue")
         {
-            var destinationController = segue.destinationViewController as? ScheduleSpeedDaysController
+            let destinationController = segue.destinationViewController as? ScheduleSpeedDaysController
             if(destinationController != nil)
             {
                 destinationController!.scheduleSpeedDay = self.scheduleSpeedDay
@@ -332,7 +330,7 @@ class PreferencesController : UITableViewController
     
     @IBAction func setScheduleDay(segue: UIStoryboardSegue)
     {
-        var controller = segue.sourceViewController as? ScheduleSpeedDaysController
+        let controller = segue.sourceViewController as? ScheduleSpeedDaysController
         if(controller != nil)
         {
             reloadScheduleSpeedDay(controller!.scheduleSpeedDay)

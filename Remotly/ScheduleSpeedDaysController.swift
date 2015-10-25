@@ -56,9 +56,6 @@ class ScheduleSpeedDaysController : UITableViewController
     {
         switch(indexPath.section, indexPath.row)
         {
-        case (0, 0):
-            offCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Off
         case (0, 1):
             everydayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
             return ScheduleSpeedDayEnum.EveryDay
@@ -99,8 +96,6 @@ class ScheduleSpeedDaysController : UITableViewController
     {
         switch(schedule)
         {
-            case .Off:
-                return  NSIndexPath(forRow: 0, inSection: 0)
             case .EveryDay:
                 return NSIndexPath(forRow: 1, inSection: 0)
             case .Weekdays:

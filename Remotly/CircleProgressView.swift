@@ -94,7 +94,7 @@ func sizeForText(text:String, font:UIFont) -> CGSize{
         self.addSubview(contentView)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         makeLayout()
     }
@@ -194,7 +194,7 @@ func sizeForText(text:String, font:UIFont) -> CGSize{
         contentView.layer.mask = layer
         
         // text
-        var fontSize:CGFloat = diameter * 3 / 10
+        let fontSize:CGFloat = diameter * 3 / 10
         let progressFont:UIFont = UIFont(name: "Helvetica Neue", size: fontSize)!
         let percentageFont:UIFont = UIFont(name: "Helvetica Neue", size: fontSize / 2)!
         
@@ -209,8 +209,8 @@ func sizeForText(text:String, font:UIFont) -> CGSize{
             percentageLabel.textColor = trackFillColor
             percentageLabel.text = "%"
             
-            let progressSize:CGSize = sizeForText(progressLabel.text!, progressFont)
-            let percentageSize:CGSize = sizeForText(percentageLabel.text!, percentageFont)
+            let progressSize:CGSize = sizeForText(progressLabel.text!, font: progressFont)
+            let percentageSize:CGSize = sizeForText(percentageLabel.text!, font: percentageFont)
             
             progressLabel.frame = CGRectMake(
                 center.x - progressSize.width / 2 - trackWidth / 4,

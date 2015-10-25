@@ -26,12 +26,12 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         
         super.viewDidLoad()
         
-        var error: NSError? = nil
-        if (fetchedResultsController.performFetch(&error) == false)
-        {
-            print("An error occurred: \(error?.localizedDescription)")
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("An error occurred: \(error.localizedDescription)", terminator: "")
         }
-
+        
         self.clearsSelectionOnViewWillAppear = true
     }
     
@@ -40,7 +40,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         super.viewWillAppear(animated)
         self.navigationController?.setToolbarHidden(true, animated: animated)
         
-        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        if let selectedIndexPath = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
@@ -73,7 +73,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
     {
         if let sections = fetchedResultsController.sections
         {
-            let currentSection = sections[section] as! NSFetchedResultsSectionInfo
+            let currentSection = sections[section] 
             return currentSection.numberOfObjects
         }
         
@@ -85,7 +85,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) as! ServersCell
         let server = fetchedResultsController.objectAtIndexPath(indexPath) as! Server
         
-        var isDefault = configuration?.defaultServer?.objectID == server.objectID
+        let isDefault = configuration?.defaultServer?.objectID == server.objectID
         cell.setServer(server, isDefault: isDefault)
         
         return cell
@@ -96,9 +96,9 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
     {
-        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:NSIndexPath) -> Void in
             let server = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Server
             
             if(self.configuration?.defaultServer?.objectID == server.objectID)
@@ -123,14 +123,14 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
             let destinationViewController = segue.destinationViewController as! UINavigationController
             let serverDetailsController = destinationViewController.viewControllers.first as! ServerDetailsController
             
-            var server = getServerForSender(sender)
+            let server = getServerForSender(sender)
             serverDetailsController.server = server
         }
         else if(segue.identifier == "TorrentsListSegue")
         {
             let torrentsViewController = segue.destinationViewController as! TorrentsListController
             
-            var server = getServerForSender(sender)
+            let server = getServerForSender(sender)
             torrentsViewController.server = server
         }
     }
@@ -139,7 +139,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
     {
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPathForCell(cell)
-        var server = fetchedResultsController.objectAtIndexPath(indexPath!) as! Server
+        let server = fetchedResultsController.objectAtIndexPath(indexPath!) as! Server
         
         return server
     }

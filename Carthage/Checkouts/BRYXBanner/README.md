@@ -1,6 +1,7 @@
 # BRYXBanner
 
 [![Version](https://img.shields.io/cocoapods/v/BRYXBanner.svg?style=flat)](http://cocoapods.org/pods/BRYXBanner)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License](https://img.shields.io/cocoapods/l/BRYXBanner.svg?style=flat)](http://cocoapods.org/pods/BRYXBanner)
 [![Platform](https://img.shields.io/cocoapods/p/BRYXBanner.svg?style=flat)](http://cocoapods.org/pods/BRYXBanner)
 
@@ -10,7 +11,7 @@ A lightweight dropdown banner for iOS 7+.
 
 ## Usage
 
-Import `BRYXBanner` 
+Import `BRYXBanner`
 
 ```rust
 import BRYXBanner
@@ -42,12 +43,6 @@ To install it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'BRYXBanner'
-```
-
-If you intend to use BRYXBanner on a Swift 2 project, use the `swift-2` branch in your Podfile.
-
-```ruby
-pod 'BRYXBanner', :git => 'https://github.com/bryx-inc/BRYXBanner.git', :branch => 'swift-2'
 ```
 
 If you need to support iOS 7, just copy `Banner.swift` into your Xcode project.

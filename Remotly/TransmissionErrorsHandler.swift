@@ -23,7 +23,7 @@ class TransmissionErrorsHandler
 {
     static func createError(errorCode:Int, message:String) -> NSError
     {
-        var userInfo = [
+        let userInfo = [
             NSLocalizedDescriptionKey: TransmissionErrorsHandler.getUserMessageForErrorCode(errorCode),
             NSLocalizedFailureReasonErrorKey: message
         ];

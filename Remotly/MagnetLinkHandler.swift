@@ -13,9 +13,9 @@ class MagnetLinkHander
     static func getFileName(fileUrl:NSURL) -> String
     {
         let urlComponents = NSURLComponents(URL: fileUrl, resolvingAgainstBaseURL: false)
-        let items = urlComponents?.queryItems as! [NSURLQueryItem]
-        var dict = NSMutableDictionary()
-        for item in items{
+        let items = urlComponents?.queryItems
+        let dict = NSMutableDictionary()
+        for item in items! {
             dict.setValue(item.value, forKey: item.name)
         }
         

@@ -10,7 +10,7 @@ import UIKit
 
 class BaseTableView : UITableView
 {
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         textFieldResignFirstResponders(self);
         super.touchesEnded(touches, withEvent: event)
@@ -22,12 +22,12 @@ class BaseTableView : UITableView
         {
             if(childView.isKindOfClass(UITextField))
             {
-                var textField = childView as! UITextField
+                let textField = childView as! UITextField
                 textField.resignFirstResponder()
             }
             else
             {
-                textFieldResignFirstResponders(childView as! UIView)
+                textFieldResignFirstResponders(childView )
             }
         }
     }

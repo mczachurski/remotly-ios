@@ -31,8 +31,8 @@ class ServerDetailsController: UITableViewController
             userNameOutlet.text = server!.userName
             passwordOutlet.text = server!.password
             
-            var managedContext = CoreDataHandler.getManagedObjectContext()
-            var configuration = CoreDataHandler.getConfiguration(managedContext)
+            let managedContext = CoreDataHandler.getManagedObjectContext()
+            let configuration = CoreDataHandler.getConfiguration(managedContext)
             isDefaultOutlet.on = server!.objectID == configuration.defaultServer?.objectID
         }
         
@@ -63,18 +63,18 @@ class ServerDetailsController: UITableViewController
             return
         }
         
-        var managedContext = CoreDataHandler.getManagedObjectContext()
+        let managedContext = CoreDataHandler.getManagedObjectContext()
         if(server == nil)
         {
             server = CoreDataHandler.createServerEntity(managedContext)
         }
         
-        server!.name = nameOutlet.text
-        server!.address = addressOutlet.text
-        server!.userName = userNameOutlet.text
-        server!.password = passwordOutlet.text
+        server!.name = nameOutlet.text!
+        server!.address = addressOutlet.text!
+        server!.userName = userNameOutlet.text!
+        server!.password = passwordOutlet.text!
         
-        var configuration = CoreDataHandler.getConfiguration(managedContext)
+        let configuration = CoreDataHandler.getConfiguration(managedContext)
         if(isDefaultOutlet.on)
         {
             configuration.defaultServer = server!
@@ -95,12 +95,12 @@ class ServerDetailsController: UITableViewController
     private func isValidData() -> Bool
     {
         var isValid = true
-        if(nameOutlet.text.isEmpty)
+        if(nameOutlet.text!.isEmpty)
         {
             isValid = false
         }
         
-        if(addressOutlet.text.isEmpty)
+        if(addressOutlet.text!.isEmpty)
         {
             isValid = false
         }

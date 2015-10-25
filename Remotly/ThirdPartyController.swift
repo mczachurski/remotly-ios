@@ -20,7 +20,7 @@ class ThirdPartyController: UITableViewController
     {
         super.viewWillAppear(animated)
         
-        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        if let selectedIndexPath = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }

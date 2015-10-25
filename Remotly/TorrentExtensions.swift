@@ -61,14 +61,14 @@ extension Torrent
     
     var isDownloading: Bool {
         get {
-            var statusEnum = TorrentStatusEnum(rawValue: status)
+            let statusEnum = TorrentStatusEnum(rawValue: status)
             return statusEnum == TorrentStatusEnum.Downloading
         }
     }
     
     var isPaused: Bool {
         get {
-            var statusEnum = TorrentStatusEnum(rawValue: status)
+            let statusEnum = TorrentStatusEnum(rawValue: status)
             return statusEnum == TorrentStatusEnum.Paused
         }
     }
@@ -94,7 +94,7 @@ extension Torrent
         get {
             let peersInformationValue:String
             
-            var statusEnum = TorrentStatusEnum(rawValue: status)
+            let statusEnum = TorrentStatusEnum(rawValue: status)
             
             if(statusEnum == nil)
             {

@@ -20,17 +20,17 @@ class FormatHandler
         var sizeString = ""
         if (size >= 1000000000)
         {
-            var calculatedSize = Double(size) / 1000000000.0
+            let calculatedSize = Double(size) / 1000000000.0
             sizeString = "\(roundTwoPlaces(calculatedSize)) GB"
         }
         else if (size >= 1000000)
         {
-            var calculatedSize = Double(size) / 1000000.0
+            let calculatedSize = Double(size) / 1000000.0
             sizeString = "\(roundTwoPlaces(calculatedSize)) MB"
         }
         else if (size >= 1000)
         {
-            var calculatedSize = Double(size) / 1000.0
+            let calculatedSize = Double(size) / 1000.0
             sizeString = "\(roundTwoPlaces(calculatedSize)) KB"
         }
         else if (size > 1)
@@ -54,8 +54,8 @@ class FormatHandler
         var timeString = ""
         if (seconds >= 86400)
         {
-            var calculatedDays = seconds / 86400
-            var calculatedHours = (seconds % 86400) / 3600
+            let calculatedDays = seconds / 86400
+            let calculatedHours = (seconds % 86400) / 3600
             
             var calculatedDaysString = ""
             if(calculatedDays == 1)
@@ -72,15 +72,15 @@ class FormatHandler
         }
         else if (seconds >= 3600)
         {
-            var calculatedHours = seconds / 3600
-            var calculatedMinutes = (seconds % 3600) / 60
+            let calculatedHours = seconds / 3600
+            let calculatedMinutes = (seconds % 3600) / 60
             
             timeString = "\(calculatedHours) hr \(calculatedMinutes) min"
         }
         else if (seconds >= 60)
         {
-            var calculatedMinutes = seconds / 60
-            var calculatedSeconds = seconds % 60
+            let calculatedMinutes = seconds / 60
+            let calculatedSeconds = seconds % 60
             
             timeString = "\(calculatedMinutes) min \(calculatedSeconds) sec"
         }
@@ -98,7 +98,7 @@ class FormatHandler
     
     static func getHoursAndMinutesFormat(date:NSDate) -> String
     {
-        var formatter = NSDateFormatter()
+        let formatter = NSDateFormatter()
         formatter.dateFormat = "hh:mm"
         formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         

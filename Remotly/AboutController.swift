@@ -24,7 +24,7 @@ class AboutController: UITableViewController
     {
         super.viewWillAppear(animated)
         
-        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        if let selectedIndexPath = tableView.indexPathForSelectedRow
         {
             tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
@@ -61,7 +61,7 @@ class AboutController: UITableViewController
         let recipients = "mailto:mczachurski@icloud.com?subject=My remarks for Remotly app"
         let body = "&body=<br /><br />System: \(systemVersion)<br />Model: \(model)<br />Remotly: \(appVersion!)<br />"
         var email = "\(recipients)\(body)"
-        email = email.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        email = email.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         
         let url = NSURL(string: email)
         UIApplication.sharedApplication().openURL(url!)
