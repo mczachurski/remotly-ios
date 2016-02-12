@@ -12,3 +12,6 @@ You can downlad app from AppStore.
 
 ## Contributing
 You can fork and clone repository. Execute 'carthage update' and build. Do your changes and pull a request. Enjoy!
+
+## AppleStore
+Unfortunately Apple rejected this app from App Store.
