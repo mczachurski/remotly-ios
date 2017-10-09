@@ -112,7 +112,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         alert.show()
     }
     
-    func enableRefreshAction()
+    @objc func enableRefreshAction()
     {
         self.removeRefreshButtonFromNavigationBar()
         
@@ -171,7 +171,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     fileprivate func changeToolbarFontApperance()
     {
-        let toolbarFontAttributes = [NSFontAttributeName : UIFont.systemFont(ofSize: 13.0)]
+        let toolbarFontAttributes = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 13.0)]
         downloadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, for: UIControlState())
         uploadToolbarOutlet.setTitleTextAttributes(toolbarFontAttributes, for: UIControlState())
     }
@@ -285,7 +285,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         }
     }
     
-    func reloadTimer(_ timer:Timer)
+    @objc func reloadTimer(_ timer:Timer)
     {
         if(!isDuringRequest)
         {
@@ -376,7 +376,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     {
         if let sections = fetchedResultsController.sections
         {
-            let currentSection = sections[section] as! NSFetchedResultsSectionInfo
+            let currentSection = sections[section] 
             return currentSection.numberOfObjects
         }
         

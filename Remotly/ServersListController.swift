@@ -75,7 +75,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
     {
         if let sections = fetchedResultsController.sections
         {
-            let currentSection = sections[section] as! NSFetchedResultsSectionInfo
+            let currentSection = sections[section] 
             return currentSection.numberOfObjects
         }
         

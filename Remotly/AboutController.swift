@@ -61,8 +61,9 @@ class AboutController: UITableViewController
         let recipients = "mailto:mczachurski@icloud.com?subject=My remarks for Remotly app"
         let body = "&body=<br /><br />System: \(systemVersion)<br />Model: \(model)<br />Remotly: \(appVersion!)<br />"
         var email = "\(recipients)\(body)"
-        email = email.addingPercentEscapes(using: String.Encoding.utf8)!
-        
+        //email = email.addingPercentEscapes(using: String.Encoding.utf8)!
+      email = email.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)!
+      
         let url = URL(string: email)
         UIApplication.shared.openURL(url!)
     }
