@@ -1,0 +1,656 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D30B77621B8D06A800A23067 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77601B8D06A800A23067 /* Server.swift */; };
+		D30B77631B8D06A800A23067 /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77611B8D06A800A23067 /* Torrent.swift */; };
+		D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */; };
+		D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */; };
+		D3207C871B9195CD00940E0F /* ScheduleSpeedDayEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C861B9195CD00940E0F /* ScheduleSpeedDayEnum.swift */; };
+		D3207C891B91AE9700940E0F /* ScheduleSpeedDaysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */; };
+		D3207C8B1B922B0600940E0F /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C8A1B922B0600940E0F /* BaseTableView.swift */; };
+		D3207C8E1B9235CE00940E0F /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3207C8D1B9235CE00940E0F /* SwiftLoader.swift */; };
+		D32BF18B1B8B042D0027AC01 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D32BF18A1B8B042D0027AC01 /* README.md */; };
+		D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */; };
+		D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */; };
+		D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */; };
+		D35D06011B6A9C3400E4C72B /* TorrentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */; };
+		D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */; };
+		D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */; };
+		D37D29211B9047FE0061B496 /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37D29201B9047FE0061B496 /* PreferencesController.swift */; };
+		D39A44341B8F08D10010C095 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A44331B8F08D10010C095 /* AboutController.swift */; };
+		D39A44361B8F14190010C095 /* ThirdPartyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A44351B8F14190010C095 /* ThirdPartyController.swift */; };
+		D39A44381B8F722C0010C095 /* TransmissionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39A44371B8F722C0010C095 /* TransmissionSession.swift */; };
+		D3DA61151B8C48D5006B8762 /* ServerDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */; };
+		D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61191B8C52E5006B8762 /* ServersListController.swift */; };
+		D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */; };
+		D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */; };
+		D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61221B8C9652006B8762 /* ServersCell.swift */; };
+		D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61241B8C99A0006B8762 /* Configuration.swift */; };
+		D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */; };
+		D3E8DFEC1B8DDB9F0002429D /* MagnetLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8DFEB1B8DDB9F0002429D /* MagnetLinkHandler.swift */; };
+		D3E8DFF01B8E32FC0002429D /* BRYXBanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E8DFEF1B8E32FC0002429D /* BRYXBanner.framework */; };
+		D3E8DFF21B8E40C60002429D /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8DFF11B8E40C60002429D /* NotificationHandler.swift */; };
+		D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */; };
+		D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */; };
+		D3FDEC851B67F64E00ADC986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3FDEC831B67F64E00ADC986 /* Main.storyboard */; };
+		D3FDEC871B67F64E00ADC986 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3FDEC861B67F64E00ADC986 /* Images.xcassets */; };
+		D3FDEC8A1B67F64E00ADC986 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3FDEC881B67F64E00ADC986 /* LaunchScreen.xib */; };
+		D3FDEC961B67F64E00ADC986 /* RemotlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FDEC951B67F64E00ADC986 /* RemotlyTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D3FDEC901B67F64E00ADC986 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3FDEC6F1B67F64E00ADC986 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3FDEC761B67F64E00ADC986;
+			remoteInfo = Remotly;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Remotly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30B77601B8D06A800A23067 /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		D30B77611B8D06A800A23067 /* Torrent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
+		D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentExtensions.swift; sourceTree = "<group>"; };
+		D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionErrorsHandler.swift; sourceTree = "<group>"; };
+		D3207C861B9195CD00940E0F /* ScheduleSpeedDayEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleSpeedDayEnum.swift; sourceTree = "<group>"; };
+		D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleSpeedDaysController.swift; sourceTree = "<group>"; };
+		D3207C8A1B922B0600940E0F /* BaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
+		D3207C8D1B9235CE00940E0F /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
+		D32BF18A1B8B042D0027AC01 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentStatusEnum.swift; sourceTree = "<group>"; };
+		D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsListController.swift; sourceTree = "<group>"; };
+		D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionClient.swift; sourceTree = "<group>"; };
+		D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentInformation.swift; sourceTree = "<group>"; };
+		D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorrentsCell.swift; sourceTree = "<group>"; };
+		D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		D37D29201B9047FE0061B496 /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesController.swift; sourceTree = "<group>"; };
+		D39A44331B8F08D10010C095 /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
+		D39A44351B8F14190010C095 /* ThirdPartyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyController.swift; sourceTree = "<group>"; };
+		D39A44371B8F722C0010C095 /* TransmissionSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionSession.swift; sourceTree = "<group>"; };
+		D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDetailsController.swift; sourceTree = "<group>"; };
+		D3DA61191B8C52E5006B8762 /* ServersListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersListController.swift; sourceTree = "<group>"; };
+		D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsHandler.swift; sourceTree = "<group>"; };
+		D3DA61221B8C9652006B8762 /* ServersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServersCell.swift; sourceTree = "<group>"; };
+		D3DA61241B8C99A0006B8762 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatHandler.swift; sourceTree = "<group>"; };
+		D3E8DFEB1B8DDB9F0002429D /* MagnetLinkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnetLinkHandler.swift; sourceTree = "<group>"; };
+		D3E8DFED1B8E32E80002429D /* BRYXBanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BRYXBanner.framework; path = Carthage/Build/iOS/BRYXBanner.framework; sourceTree = "<group>"; };
+		D3E8DFEF1B8E32FC0002429D /* BRYXBanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BRYXBanner.framework; path = Carthage/Build/iOS/BRYXBanner.framework; sourceTree = "<group>"; };
+		D3E8DFF11B8E40C60002429D /* NotificationHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
+		D3FDEC771B67F64E00ADC986 /* Remotly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Remotly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3FDEC7B1B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D3FDEC7F1B67F64E00ADC986 /* Remotly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Remotly.xcdatamodel; sourceTree = "<group>"; };
+		D3FDEC841B67F64E00ADC986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D3FDEC861B67F64E00ADC986 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D3FDEC891B67F64E00ADC986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D3FDEC8F1B67F64E00ADC986 /* RemotlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemotlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3FDEC941B67F64E00ADC986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3FDEC951B67F64E00ADC986 /* RemotlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotlyTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D3FDEC741B67F64E00ADC986 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D35D06071B6D35D200E4C72B /* SwiftyJSON.framework in Frameworks */,
+				D3E8DFF01B8E32FC0002429D /* BRYXBanner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3FDEC8C1B67F64E00ADC986 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		419654A1475282F6128423B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3E8DFED1B8E32E80002429D /* BRYXBanner.framework */,
+				02BB158BC7A7EA36D730CFF1 /* libPods-Remotly.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3207C8C1B922DFE00940E0F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D3207C8A1B922B0600940E0F /* BaseTableView.swift */,
+				D3207C8D1B9235CE00940E0F /* SwiftLoader.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D3DA61111B8C4827006B8762 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D39A44331B8F08D10010C095 /* AboutController.swift */,
+				D39A44351B8F14190010C095 /* ThirdPartyController.swift */,
+				D3DA61191B8C52E5006B8762 /* ServersListController.swift */,
+				D3DA61141B8C48D5006B8762 /* ServerDetailsController.swift */,
+				D35D05FC1B6A9ABB00E4C72B /* TorrentsListController.swift */,
+				D37D29201B9047FE0061B496 /* PreferencesController.swift */,
+				D3207C881B91AE9700940E0F /* ScheduleSpeedDaysController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D3DA61121B8C4836006B8762 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D3DA61221B8C9652006B8762 /* ServersCell.swift */,
+				D35D06021B6BF9CB00E4C72B /* TorrentsCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		D3DA61131B8C4879006B8762 /* Transmission */ = {
+			isa = PBXGroup;
+			children = (
+				D31257D11B8CB98D00334CD5 /* TransmissionErrorsHandler.swift */,
+				D32BF18C1B8B23DE0027AC01 /* TorrentStatusEnum.swift */,
+				D35D06001B6A9C3400E4C72B /* TorrentInformation.swift */,
+				D35D05FE1B6A9C0000E4C72B /* TransmissionClient.swift */,
+				D39A44371B8F722C0010C095 /* TransmissionSession.swift */,
+				D3207C861B9195CD00940E0F /* ScheduleSpeedDayEnum.swift */,
+			);
+			name = Transmission;
+			sourceTree = "<group>";
+		};
+		D3DA61161B8C4ECA006B8762 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				D30B77601B8D06A800A23067 /* Server.swift */,
+				D30B77611B8D06A800A23067 /* Torrent.swift */,
+				D3DA61241B8C99A0006B8762 /* Configuration.swift */,
+				D3DA611B1B8C5559006B8762 /* CoreDataHandler.swift */,
+				D30B77641B8D0A6700A23067 /* TorrentExtensions.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		D3DA611F1B8C7F48006B8762 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D3DA61201B8C7F5B006B8762 /* ColorsHandler.swift */,
+				D3DA61261B8CA1C4006B8762 /* FormatHandler.swift */,
+				D3E8DFEB1B8DDB9F0002429D /* MagnetLinkHandler.swift */,
+				D3E8DFF11B8E40C60002429D /* NotificationHandler.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		D3FDEC6E1B67F64E00ADC986 = {
+			isa = PBXGroup;
+			children = (
+				D32BF18A1B8B042D0027AC01 /* README.md */,
+				D3E8DFEF1B8E32FC0002429D /* BRYXBanner.framework */,
+				D35D06061B6D35D200E4C72B /* SwiftyJSON.framework */,
+				D3FDEC791B67F64E00ADC986 /* Remotly */,
+				D3FDEC921B67F64E00ADC986 /* RemotlyTests */,
+				D3FDEC781B67F64E00ADC986 /* Products */,
+				419654A1475282F6128423B7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D3FDEC781B67F64E00ADC986 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D3FDEC771B67F64E00ADC986 /* Remotly.app */,
+				D3FDEC8F1B67F64E00ADC986 /* RemotlyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D3FDEC791B67F64E00ADC986 /* Remotly */ = {
+			isa = PBXGroup;
+			children = (
+				D3207C8C1B922DFE00940E0F /* Views */,
+				D3DA611F1B8C7F48006B8762 /* Common */,
+				D3DA61161B8C4ECA006B8762 /* CoreData */,
+				D3DA61131B8C4879006B8762 /* Transmission */,
+				D3DA61121B8C4836006B8762 /* Cells */,
+				D3DA61111B8C4827006B8762 /* Controllers */,
+				D3FDEC7C1B67F64E00ADC986 /* AppDelegate.swift */,
+				D3FDEC831B67F64E00ADC986 /* Main.storyboard */,
+				D3FDEC861B67F64E00ADC986 /* Images.xcassets */,
+				D3FDEC881B67F64E00ADC986 /* LaunchScreen.xib */,
+				D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */,
+				D3FDEC7A1B67F64E00ADC986 /* Supporting Files */,
+			);
+			path = Remotly;
+			sourceTree = "<group>";
+		};
+		D3FDEC7A1B67F64E00ADC986 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3FDEC7B1B67F64E00ADC986 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D3FDEC921B67F64E00ADC986 /* RemotlyTests */ = {
+			isa = PBXGroup;
+			children = (
+				D3FDEC951B67F64E00ADC986 /* RemotlyTests.swift */,
+				D3FDEC931B67F64E00ADC986 /* Supporting Files */,
+			);
+			path = RemotlyTests;
+			sourceTree = "<group>";
+		};
+		D3FDEC931B67F64E00ADC986 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D3FDEC941B67F64E00ADC986 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D3FDEC761B67F64E00ADC986 /* Remotly */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3FDEC991B67F64E00ADC986 /* Build configuration list for PBXNativeTarget "Remotly" */;
+			buildPhases = (
+				D3FDEC731B67F64E00ADC986 /* Sources */,
+				D3FDEC741B67F64E00ADC986 /* Frameworks */,
+				D3FDEC751B67F64E00ADC986 /* Resources */,
+				D35D06081B6D365300E4C72B /* Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Remotly;
+			productName = Remotly;
+			productReference = D3FDEC771B67F64E00ADC986 /* Remotly.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D3FDEC8E1B67F64E00ADC986 /* RemotlyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3FDEC9C1B67F64E00ADC986 /* Build configuration list for PBXNativeTarget "RemotlyTests" */;
+			buildPhases = (
+				D3FDEC8B1B67F64E00ADC986 /* Sources */,
+				D3FDEC8C1B67F64E00ADC986 /* Frameworks */,
+				D3FDEC8D1B67F64E00ADC986 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D3FDEC911B67F64E00ADC986 /* PBXTargetDependency */,
+			);
+			name = RemotlyTests;
+			productName = RemotlyTests;
+			productReference = D3FDEC8F1B67F64E00ADC986 /* RemotlyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D3FDEC6F1B67F64E00ADC986 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "SunLine Technologies";
+				TargetAttributes = {
+					D3FDEC761B67F64E00ADC986 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = X635D9QY8Z;
+						LastSwiftMigration = 0830;
+					};
+					D3FDEC8E1B67F64E00ADC986 = {
+						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0830;
+						TestTargetID = D3FDEC761B67F64E00ADC986;
+					};
+				};
+			};
+			buildConfigurationList = D3FDEC721B67F64E00ADC986 /* Build configuration list for PBXProject "Remotly" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D3FDEC6E1B67F64E00ADC986;
+			productRefGroup = D3FDEC781B67F64E00ADC986 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D3FDEC761B67F64E00ADC986 /* Remotly */,
+				D3FDEC8E1B67F64E00ADC986 /* RemotlyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D3FDEC751B67F64E00ADC986 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3FDEC851B67F64E00ADC986 /* Main.storyboard in Resources */,
+				D3FDEC8A1B67F64E00ADC986 /* LaunchScreen.xib in Resources */,
+				D32BF18B1B8B042D0027AC01 /* README.md in Resources */,
+				D3FDEC871B67F64E00ADC986 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3FDEC8D1B67F64E00ADC986 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D35D06081B6D365300E4C72B /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BRYXBanner.framework",
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D3FDEC731B67F64E00ADC986 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D35D06011B6A9C3400E4C72B /* TorrentInformation.swift in Sources */,
+				D3DA61151B8C48D5006B8762 /* ServerDetailsController.swift in Sources */,
+				D3DA61251B8C99A0006B8762 /* Configuration.swift in Sources */,
+				D3DA61211B8C7F5B006B8762 /* ColorsHandler.swift in Sources */,
+				D30B77651B8D0A6700A23067 /* TorrentExtensions.swift in Sources */,
+				D39A44341B8F08D10010C095 /* AboutController.swift in Sources */,
+				D3207C8E1B9235CE00940E0F /* SwiftLoader.swift in Sources */,
+				D3DA611C1B8C5559006B8762 /* CoreDataHandler.swift in Sources */,
+				D3FDEC801B67F64E00ADC986 /* Remotly.xcdatamodeld in Sources */,
+				D35D05FD1B6A9ABB00E4C72B /* TorrentsListController.swift in Sources */,
+				D3DA611A1B8C52E5006B8762 /* ServersListController.swift in Sources */,
+				D3DA61231B8C9652006B8762 /* ServersCell.swift in Sources */,
+				D3207C891B91AE9700940E0F /* ScheduleSpeedDaysController.swift in Sources */,
+				D3DA61271B8CA1C4006B8762 /* FormatHandler.swift in Sources */,
+				D37D29211B9047FE0061B496 /* PreferencesController.swift in Sources */,
+				D39A44361B8F14190010C095 /* ThirdPartyController.swift in Sources */,
+				D39A44381B8F722C0010C095 /* TransmissionSession.swift in Sources */,
+				D3207C871B9195CD00940E0F /* ScheduleSpeedDayEnum.swift in Sources */,
+				D3E8DFEC1B8DDB9F0002429D /* MagnetLinkHandler.swift in Sources */,
+				D3FDEC7D1B67F64E00ADC986 /* AppDelegate.swift in Sources */,
+				D32BF18D1B8B23DE0027AC01 /* TorrentStatusEnum.swift in Sources */,
+				D30B77631B8D06A800A23067 /* Torrent.swift in Sources */,
+				D3207C8B1B922B0600940E0F /* BaseTableView.swift in Sources */,
+				D35D06031B6BF9CB00E4C72B /* TorrentsCell.swift in Sources */,
+				D35D05FF1B6A9C0000E4C72B /* TransmissionClient.swift in Sources */,
+				D3E8DFF21B8E40C60002429D /* NotificationHandler.swift in Sources */,
+				D30B77621B8D06A800A23067 /* Server.swift in Sources */,
+				D31257D21B8CB98D00334CD5 /* TransmissionErrorsHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3FDEC8B1B67F64E00ADC986 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3FDEC961B67F64E00ADC986 /* RemotlyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D3FDEC911B67F64E00ADC986 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3FDEC761B67F64E00ADC986 /* Remotly */;
+			targetProxy = D3FDEC901B67F64E00ADC986 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D3FDEC831B67F64E00ADC986 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3FDEC841B67F64E00ADC986 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D3FDEC881B67F64E00ADC986 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3FDEC891B67F64E00ADC986 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D3FDEC971B67F64E00ADC986 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D3FDEC981B67F64E00ADC986 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D3FDEC9A1B67F64E00ADC986 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = X635D9QY8Z;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = Remotly/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		D3FDEC9B1B67F64E00ADC986 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = X635D9QY8Z;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = Remotly/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		D3FDEC9D1B67F64E00ADC986 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RemotlyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remotly.app/Remotly";
+			};
+			name = Debug;
+		};
+		D3FDEC9E1B67F64E00ADC986 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RemotlyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Remotly.app/Remotly";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D3FDEC721B67F64E00ADC986 /* Build configuration list for PBXProject "Remotly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3FDEC971B67F64E00ADC986 /* Debug */,
+				D3FDEC981B67F64E00ADC986 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3FDEC991B67F64E00ADC986 /* Build configuration list for PBXNativeTarget "Remotly" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3FDEC9A1B67F64E00ADC986 /* Debug */,
+				D3FDEC9B1B67F64E00ADC986 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D3FDEC9C1B67F64E00ADC986 /* Build configuration list for PBXNativeTarget "RemotlyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3FDEC9D1B67F64E00ADC986 /* Debug */,
+				D3FDEC9E1B67F64E00ADC986 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D3FDEC7E1B67F64E00ADC986 /* Remotly.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D3FDEC7F1B67F64E00ADC986 /* Remotly.xcdatamodel */,
+			);
+			currentVersion = D3FDEC7F1B67F64E00ADC986 /* Remotly.xcdatamodel */;
+			path = Remotly.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D3FDEC6F1B67F64E00ADC986 /* Project object */;
+}
