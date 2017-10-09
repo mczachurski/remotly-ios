@@ -43,8 +43,8 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         
         super.viewDidLoad()
         
-        //var error: NSError? = nil
-//        if (fetchedResultsController.performFetch(&error) == false)
+        // var error: NSError? = nil
+//        if  (fetchedResultsController.performFetch(&error) == false)
 //        {
 //            print("An error occurred: \(error?.localizedDescription)")
 //        }
