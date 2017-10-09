@@ -14,10 +14,10 @@ class ServersCell: UITableViewCell
     @IBOutlet weak var addressOutlet: UILabel!
     @IBOutlet weak var isDefaultOutlet: UIImageView!
     
-    func setServer(server:Server, isDefault:Bool)
+    func setServer(_ server:Server, isDefault:Bool)
     {
         serverNameOutlet.text = server.name
         addressOutlet.text = server.address
-        isDefaultOutlet.hidden = !isDefault
+        isDefaultOutlet.isHidden = !isDefault
     }
 }

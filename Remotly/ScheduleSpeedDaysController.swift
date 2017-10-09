@@ -22,7 +22,7 @@ class ScheduleSpeedDaysController : UITableViewController
     @IBOutlet weak var saturdayCellOutlet: UITableViewCell!
     @IBOutlet weak var sundayCellOutlet: UITableViewCell!
     
-    var scheduleSpeedDay = ScheduleSpeedDayEnum.Off
+    var scheduleSpeedDay = ScheduleSpeedDayEnum.off
     
     override func viewDidLoad()
     {
@@ -31,98 +31,98 @@ class ScheduleSpeedDaysController : UITableViewController
         selectRow(indexPath)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         deselectAll()
         scheduleSpeedDay = selectRow(indexPath)
     }
     
-    private func deselectAll()
+    fileprivate func deselectAll()
     {
-        offCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        everydayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        weekdaysCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        weekendsCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        mondayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        tuesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        wednesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        thursdayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        fridayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        saturdayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
-        sundayCellOutlet.accessoryType = UITableViewCellAccessoryType.None
+        offCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        everydayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        weekdaysCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        weekendsCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        mondayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        tuesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        wednesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        thursdayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        fridayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        saturdayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
+        sundayCellOutlet.accessoryType = UITableViewCellAccessoryType.none
     }
     
-    private func selectRow(indexPath:NSIndexPath) -> ScheduleSpeedDayEnum
+    fileprivate func selectRow(_ indexPath:IndexPath) -> ScheduleSpeedDayEnum
     {
         switch(indexPath.section, indexPath.row)
         {
         case (0, 0):
-            offCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Off
+            offCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.off
         case (0, 1):
-            everydayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.EveryDay
+            everydayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.everyDay
         case (0, 2):
-            weekdaysCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Weekdays
+            weekdaysCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.weekdays
         case (0, 3):
-            weekendsCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Weekends
+            weekendsCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.weekends
         case (1, 0):
-            mondayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Monday
+            mondayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.monday
         case (1, 1):
-            tuesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Tuesday
+            tuesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.tuesday
         case (1, 2):
-            wednesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Wednesday
+            wednesdayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.wednesday
         case (1, 3):
-            thursdayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Thursday
+            thursdayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.thursday
         case (1, 4):
-            fridayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Friday
+            fridayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.friday
         case (1, 5):
-            saturdayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Saturday
+            saturdayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.saturday
         case (1, 6):
-            sundayCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Sunday
+            sundayCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.sunday
         default:
-            offCellOutlet.accessoryType = UITableViewCellAccessoryType.Checkmark
-            return ScheduleSpeedDayEnum.Off
+            offCellOutlet.accessoryType = UITableViewCellAccessoryType.checkmark
+            return ScheduleSpeedDayEnum.off
         }
     }
     
-    private func getIndexPathForEnum(schedule:ScheduleSpeedDayEnum) -> NSIndexPath
+    fileprivate func getIndexPathForEnum(_ schedule:ScheduleSpeedDayEnum) -> IndexPath
     {
         switch(schedule)
         {
-            case .Off:
-                return  NSIndexPath(forRow: 0, inSection: 0)
-            case .EveryDay:
-                return NSIndexPath(forRow: 1, inSection: 0)
-            case .Weekdays:
-                return NSIndexPath(forRow: 2, inSection: 0)
-            case .Weekends:
-                return NSIndexPath(forRow: 3, inSection: 0)
-            case .Monday:
-                return NSIndexPath(forRow: 0, inSection: 1)
-            case .Tuesday:
-                return NSIndexPath(forRow: 1, inSection: 1)
-            case .Wednesday:
-                return NSIndexPath(forRow: 2, inSection: 1)
-            case .Thursday:
-                return NSIndexPath(forRow: 3, inSection: 1)
-            case .Friday:
-                return NSIndexPath(forRow: 4, inSection: 1)
-            case .Saturday:
-                return NSIndexPath(forRow: 5, inSection: 1)
-            case .Sunday:
-                return NSIndexPath(forRow: 6, inSection: 1)
+            case .off:
+                return  IndexPath(row: 0, section: 0)
+            case .everyDay:
+                return IndexPath(row: 1, section: 0)
+            case .weekdays:
+                return IndexPath(row: 2, section: 0)
+            case .weekends:
+                return IndexPath(row: 3, section: 0)
+            case .monday:
+                return IndexPath(row: 0, section: 1)
+            case .tuesday:
+                return IndexPath(row: 1, section: 1)
+            case .wednesday:
+                return IndexPath(row: 2, section: 1)
+            case .thursday:
+                return IndexPath(row: 3, section: 1)
+            case .friday:
+                return IndexPath(row: 4, section: 1)
+            case .saturday:
+                return IndexPath(row: 5, section: 1)
+            case .sunday:
+                return IndexPath(row: 6, section: 1)
             default:
-                return NSIndexPath(forRow: 0, inSection: 0)
+                return IndexPath(row: 0, section: 0)
         }
     }
 }

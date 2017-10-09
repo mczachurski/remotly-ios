@@ -21,9 +21,9 @@ let RTTransmissionSetAlternativeSpeedLimitError:Int = 7
 
 class TransmissionErrorsHandler
 {
-    static func createError(errorCode:Int, message:String) -> NSError
+    static func createError(_ errorCode:Int, message:String) -> NSError
     {
-        var userInfo = [
+        let userInfo = [
             NSLocalizedDescriptionKey: TransmissionErrorsHandler.getUserMessageForErrorCode(errorCode),
             NSLocalizedFailureReasonErrorKey: message
         ];
@@ -32,7 +32,7 @@ class TransmissionErrorsHandler
         return error
     }
     
-    private static func getUserMessageForErrorCode(errorCode:Int) -> String
+    fileprivate static func getUserMessageForErrorCode(_ errorCode:Int) -> String
     {
         switch(errorCode)
         {

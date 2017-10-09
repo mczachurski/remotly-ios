@@ -14,60 +14,90 @@ class CoreDataHandler
 {
     static func getManagedObjectContext() -> NSManagedObjectContext
     {
-        var managedContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
         return managedContext
     }
     
-    static func save(managedContext:NSManagedObjectContext) -> Bool
+    static func save(_ managedContext:NSManagedObjectContext) -> Bool
     {
-        var error: NSError?
-        if !managedContext.save(&error)
-        {
-            println("Could not save \(error), \(error?.userInfo)")
-            return false
-        }
-        
+        //var error: NSError?
+      do {
+        try managedContext.save()
+      } catch let error {
+        print("Could not save \(error), \(error.localizedDescription)")
+        return false
+      }
+      
+//        if !managedContext.save(error)
+//        {
+//            print("Could not save \(error), \(error?.userInfo)")
+//            return false
+//        }
+//
         return true
     }
     
-    static func createServerEntity(managedContext:NSManagedObjectContext) -> Server
+    static func createServerEntity(_ managedContext:NSManagedObjectContext) -> Server
     {
-        let entity =  NSEntityDescription.entityForName("Server", inManagedObjectContext: managedContext)
-        let server = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+        let entity =  NSEntityDescription.entity(forEntityName: "Server", in: managedContext)
+        let server = NSManagedObject(entity: entity!, insertInto:managedContext)
         return server as! Server
     }
     
-    static func createTorrentEntity(server:Server, managedContext:NSManagedObjectContext) -> Torrent
+    static func createTorrentEntity(_ server:Server, managedContext:NSManagedObjectContext) -> Torrent
     {
-        let entity =  NSEntityDescription.entityForName("Torrent", inManagedObjectContext: managedContext)
-        let torrentEntity = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+        let entity =  NSEntityDescription.entity(forEntityName: "Torrent", in: managedContext)
+        let torrentEntity = NSManagedObject(entity: entity!, insertInto:managedContext)
 
-        var torrent = torrentEntity as! Torrent
+        let torrent = torrentEntity as! Torrent
         torrent.server = server
         
         return torrent
     }
     
-    static func getConfiguration(managedContext:NSManagedObjectContext) -> Configuration
+    static func getConfiguration(_ managedContext:NSManagedObjectContext) -> Configuration
     {
-        let fetchRequest = NSFetchRequest(entityName: "Configuration")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Configuration")
         
-        var error: NSError?
-        var fetchedObjects = managedContext.executeFetchRequest(fetchRequest, error: &error)
-        
-        if(fetchedObjects?.count == 1)
+        //var error: NSError?
+      
+      
+      //var fetchedObjects:[AnyObject]
+      do {
+        let fetchedObjects = try managedContext.fetch(fetchRequest)
+        // success ...
+        if(fetchedObjects.count == 1)
         {
-            return fetchedObjects![0] as! Configuration
+          return fetchedObjects[0] as! Configuration
         }
-
-        let entity =  NSEntityDescription.entityForName("Configuration", inManagedObjectContext: managedContext)
-        let configuration = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+        
+        let entity =  NSEntityDescription.entity(forEntityName: "Configuration", in: managedContext)
+        let configuration = NSManagedObject(entity: entity!, insertInto:managedContext)
         return configuration as! Configuration
+        
+      } catch let error as NSError {
+        // failure
+        print("Fetch failed: \(error.localizedDescription)")
+      }
+      
+      let entity =  NSEntityDescription.entity(forEntityName: "Configuration", in: managedContext)
+      let configuration = NSManagedObject(entity: entity!, insertInto:managedContext)
+      return configuration as! Configuration
+      
+//        if(fetchedObjects?.count == 1)
+//        {
+//            return fetchedObjects![0] as! Configuration
+//        }
+//
+//        let entity =  NSEntityDescription.entity(forEntityName: "Configuration", in: managedContext)
+//        let configuration = NSManagedObject(entity: entity!, insertInto:managedContext)
+//        return configuration as! Configuration
+     
     }
     
-    static func getServerFetchedResultsController(context:NSManagedObjectContext, delegate:NSFetchedResultsControllerDelegate) -> NSFetchedResultsController
+    static func getServerFetchedResultsController(_ context:NSManagedObjectContext, delegate:NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<NSFetchRequestResult>
     {
-        let serversFetchRequest = NSFetchRequest(entityName: "Server")
+        let serversFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Server")
         let primarySortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         serversFetchRequest.sortDescriptors = [primarySortDescriptor]
         
@@ -82,9 +112,9 @@ class CoreDataHandler
         return frc
     }
     
-    static func getTorrentFetchedResultsController(context:NSManagedObjectContext, server:Server, delegate:NSFetchedResultsControllerDelegate) -> NSFetchedResultsController
+    static func getTorrentFetchedResultsController(_ context:NSManagedObjectContext, server:Server, delegate:NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<NSFetchRequestResult>
     {
-        let fetchRequest = NSFetchRequest(entityName: "Torrent")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Torrent")
         let primarySortDescriptor = NSSortDescriptor(key: "addedDate", ascending: true)
         fetchRequest.sortDescriptors = [primarySortDescriptor]
         

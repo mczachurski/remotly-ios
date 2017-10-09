@@ -10,27 +10,27 @@ import Foundation
 
 class FormatHandler
 {
-    static func roundTwoPlaces(value:Double) -> Double {
+    static func roundTwoPlaces(_ value:Double) -> Double {
         let divisor = pow(10.0, 2.0)
         return round(value * divisor) / divisor
     }
     
-    static func formatSizeUnits(size:Int64) -> String
+    static func formatSizeUnits(_ size:Int64) -> String
     {
         var sizeString = ""
         if (size >= 1000000000)
         {
-            var calculatedSize = Double(size) / 1000000000.0
+            let calculatedSize = Double(size) / 1000000000.0
             sizeString = "\(roundTwoPlaces(calculatedSize)) GB"
         }
         else if (size >= 1000000)
         {
-            var calculatedSize = Double(size) / 1000000.0
+            let calculatedSize = Double(size) / 1000000.0
             sizeString = "\(roundTwoPlaces(calculatedSize)) MB"
         }
         else if (size >= 1000)
         {
-            var calculatedSize = Double(size) / 1000.0
+            let calculatedSize = Double(size) / 1000.0
             sizeString = "\(roundTwoPlaces(calculatedSize)) KB"
         }
         else if (size > 1)
@@ -49,13 +49,13 @@ class FormatHandler
         return sizeString;
     }
     
-    static func formatTime(seconds:Int64) -> String
+    static func formatTime(_ seconds:Int64) -> String
     {
         var timeString = ""
         if (seconds >= 86400)
         {
-            var calculatedDays = seconds / 86400
-            var calculatedHours = (seconds % 86400) / 3600
+            let calculatedDays = seconds / 86400
+            let calculatedHours = (seconds % 86400) / 3600
             
             var calculatedDaysString = ""
             if(calculatedDays == 1)
@@ -72,15 +72,15 @@ class FormatHandler
         }
         else if (seconds >= 3600)
         {
-            var calculatedHours = seconds / 3600
-            var calculatedMinutes = (seconds % 3600) / 60
+            let calculatedHours = seconds / 3600
+            let calculatedMinutes = (seconds % 3600) / 60
             
             timeString = "\(calculatedHours) hr \(calculatedMinutes) min"
         }
         else if (seconds >= 60)
         {
-            var calculatedMinutes = seconds / 60
-            var calculatedSeconds = seconds % 60
+            let calculatedMinutes = seconds / 60
+            let calculatedSeconds = seconds % 60
             
             timeString = "\(calculatedMinutes) min \(calculatedSeconds) sec"
         }
@@ -96,13 +96,13 @@ class FormatHandler
         return timeString
     }
     
-    static func getHoursAndMinutesFormat(date:NSDate) -> String
+    static func getHoursAndMinutesFormat(_ date:Date) -> String
     {
-        var formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm"
-        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         
-        let formattedDate = formatter.stringFromDate(date)
+        let formattedDate = formatter.string(from: date)
         return formattedDate
     }
 }

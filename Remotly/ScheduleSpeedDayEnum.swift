@@ -10,15 +10,15 @@ import Foundation
 
 enum ScheduleSpeedDayEnum:Int32
 {
-    case Off = 0
-    case Sunday = 1
-    case Monday = 2
-    case Tuesday = 4
-    case Wednesday = 8
-    case Thursday = 16
-    case Friday = 32
-    case Weekdays = 62
-    case Saturday = 64
-    case Weekends = 65
-    case EveryDay = 127
+    case off = 0
+    case sunday = 1
+    case monday = 2
+    case tuesday = 4
+    case wednesday = 8
+    case thursday = 16
+    case friday = 32
+    case weekdays = 62
+    case saturday = 64
+    case weekends = 65
+    case everyDay = 127
 }
