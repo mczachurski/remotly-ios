@@ -11,18 +11,18 @@ import BRYXBanner
 
 class NotificationHandler
 {
-    static func showError(title:String, message:String)
+    static func showError(_ title:String, message:String)
     {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             let banner = Banner(title: title, subtitle: message, image: nil, backgroundColor: ColorsHandler.getNotificationErrorColor())
             banner.dismissesOnTap = true
             banner.show(duration: 3.0)
         }
     }
     
-    static func showSuccess(title:String, message:String)
+    static func showSuccess(_ title:String, message:String)
     {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             let banner = Banner(title: title, subtitle: message, image: nil, backgroundColor: ColorsHandler.getNotificationSuccessColor())
             banner.dismissesOnTap = true
             banner.show(duration: 3.0)

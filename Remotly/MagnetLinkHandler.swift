@@ -10,18 +10,18 @@ import Foundation
 
 class MagnetLinkHander
 {
-    static func getFileName(fileUrl:NSURL) -> String
+    static func getFileName(_ fileUrl:URL) -> String
     {
-        let urlComponents = NSURLComponents(URL: fileUrl, resolvingAgainstBaseURL: false)
-        let items = urlComponents?.queryItems as! [NSURLQueryItem]
-        var dict = NSMutableDictionary()
+        let urlComponents = URLComponents(url: fileUrl, resolvingAgainstBaseURL: false)
+        let items = urlComponents?.queryItems as! [URLQueryItem]
+        let dict = NSMutableDictionary()
         for item in items{
             dict.setValue(item.value, forKey: item.name)
         }
         
         if let fileName = dict["dn"] as? String
         {
-            let clearFileName = fileName.stringByReplacingOccurrencesOfString("+", withString: " ")
+            let clearFileName = fileName.replacingOccurrences(of: "+", with: " ")
             return clearFileName
         }
         

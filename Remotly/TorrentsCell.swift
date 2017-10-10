@@ -18,7 +18,7 @@ class TorrentsCell: UITableViewCell
     @IBOutlet weak var progressOutlet: UIProgressView!
     @IBOutlet weak var imageStatusOutlet: UIImageView!
     
-    func setTorrent(torrent:Torrent)
+    func setTorrent(_ torrent:Torrent)
     {
         nameOutlet.text = torrent.name
         sizeOutlet.text = torrent.sizeInformationValue
@@ -29,7 +29,7 @@ class TorrentsCell: UITableViewCell
         
         if(torrent.isDownloading)
         {
-            nameOutlet.textColor = UIColor.blackColor()
+            nameOutlet.textColor = UIColor.black
             imageStatusOutlet.image = UIImage(named: "play1")
         }
         else if (torrent.isPaused)

@@ -14,7 +14,7 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
     var context: NSManagedObjectContext!
     var configuration:Configuration?
     
-    lazy var fetchedResultsController: NSFetchedResultsController = {
+  lazy var fetchedResultsController: NSFetchedResultsController = { () -> NSFetchedResultsController<NSFetchRequestResult> in
         let frc = CoreDataHandler.getServerFetchedResultsController(self.context, delegate: self)
         return frc
     }()
@@ -26,40 +26,42 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         
         super.viewDidLoad()
         
-        var error: NSError? = nil
-        if (fetchedResultsController.performFetch(&error) == false)
-        {
-            print("An error occurred: \(error?.localizedDescription)")
+       // var error: NSError? = nil
+      do{
+        try fetchedResultsController.performFetch()
+      }
+      catch{
+        print("An error occurred: \(error.localizedDescription)")
         }
 
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         self.navigationController?.setToolbarHidden(true, animated: animated)
         
-        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        if let selectedIndexPath = tableView.indexPathForSelectedRow
         {
-            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+            tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
     }
     
-    override func viewWillDisappear(animated: Bool)
+    override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
         self.navigationController?.setToolbarHidden(false, animated: animated)
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController)
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>)
     {
         configuration = CoreDataHandler.getConfiguration(context)
         self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         if let sections = fetchedResultsController.sections
         {
@@ -69,21 +71,21 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         return 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if let sections = fetchedResultsController.sections
         {
-            let currentSection = sections[section] as! NSFetchedResultsSectionInfo
+            let currentSection = sections[section] 
             return currentSection.numberOfObjects
         }
         
         return 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ServerCell", forIndexPath: indexPath) as! ServersCell
-        let server = fetchedResultsController.objectAtIndexPath(indexPath) as! Server
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServerCell", for: indexPath) as! ServersCell
+        let server = fetchedResultsController.object(at: indexPath) as! Server
         
         var isDefault = configuration?.defaultServer?.objectID == server.objectID
         cell.setServer(server, isDefault: isDefault)
@@ -91,22 +93,22 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
         return cell
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
         
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]?
-    {
-        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
-            let server = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Server
+    //override func tableView(_ tableView: UITableView, editActionsForRowAtIndexPath indexPath: IndexPath) -> [AnyObject]?
+  override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?{
+        var deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete" , handler: { (action:UITableViewRowAction!, indexPath:IndexPath!) -> Void in
+            let server = self.fetchedResultsController.object(at: indexPath) as! Server
             
             if(self.configuration?.defaultServer?.objectID == server.objectID)
             {
                 self.configuration?.defaultServer = nil
             }
             
-            self.context.deleteObject(server)
+            self.context.delete(server)
             CoreDataHandler.save(self.context)
             
         })
@@ -116,30 +118,30 @@ class ServersListController: UITableViewController, NSFetchedResultsControllerDe
 
     
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if(segue.identifier == "EditServerSegue")
         {
-            let destinationViewController = segue.destinationViewController as! UINavigationController
+            let destinationViewController = segue.destination as! UINavigationController
             let serverDetailsController = destinationViewController.viewControllers.first as! ServerDetailsController
             
-            var server = getServerForSender(sender)
+            let server = getServerForSender(sender as AnyObject)
             serverDetailsController.server = server
         }
         else if(segue.identifier == "TorrentsListSegue")
         {
-            let torrentsViewController = segue.destinationViewController as! TorrentsListController
+            let torrentsViewController = segue.destination as! TorrentsListController
             
-            var server = getServerForSender(sender)
+            let server = getServerForSender(sender as AnyObject)
             torrentsViewController.server = server
         }
     }
     
-    private func getServerForSender(sender: AnyObject?) -> Server
+    fileprivate func getServerForSender(_ sender: AnyObject?) -> Server
     {
         let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPathForCell(cell)
-        var server = fetchedResultsController.objectAtIndexPath(indexPath!) as! Server
+        let indexPath = tableView.indexPath(for: cell)
+        var server = fetchedResultsController.object(at: indexPath!) as! Server
         
         return server
     }

@@ -16,17 +16,17 @@ class ThirdPartyController: UITableViewController
         self.clearsSelectionOnViewWillAppear = true;
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         
-        if let selectedIndexPath = tableView.indexPathForSelectedRow()
+        if let selectedIndexPath = tableView.indexPathForSelectedRow
         {
-            tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+            tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         switch(indexPath.row)
         {
@@ -43,9 +43,9 @@ class ThirdPartyController: UITableViewController
         }
     }
     
-    private func gotoWebsite(address:String)
+    fileprivate func gotoWebsite(_ address:String)
     {
-        let url = NSURL(string: address)
-        UIApplication.sharedApplication().openURL(url!)
+        let url = URL(string: address)
+        UIApplication.shared.openURL(url!)
     }
 }

@@ -15,7 +15,7 @@ class TransmissionSession
     var altSpeedTimeBegin:Int32 = 0
     var altSpeedTimeEnd:Int32 = 0
     var altSpeedTimeEnabled:Bool = false
-    var altSpeedTimeDay = ScheduleSpeedDayEnum.Off
+    var altSpeedTimeDay = ScheduleSpeedDayEnum.off
     var altSpeedUp:Int32 = 0
     var rpcVersion:Double = 0.0
     var speedLimitDown:Int32 = 0

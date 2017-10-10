@@ -20,7 +20,7 @@ class ServerDetailsController: UITableViewController
     @IBOutlet weak var isDefaultOutlet: UISwitch!
     @IBOutlet weak var saveButtonOutlet: UIBarButtonItem!
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         
@@ -33,30 +33,30 @@ class ServerDetailsController: UITableViewController
             
             var managedContext = CoreDataHandler.getManagedObjectContext()
             var configuration = CoreDataHandler.getConfiguration(managedContext)
-            isDefaultOutlet.on = server!.objectID == configuration.defaultServer?.objectID
+            isDefaultOutlet.isOn = server!.objectID == configuration.defaultServer?.objectID
         }
         
         checkValidData(self)
     }
     
-    @IBAction func checkValidData(sender: AnyObject)
+    @IBAction func checkValidData(_ sender: AnyObject)
     {
         if(isValidData())
         {
-            saveButtonOutlet.enabled = true
+            saveButtonOutlet.isEnabled = true
         }
         else
         {
-            saveButtonOutlet.enabled = false
+            saveButtonOutlet.isEnabled = false
         }
     }
     
-    @IBAction func cancelAction(sender: AnyObject)
+    @IBAction func cancelAction(_ sender: AnyObject)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveAction(sender: AnyObject)
+    @IBAction func saveAction(_ sender: AnyObject)
     {
         if(!isValidData())
         {
@@ -69,13 +69,13 @@ class ServerDetailsController: UITableViewController
             server = CoreDataHandler.createServerEntity(managedContext)
         }
         
-        server!.name = nameOutlet.text
-        server!.address = addressOutlet.text
-        server!.userName = userNameOutlet.text
-        server!.password = passwordOutlet.text
+        server!.name = nameOutlet.text!
+        server!.address = addressOutlet.text!
+        server!.userName = userNameOutlet.text!
+        server!.password = passwordOutlet.text!
         
         var configuration = CoreDataHandler.getConfiguration(managedContext)
-        if(isDefaultOutlet.on)
+        if(isDefaultOutlet.isOn)
         {
             configuration.defaultServer = server!
         }
@@ -89,18 +89,18 @@ class ServerDetailsController: UITableViewController
             NotificationHandler.showError("Error", message: "There is a problem during saving data")
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    private func isValidData() -> Bool
+    fileprivate func isValidData() -> Bool
     {
         var isValid = true
-        if(nameOutlet.text.isEmpty)
+        if(nameOutlet.text?.isEmpty)!
         {
             isValid = false
         }
         
-        if(addressOutlet.text.isEmpty)
+        if(addressOutlet.text?.isEmpty)!
         {
             isValid = false
         }
@@ -108,7 +108,7 @@ class ServerDetailsController: UITableViewController
         return isValid
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         if(indexPath.section == 0)
         {

@@ -10,7 +10,7 @@ import Foundation
 
 extension Torrent
 {
-    func synchronizeData(torrentFromServer:TorrentInformation)
+    func synchronizeData(_ torrentFromServer:TorrentInformation)
     {
         self.hashString = torrentFromServer.hashString
         self.id = torrentFromServer.id
@@ -62,14 +62,14 @@ extension Torrent
     var isDownloading: Bool {
         get {
             var statusEnum = TorrentStatusEnum(rawValue: status)
-            return statusEnum == TorrentStatusEnum.Downloading
+            return statusEnum == TorrentStatusEnum.downloading
         }
     }
     
     var isPaused: Bool {
         get {
             var statusEnum = TorrentStatusEnum(rawValue: status)
-            return statusEnum == TorrentStatusEnum.Paused
+            return statusEnum == TorrentStatusEnum.paused
         }
     }
     
@@ -104,15 +104,15 @@ extension Torrent
             
             switch(statusEnum!)
             {
-                case TorrentStatusEnum.Paused:
+                case TorrentStatusEnum.paused:
                     peersInformationValue = "Paused"
-                case TorrentStatusEnum.Verifying:
+                case TorrentStatusEnum.verifying:
                     peersInformationValue = "Verifying..."
-                case TorrentStatusEnum.Deleting:
+                case TorrentStatusEnum.deleting:
                     peersInformationValue = "Deleting..."
-                case TorrentStatusEnum.Downloading:
+                case TorrentStatusEnum.downloading:
                     peersInformationValue = "Downloading from \(peersSendingToUs) of \(peersConnected) peers"
-                case TorrentStatusEnum.Finished:
+                case TorrentStatusEnum.finished:
                     peersInformationValue = "Seeding to \(peersGettingFromUs) of \(peersConnected) peers"
             }
             
@@ -122,7 +122,7 @@ extension Torrent
     
     var downloadInformationValue: String {
         get {
-            if(status == TorrentStatusEnum.Finished.rawValue)
+            if(status == TorrentStatusEnum.finished.rawValue)
             {
                 return "DL: downloaded"
             }

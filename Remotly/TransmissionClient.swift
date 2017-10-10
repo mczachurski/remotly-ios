@@ -23,9 +23,9 @@ class TransmissionClient
         self.password = password
     }
     
-    private func prepareTransmissionUrl(address:String)
+    fileprivate func prepareTransmissionUrl(_ address:String)
     {
-        if(address.rangeOfString("http://", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) == nil)
+        if(address.range(of: "http://", options: NSString.CompareOptions.caseInsensitive, range: nil, locale: nil) == nil)
         {
             transmissionUrl = "http://" + address
         }
@@ -35,26 +35,26 @@ class TransmissionClient
     
     // MARK: Add torrent
     
-    func addTorrent(fileUrl:NSURL, isExternal:Bool, onCompletion:((NSError!) -> Void)?)
+    func addTorrent(_ fileUrl:URL, isExternal:Bool, onCompletion:((NSError?) -> Void)?)
     {
         let requestJson = addTorrentPrepareJson(fileUrl, isExternal: isExternal)
         addTorrentSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func addTorrentPrepareJson(fileUrl:NSURL, isExternal:Bool) -> String
+    fileprivate func addTorrentPrepareJson(_ fileUrl:URL, isExternal:Bool) -> String
     {
         var requestJson = ""
         if(isExternal == true)
         {
             requestJson += "{ \"arguments\": {\"filename\": \""
-            requestJson += fileUrl.absoluteString!
+            requestJson += fileUrl.absoluteString
             requestJson += "\" }, \"method\": \"torrent-add\"}"
         }
         else
         {
-            let dataContent = NSData(contentsOfURL: fileUrl)
-            let base64Content = dataContent?.base64EncodedStringWithOptions(nil)
-            
+            let dataContent = try? Data(contentsOf: fileUrl)
+            //let base64Content = dataContent?.base64EncodedStringWithOptions(nil)
+            let base64Content = dataContent?.base64EncodedString()
             requestJson += "{ \"arguments\": {\"metainfo\": \""
             requestJson += base64Content!
             requestJson += "\" }, \"method\": \"torrent-add\" }"
@@ -63,13 +63,13 @@ class TransmissionClient
         return requestJson
     }
     
-    private func addTorrentSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    fileprivate func addTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+              let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -84,26 +84,26 @@ class TransmissionClient
     
     // MARK: Remove torrent
     
-    func removeTorrent(torrentId:Int64, deleteLocalData:Bool, onCompletion:((NSError!) -> Void)?)
+    func removeTorrent(_ torrentId:Int64, deleteLocalData:Bool, onCompletion:((NSError?) -> Void)?)
     {
-        var requestJson = removeTorrentPrepareJson(torrentId, deleteLocalData: deleteLocalData)
+        let requestJson = removeTorrentPrepareJson(torrentId, deleteLocalData: deleteLocalData)
         removeTorrentSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func removeTorrentPrepareJson(torrentId:Int64, deleteLocalData:Bool) -> String
+    fileprivate func removeTorrentPrepareJson(_ torrentId:Int64, deleteLocalData:Bool) -> String
     {
         let deleteLocalDataValue = deleteLocalData ? "true" : "false"
-        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ], \"delete-local-data\": \(deleteLocalDataValue) }, \"method\": \"torrent-remove\" }"
+        let requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ], \"delete-local-data\": \(deleteLocalDataValue) }, \"method\": \"torrent-remove\" }"
         return requestJson
     }
     
-    private func removeTorrentSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    fileprivate func removeTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { (data, response, error) -> Void in
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+                let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -118,25 +118,25 @@ class TransmissionClient
     
     // MARK: Reasume torrent
     
-    func reasumeTorrent(torrentId:Int64, onCompletion:((NSError!) -> Void)?)
+    func reasumeTorrent(_ torrentId:Int64, onCompletion:((NSError?) -> Void)?)
     {
-        var requestJson = reasumeTorrentPrepareJson(torrentId)
+        let requestJson = reasumeTorrentPrepareJson(torrentId)
         reasumeTorrentSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func reasumeTorrentPrepareJson(torrentId:Int64) -> String
+    fileprivate func reasumeTorrentPrepareJson(_ torrentId:Int64) -> String
     {
-        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-start\" }"
+        let requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-start\" }"
         return requestJson
     }
     
-    private func reasumeTorrentSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    fileprivate func reasumeTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+                let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -151,25 +151,25 @@ class TransmissionClient
     
     // MARK: Pause torrent
     
-    func pauseTorrent(torrentId:Int64, onCompletion:((NSError!) -> Void)?)
+    func pauseTorrent(_ torrentId:Int64, onCompletion:((NSError?) -> Void)?)
     {
-        var requestJson = pauseTorrentPrepareJson(torrentId)
+        let requestJson = pauseTorrentPrepareJson(torrentId)
         pauseTorrentSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func pauseTorrentPrepareJson(torrentId:Int64) -> String
+    fileprivate func pauseTorrentPrepareJson(_ torrentId:Int64) -> String
     {
-        var requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-stop\" }"
+        let requestJson = "{ \"arguments\": {\"ids\": [ \(torrentId) ]}, \"method\": \"torrent-stop\" }"
         return requestJson
     }
     
-    private func pauseTorrentSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    fileprivate func pauseTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+                let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -184,19 +184,19 @@ class TransmissionClient
     
     // MARK: Get torrents
     
-    func getTorrents(onCompletion: (([TorrentInformation]!, NSError!) -> Void)?)
+    func getTorrents(_ onCompletion: (([TorrentInformation]?, NSError?) -> Void)?)
     {
-        var requestJson = getTorrentsPrepareJson()
+        let requestJson = getTorrentsPrepareJson()
         getTorrentsSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func getTorrentsPrepareJson() -> String
+    fileprivate func getTorrentsPrepareJson() -> String
     {
-        var requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\", \"hashString\", \"addedDate\" ]}, \"method\": \"torrent-get\" }"
+        let requestJson = "{ \"arguments\": {\"fields\": [ \"status\",\"id\", \"name\", \"totalSize\", \"files\", \"priorities\", \"percentDone\", \"leftUntilDone\", \"sizeWhenDone\", \"peersConnected\", \"peersSendingToUs\", \"rateDownload\", \"rateUpload\", \"isFinished\", \"peersGettingFromUs\", \"hashString\", \"addedDate\" ]}, \"method\": \"torrent-get\" }"
         return requestJson
     }
     
-    private func getTorrentsSendRequest(requestJson:String, onCompletion:(([TorrentInformation]!, NSError!) -> Void)?)
+    fileprivate func getTorrentsSendRequest(_ requestJson:String, onCompletion:(([TorrentInformation]?, NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
             
@@ -204,7 +204,7 @@ class TransmissionClient
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+                let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -218,21 +218,21 @@ class TransmissionClient
                     for (key: String, subJson: JSON) in torrents
                     {
                         var torrentInformation = TorrentInformation()
-                        torrentInformation.id = subJson["id"].int64Value
-                        torrentInformation.status = subJson["status"].int32Value
-                        torrentInformation.name = subJson["name"].stringValue
-                        torrentInformation.totalSize = subJson["totalSize"].int64Value
-                        torrentInformation.percentDone = subJson["percentDone"].doubleValue
-                        torrentInformation.leftUntilDone = subJson["leftUntilDone"].int64Value
-                        torrentInformation.sizeWhenDone = subJson["sizeWhenDone"].int64Value
-                        torrentInformation.peersConnected = subJson["peersConnected"].int32Value
-                        torrentInformation.peersSendingToUs = subJson["peersSendingToUs"].int32Value
-                        torrentInformation.rateDownload = subJson["rateDownload"].int64Value
-                        torrentInformation.rateUpload = subJson["rateUpload"].int64Value
-                        torrentInformation.isFinished = subJson["isFinished"].boolValue
-                        torrentInformation.peersGettingFromUs = subJson["peersGettingFromUs"].int32Value
-                        torrentInformation.hashString = subJson["hashString"].stringValue
-                        torrentInformation.addedDate = subJson["addedDate"].doubleValue
+                        torrentInformation.id = JSON["id"].int64Value
+                        torrentInformation.status = JSON["status"].int32Value
+                        torrentInformation.name = JSON["name"].stringValue
+                        torrentInformation.totalSize = JSON["totalSize"].int64Value
+                        torrentInformation.percentDone = JSON["percentDone"].doubleValue
+                        torrentInformation.leftUntilDone = JSON["leftUntilDone"].int64Value
+                        torrentInformation.sizeWhenDone = JSON["sizeWhenDone"].int64Value
+                        torrentInformation.peersConnected = JSON["peersConnected"].int32Value
+                        torrentInformation.peersSendingToUs = JSON["peersSendingToUs"].int32Value
+                        torrentInformation.rateDownload = JSON["rateDownload"].int64Value
+                        torrentInformation.rateUpload = JSON["rateUpload"].int64Value
+                        torrentInformation.isFinished = JSON["isFinished"].boolValue
+                        torrentInformation.peersGettingFromUs = JSON["peersGettingFromUs"].int32Value
+                        torrentInformation.hashString = JSON["hashString"].stringValue
+                        torrentInformation.addedDate = JSON["addedDate"].doubleValue
                         
                         torrentInformations.append(torrentInformation)
                     }
@@ -245,19 +245,19 @@ class TransmissionClient
     
     // MARK: Get transmission session
     
-    func getTransmissionSessionInformation(onCompletion: ((TransmissionSession, NSError!) -> Void)?)
+    func getTransmissionSessionInformation(_ onCompletion: ((TransmissionSession, NSError?) -> Void)?)
     {
-        var requestJson = getTransmissionSessionInformationPrepareJson()
+        let requestJson = getTransmissionSessionInformationPrepareJson()
         getTransmissionSessionInformationSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func getTransmissionSessionInformationPrepareJson() -> String
+    fileprivate func getTransmissionSessionInformationPrepareJson() -> String
     {
-        var requestJson = "{ \"method\": \"session-get\" }"
+        let requestJson = "{ \"method\": \"session-get\" }"
         return requestJson
     }
     
-    private func getTransmissionSessionInformationSendRequest(requestJson:String, onCompletion:((TransmissionSession, NSError!) -> Void)?)
+    fileprivate func getTransmissionSessionInformationSendRequest(_ requestJson:String, onCompletion:((TransmissionSession, NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
             
@@ -265,7 +265,7 @@ class TransmissionClient
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+                let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -288,7 +288,7 @@ class TransmissionClient
                     transmissionSession.speedLimitUpEnabled = sessionJson["speed-limit-up-enabled"].boolValue
                     transmissionSession.version = sessionJson["version"].stringValue
                     
-                    transmissionSession.altSpeedTimeDay = ScheduleSpeedDayEnum.Off
+                    transmissionSession.altSpeedTimeDay = ScheduleSpeedDayEnum.off
                     if(transmissionSession.altSpeedTimeEnabled)
                     {
                         var speedTimeDay = sessionJson["alt-speed-time-day"].int32Value
@@ -307,31 +307,31 @@ class TransmissionClient
     
     // MARK: Set transmission session
     
-    func setTransmissionSession(transmissionSession:TransmissionSession, onCompletion:((NSError!) -> Void)?)
+    func setTransmissionSession(_ transmissionSession:TransmissionSession, onCompletion:((NSError?) -> Void)?)
     {
-        var requestJson = getTransmissionSessionPrepareJson(transmissionSession)
+        let requestJson = getTransmissionSessionPrepareJson(transmissionSession)
         setTransmissionSessionSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func getTransmissionSessionPrepareJson(transmissionSession:TransmissionSession) -> String
+    fileprivate func getTransmissionSessionPrepareJson(_ transmissionSession:TransmissionSession) -> String
     {
         let altSpeedTimeEnabledValue = transmissionSession.altSpeedTimeEnabled ? "true" : "false"
         let speedLimitDownEnabledValue = transmissionSession.speedLimitDownEnabled ? "true" : "false"
         let speedLimitUpEnabledValue = transmissionSession.speedLimitUpEnabled ? "true" : "false"
         
-        var requestJson = "{ \"arguments\": {\"alt-speed-down\": \(transmissionSession.altSpeedDown), \"alt-speed-time-begin\": \(transmissionSession.altSpeedTimeBegin), \"alt-speed-time-enabled\": \(altSpeedTimeEnabledValue), \"alt-speed-time-end\": \(transmissionSession.altSpeedTimeEnd), \"alt-speed-time-day\": \(transmissionSession.altSpeedTimeDay.rawValue), \"alt-speed-up\": \(transmissionSession.altSpeedUp), \"speed-limit-down-enabled\": \(speedLimitDownEnabledValue), \"speed-limit-down\": \(transmissionSession.speedLimitDown), \"speed-limit-up-enabled\": \(speedLimitUpEnabledValue), \"speed-limit-up\": \(transmissionSession.speedLimitUp) }, \"method\": \"session-set\" }"
+        let requestJson = "{ \"arguments\": {\"alt-speed-down\": \(transmissionSession.altSpeedDown), \"alt-speed-time-begin\": \(transmissionSession.altSpeedTimeBegin), \"alt-speed-time-enabled\": \(altSpeedTimeEnabledValue), \"alt-speed-time-end\": \(transmissionSession.altSpeedTimeEnd), \"alt-speed-time-day\": \(transmissionSession.altSpeedTimeDay.rawValue), \"alt-speed-up\": \(transmissionSession.altSpeedUp), \"speed-limit-down-enabled\": \(speedLimitDownEnabledValue), \"speed-limit-down\": \(transmissionSession.speedLimitDown), \"speed-limit-up-enabled\": \(speedLimitUpEnabledValue), \"speed-limit-up\": \(transmissionSession.speedLimitUp) }, \"method\": \"session-set\" }"
         
         return requestJson
     }
     
     
-    private func setTransmissionSessionSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    fileprivate func setTransmissionSessionSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+                let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -345,32 +345,32 @@ class TransmissionClient
     }
     // MARK: Change transmission speeds
     
-    func setNormalTransmissionSpeed(onCompletion:((NSError!) -> Void)?)
+    func setNormalTransmissionSpeed(_ onCompletion:((NSError?) -> Void)?)
     {
-        var requestJson = setTransmissionSpeedPrepareJson(false)
+        let requestJson = setTransmissionSpeedPrepareJson(false)
         setTransmissionSpeedSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    func setAlternativeTransmissionSpeed(onCompletion:((NSError!) -> Void)?)
+    func setAlternativeTransmissionSpeed(_ onCompletion:((NSError?) -> Void)?)
     {
-        var requestJson = setTransmissionSpeedPrepareJson(true)
+        let requestJson = setTransmissionSpeedPrepareJson(true)
         setTransmissionSpeedSendRequest(requestJson, onCompletion: onCompletion)
     }
     
-    private func setTransmissionSpeedPrepareJson(isAlternative:Bool) -> String
+    fileprivate func setTransmissionSpeedPrepareJson(_ isAlternative:Bool) -> String
     {
         let isAlternativeValue = isAlternative ? "true" : "false"
-        var requestJson = "{ \"arguments\": {\"alt-speed-enabled\": \(isAlternativeValue) }, \"method\": \"session-set\" }"
+        let requestJson = "{ \"arguments\": {\"alt-speed-enabled\": \(isAlternativeValue) }, \"method\": \"session-set\" }"
         return requestJson
     }
     
-    private func setTransmissionSpeedSendRequest(requestJson:String, onCompletion:((NSError!) -> Void)?)
+    fileprivate func setTransmissionSpeedSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { data, response, error -> Void in
             var internalError = error
             if(internalError == nil)
             {
-                let json:JSON = JSON(data: data)
+                let json:JSON = JSON(data: data!)
                 var result = json["result"].stringValue
                 
                 if(result != "success")
@@ -385,33 +385,39 @@ class TransmissionClient
     
     // MARK: Sending request
     
-    private func sendRequest(requestJson: String, completionHandler: ((NSData!, NSURLResponse!, NSError!) -> Void)?)
+    fileprivate func sendRequest(_ requestJson: String, completionHandler: ((Data?, URLResponse?, NSError?) -> Void)?)
     {
-        let request = sendRequestPrepareRequest(requestJson)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+      var request = sendRequestPrepareRequest(requestJson) as URLRequest
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
             
             if(error != nil)
             {
-                completionHandler?(data, response, error)
+              print("error: \(String(describing: error))")
+              completionHandler?(data, response, error as NSError?)
             }
             else
             {
-                if(self.checkIfErrorIsMissingSessionId(response))
+              if(self.checkIfErrorIsMissingSessionId(response!))
                 {
                     // If error was missing session Id we have to do request again (now we should have proper session Id).
+                  print("Checking if Session Error)")
                     let sessionId = self.getSessionIdForServer()
                     request.setValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
                     
-                    let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-                        completionHandler?(data, response, error)
+                    let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
+                      print("Data: \(String(describing: data))")
+                     print("Response: \(String(describing: response))")
+                      print("Error: \(String(describing: error))")
+                      
+                      completionHandler?(data, response, error as NSError?)
                     })
                     
                     task.resume();
                 }
                 else
                 {
-                    completionHandler?(data, response, error)
+                    completionHandler?(data, response, error as NSError?)
                 }
             }
         })
@@ -419,43 +425,48 @@ class TransmissionClient
         task.resume();
     }
     
-    private func sendRequestPrepareRequest(requestJson: String) -> NSMutableURLRequest
+    fileprivate func sendRequestPrepareRequest(_ requestJson: String) -> NSMutableURLRequest
     {
-        let request = NSMutableURLRequest(URL: NSURL(string: transmissionUrl)!)
-        request.HTTPMethod = "POST"
-        
-        let sessionId = getSessionIdForServer()
-        request.addValue(sessionId, forHTTPHeaderField: "X-Transmission-Session-Id")
+        let request = NSMutableURLRequest(url: URL(string: transmissionUrl)!)
+        request.httpMethod = "POST"
+      var sessionId = getSessionIdForServer()
+      if sessionId != nil {
+        sessionId = self.getSessionIdForServer()
+      } else {
+        sessionId = ""
+      }
+        request.addValue(sessionId!, forHTTPHeaderField: "X-Transmission-Session-Id")
         
         if(!userName.isEmpty && !password.isEmpty)
         {            
             let credentials = "\(userName):\(password)"
-            let credentialsData = credentials.dataUsingEncoding(NSUTF8StringEncoding)
-            let authorization = credentialsData?.base64EncodedStringWithOptions(nil)
+            let credentialsData = credentials.data(using: String.Encoding.utf8)
+            //let authorization = credentialsData?.base64EncodedStringWithOptions(nil)
+            let authorization = credentialsData?.base64EncodedString()
             
             request.setValue("Basic \(authorization!)", forHTTPHeaderField: "Authorization")
         }
 
-        request.HTTPBody = requestJson.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        request.httpBody = requestJson.data(using: String.Encoding.utf8, allowLossyConversion: false)
         
         return request
     }
     
     // MARK: Manage sessions identifiers
     
-    private func getSessionIdForServer() -> String?
+    fileprivate func getSessionIdForServer() -> String?
     {
         return TransmissionClient.sessionIds[transmissionUrl];
     }
     
-    private func setSessionIdForServer(sessionId:String)
+    fileprivate func setSessionIdForServer(_ sessionId:String)
     {
         TransmissionClient.sessionIds[transmissionUrl] = sessionId
     }
     
-    private func checkIfErrorIsMissingSessionId(response:NSURLResponse) -> Bool
+    fileprivate func checkIfErrorIsMissingSessionId(_ response:URLResponse) -> Bool
     {
-        var httpResponse = response as! NSHTTPURLResponse
+        let httpResponse = response as! HTTPURLResponse
         if(httpResponse.statusCode == 409)
         {
             let sessionId = httpResponse.allHeaderFields["X-Transmission-Session-Id"] as! String
