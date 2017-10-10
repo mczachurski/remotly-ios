@@ -1,3 +1,2 @@
-github "bryx-inc/BRYXBanner" "0.3.1"
-github "icanzilb/SwiftSpinner" "0.7.0"
-github "SwiftyJSON/SwiftyJSON" "2.2.1"
+github "SwiftyJSON/SwiftyJSON" "3.1.4"
+github "bryx-inc/BRYXBanner" "0.8.0"
