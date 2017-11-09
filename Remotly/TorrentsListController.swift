@@ -173,7 +173,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
 //                var textfield = alertView.textField(at: 0)
 //                var fileString = textfield?.text
 //                var fileUrl = URL(string: fileString!)
-//                
+//
 //                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
 //                    if(error != nil)
 //                    {
@@ -187,7 +187,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
 //            }
 //        }
 //    }
-//    
+//
     @IBAction func changeSpeedMode(_ sender: AnyObject)
     {
         if(isAlternativeSpeedModeEnabled)
