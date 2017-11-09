@@ -164,30 +164,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         }
     }
     
-//    func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
-//    {
-//        if(alertView.tag == 1)
-//        {
-//            if(buttonIndex == 1)
-//            {
-//                var textfield = alertView.textField(at: 0)
-//                var fileString = textfield?.text
-//                var fileUrl = URL(string: fileString!)
-//
-//                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
-//                    if(error != nil)
-//                    {
-//                        NotificationHandler.showError("Error", message: error!.localizedDescription)
-//                    }
-//                    else
-//                    {
-//                        NotificationHandler.showSuccess("Success", message: "Torrent was added")
-//                    }
-//                })
-//            }
-//        }
-//    }
-//
+
     @IBAction func changeSpeedMode(_ sender: AnyObject)
     {
         if(isAlternativeSpeedModeEnabled)
