@@ -105,11 +105,52 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     @IBAction func addNewTorrentAction(_ sender: AnyObject)
     {
-        let alert = UIAlertView(title: "Torrent url", message: "Please enter url to torrent file", delegate: self, cancelButtonTitle: "Cancel")
-        alert.alertViewStyle = UIAlertViewStyle.plainTextInput
-        alert.tag = 1
-        alert.addButton(withTitle: "Add")
-        alert.show()
+
+      let alert = UIAlertController(title: "Magnet Link", message: "Please enter/paste URL", preferredStyle: UIAlertControllerStyle.alert)
+      let sendButton = UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction) -> Void in
+      let linkField = alert.textFields![0] as UITextField
+      let linkURL = URL(string: linkField.text!)
+      
+      self.transmissionClient.addTorrent(linkURL!, isExternal:true, onCompletion: { (error) -> Void in
+          if(error != nil)
+          {
+            NotificationHandler.showError("Error", message: error!.localizedDescription)
+          }
+          else
+          {
+            NotificationHandler.showSuccess("Success", message: "Torrent was added")
+          }
+        })
+      
+      
+      })
+      let pasteButton = UIAlertAction(title: "Paste + Send", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction) -> Void in
+      let pasteURL = URL(string: UIPasteboard.general.string!)!
+      self.transmissionClient.addTorrent(pasteURL, isExternal:true, onCompletion: { (error) -> Void in
+          if(error != nil)
+          {
+            NotificationHandler.showError("Error", message: error!.localizedDescription)
+          }
+          else
+          {
+            NotificationHandler.showSuccess("Success", message: "Torrent was added")
+          }
+        })
+      })
+      let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {
+         (action: UIAlertAction) -> Void in
+      
+        })
+      
+      alert.addTextField { (textField: UITextField!) -> Void in
+        textField.placeholder = "Paste/Enter Link Here"
+      }
+      alert.addAction(sendButton)
+      alert.addAction(pasteButton)
+      alert.addAction(cancelButton)
+      
+      self.present(alert, animated: true, completion: nil)
+        
     }
     
     @objc func enableRefreshAction()
@@ -123,30 +164,30 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         }
     }
     
-    func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
-    {
-        if(alertView.tag == 1)
-        {
-            if(buttonIndex == 1)
-            {
-                var textfield = alertView.textField(at: 0)
-                var fileString = textfield?.text
-                var fileUrl = URL(string: fileString!)
-                
-                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
-                    if(error != nil)
-                    {
-                        NotificationHandler.showError("Error", message: error!.localizedDescription)
-                    }
-                    else
-                    {
-                        NotificationHandler.showSuccess("Success", message: "Torrent was added")
-                    }
-                })
-            }
-        }
-    }
-    
+//    func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
+//    {
+//        if(alertView.tag == 1)
+//        {
+//            if(buttonIndex == 1)
+//            {
+//                var textfield = alertView.textField(at: 0)
+//                var fileString = textfield?.text
+//                var fileUrl = URL(string: fileString!)
+//                
+//                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
+//                    if(error != nil)
+//                    {
+//                        NotificationHandler.showError("Error", message: error!.localizedDescription)
+//                    }
+//                    else
+//                    {
+//                        NotificationHandler.showSuccess("Success", message: "Torrent was added")
+//                    }
+//                })
+//            }
+//        }
+//    }
+//    
     @IBAction func changeSpeedMode(_ sender: AnyObject)
     {
         if(isAlternativeSpeedModeEnabled)
