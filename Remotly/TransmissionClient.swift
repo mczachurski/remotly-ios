@@ -233,6 +233,21 @@ class TransmissionClient
                         torrentInformation.peersGettingFromUs = JSON["peersGettingFromUs"].int32Value
                         torrentInformation.hashString = JSON["hashString"].stringValue
                         torrentInformation.addedDate = JSON["addedDate"].doubleValue
+                      
+                      for (_, value) in JSON["files"]{
+                        //  print(value["name"])
+                        let compeleted = (value["bytesCompleted"].numberValue)
+                        let total = (value["length"].numberValue)
+                        var percentage = (compeleted.floatValue) / (total.floatValue)
+                        percentage = percentage * 100
+                        let fileForArray = [value["name"], percentage] as [Any]
+                        torrentInformation.files.append(fileForArray)
+              
+                      }
+                      
+                      print(torrentInformation.files)
+                      
+                      
                         
                         torrentInformations.append(torrentInformation)
                     }
