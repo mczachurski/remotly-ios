@@ -20,6 +20,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     fileprivate let deleteTorrentButtonIndex = 1
     fileprivate let deleteTorrentWitDataButtonIndex = 2
     fileprivate var torrentToDelete:Torrent? = nil
+    fileprivate var torrentToQuery:Torrent? = nil
     fileprivate var isAlternativeSpeedModeEnabled = false
     fileprivate var isDuringRequest = false
     
@@ -33,6 +34,10 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         let frc = CoreDataHandler.getTorrentFetchedResultsController(self.context, server: self.server, delegate: self)
         return frc
     }()
+  lazy var fetchedFiles: NSFetchedResultsController = { () -> NSFetchedResultsController<NSFetchRequestResult> in
+    let ffrc = CoreDataHandler.getFileFetchedResultsController(self.context, torrent: torrentToQuery!, delegate: self)
+    return ffrc
+  }()
     
     // MARK: Load view
     
@@ -353,8 +358,27 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
             
             if(!wasSynchronized)
             {
-                var newTorrent = CoreDataHandler.createTorrentEntity(server, managedContext: context)
+              var newTorrent = CoreDataHandler.createTorrentEntity(server, managedContext: context)
+//              for file in newTorrent.files{
+//                var newFile = CoreDataHandler.createFileEntity(newTorrent, managedContext: context)
+//              }
                 newTorrent.synchronizeData(torrentFromServer)
+              /*
+              for torrentFiles in torrentInformations{
+              var count = torrentFiles.files.count
+              while count > 0 {
+                  
+              let fileToAdd = CoreDataHandler.createFileEntity(newTorrent, managedContext: context)
+              fileToAdd.name = torrentFiles.files[count].name
+              print("fileToAdd.name \(fileToAdd.name)")
+              fileToAdd.length = torrentFiles.files[count].length
+              fileToAdd.bytesCompleted = torrentFiles.files[count].completed
+              fileToAdd.percentage = torrentFiles.files[count].percentage
+              count -= 1
+              newTorrent.files.adding(fileToAdd)
+              print("Count: \(newTorrent.files.count)")
+                }
+              } */
             }
         }
         
@@ -363,8 +387,25 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
             var isExist = false
             for torrentFromServer in torrentInformations
             {
+              //Create the new entities here? Didn't work up there.
                 if(torrentFromServer.hashString == torrentFromCoreData.hashString)
                 {
+                  /*
+                  if torrentFromServer.files.count != torrentFromCoreData.files.count{
+                    for torrentFile in torrentFromServer.files{
+                      var count = torrentFromServer.files.count
+                      while count > 0 {
+                      let fileToAdd = CoreDataHandler.createFileEntity(torrentFromCoreData, managedContext: context)
+                      fileToAdd.name = torrentFromServer.files[count].name
+                      print("fileToAdd.name \(fileToAdd.name)")
+                      fileToAdd.length = torrentFromServer.files[count].length
+                      fileToAdd.bytesCompleted = torrentFromServer.files[count].completed
+                      fileToAdd.percentage = torrentFromServer.files[count].percentage
+                      count -= 1
+                      
+                        }
+                      }
+                  } */
                     isExist = true
                     break
                 }
@@ -427,6 +468,24 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         
         return [deleteAction, runAction]
     }
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+   
+    //fetch the entities instead of trying to pull the NSSet
+    //this fetch setup looks good to me. Just need to replicate the creating of the File, and the subsequent updating.
+    
+    let torrent = self.fetchedResultsController.object(at: indexPath) as! Torrent
+    torrentToQuery = torrent
+    do{
+      try fetchedFiles.performFetch()
+      let filesResult = self.fetchedFiles.fetchedObjects as! [File]
+      for files in filesResult {
+        print("Files: \(files.name)")
+      }
+    }
+    catch let error{
+      print("An error occurred: \(error.localizedDescription)")
+    }
+  }
     
     fileprivate func createReasumeAction(_ torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
     {

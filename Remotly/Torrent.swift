@@ -26,6 +26,7 @@ class Torrent: NSManagedObject {
     @NSManaged var status: Int32
     @NSManaged var totalSize: Int64
     @NSManaged var addedDate: TimeInterval
+    @NSManaged var files: NSSet
     @NSManaged var server: Server
 
 }
