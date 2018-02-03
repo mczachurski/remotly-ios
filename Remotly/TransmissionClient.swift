@@ -65,7 +65,9 @@ class TransmissionClient
     
     fileprivate func addTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
+      
       sendRequest(requestJson, completionHandler: { (data: Data?, response: URLResponse?, error: NSError? )-> Void in
+        print("addTorrensSendRequest")
             var internalError = error
             if(internalError == nil)
             {
@@ -82,7 +84,7 @@ class TransmissionClient
             }
             
             onCompletion?(internalError)
-        } as! ((Data?, URLResponse?, NSError?) -> Void))
+        } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     
     // MARK: Remove torrent
@@ -102,6 +104,7 @@ class TransmissionClient
     
     fileprivate func removeTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
+      print("removeTorrensSendRequest")
         sendRequest(requestJson, completionHandler: { (data: Data?, response: URLResponse?, error: NSError? ) -> Void in
             var internalError = error
             if(internalError == nil)
@@ -116,7 +119,7 @@ class TransmissionClient
             }
             
             onCompletion?(internalError)
-          } as! ((Data?, URLResponse?, NSError?) -> Void))
+          } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     
     // MARK: Reasume torrent
@@ -135,6 +138,7 @@ class TransmissionClient
     
     fileprivate func reasumeTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
+      print("reasumeTorrensSendRequest")
         sendRequest(requestJson, completionHandler: { (data: Data?, response: URLResponse?, error: NSError? ) -> Void in
             var internalError = error
             if(internalError == nil)
@@ -149,7 +153,7 @@ class TransmissionClient
             }
             
             onCompletion?(internalError)
-          } as! ((Data?, URLResponse?, NSError?) -> Void))
+          } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     
     // MARK: Pause torrent
@@ -168,6 +172,7 @@ class TransmissionClient
     
     fileprivate func pauseTorrentSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
+      print("pauseTorrensSendRequest")
         sendRequest(requestJson, completionHandler: {(data: Data?, response: URLResponse?, error: NSError? ) -> Void in
             var internalError = error
             if(internalError == nil)
@@ -182,7 +187,7 @@ class TransmissionClient
             }
             
             onCompletion?(internalError)
-          } as! ((Data?, URLResponse?, NSError?) -> Void))
+          } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     
     // MARK: Get torrents
@@ -202,7 +207,7 @@ class TransmissionClient
     fileprivate func getTorrentsSendRequest(_ requestJson:String, onCompletion:(([TorrentInformation]?, NSError?) -> Void)?)
     {
         sendRequest(requestJson, completionHandler: { (data: Data?, response: URLResponse?, error: NSError? ) -> Void in
-            
+            print("getTorrensSendRequest")
             var torrentInformations = [TorrentInformation]()
             var internalError = error
             if(internalError == nil)
@@ -274,7 +279,7 @@ class TransmissionClient
             }
             
             onCompletion?(torrentInformations, internalError)
-          } as! ((Data?, URLResponse?, NSError?) -> Void))
+          } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     
     // MARK: Get transmission session
@@ -293,8 +298,9 @@ class TransmissionClient
     
     fileprivate func getTransmissionSessionInformationSendRequest(_ requestJson:String, onCompletion:((TransmissionSession, NSError?) -> Void)?)
     {
+      print("getTransmissionSessionInformationSendRequest")
         sendRequest(requestJson, completionHandler: { (data: Data?, response: URLResponse?, error: NSError? ) -> Void in
-            
+          
             var transmissionSession = TransmissionSession()
             var internalError = error
             if(internalError == nil)
@@ -336,7 +342,7 @@ class TransmissionClient
             }
             
             onCompletion?(transmissionSession, internalError)
-          } as! ((Data?, URLResponse?, NSError?) -> Void))
+          } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     
     // MARK: Set transmission session
@@ -361,6 +367,7 @@ class TransmissionClient
     
     fileprivate func setTransmissionSessionSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
+      print("setTransmissionSessionSendRequest")
         sendRequest(requestJson, completionHandler: { (data: Data?, response: URLResponse?, error: NSError? ) -> Void in
             var internalError = error
             if(internalError == nil)
@@ -375,7 +382,7 @@ class TransmissionClient
             }
             
             onCompletion?(internalError)
-          } as! ((Data?, URLResponse?, NSError?) -> Void))
+          } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     // MARK: Change transmission speeds
     
@@ -400,6 +407,7 @@ class TransmissionClient
     
     fileprivate func setTransmissionSpeedSendRequest(_ requestJson:String, onCompletion:((NSError?) -> Void)?)
     {
+      print("setTransmissionSpeedSendRequest")
         sendRequest(requestJson, completionHandler: { (data: Data?, response: URLResponse?, error: NSError? ) -> Void in
             var internalError = error
             if(internalError == nil)
@@ -414,13 +422,14 @@ class TransmissionClient
             }
             
             onCompletion?(internalError)
-          } as! ((Data?, URLResponse?, NSError?) -> Void))
+          } as? ((Data?, URLResponse?, NSError?) -> Void))
     }
     
     // MARK: Sending request
     
-    fileprivate func sendRequest(_ requestJson: String, completionHandler: ((Data?, URLResponse?, NSError?) -> Void)?)
+  fileprivate func sendRequest(_ requestJson: String, completionHandler: (( Data?, URLResponse?,  NSError?) -> Void)?)
     {
+      print("sendRequest")
       var request = sendRequestPrepareRequest(requestJson) as URLRequest
         let session = URLSession.shared
         let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
