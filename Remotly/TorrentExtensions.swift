@@ -27,7 +27,41 @@ extension Torrent
         self.status = torrentFromServer.status
         self.totalSize = torrentFromServer.totalSize
         self.addedDate = torrentFromServer.addedDate
+        //self.files = torrentFromServer.files  
+      //print("Self Files: \(self.files) torrentFromServerFiles: \(torrentFromServer.files)")
+      //for filesFromServer in torrentFromServer.files {
+//        let file = File(name: filesFromServer[0], length: filesFromServer[1], completed: filesFromServer[2], percentage: filesFromServer[3])
+        
+        //print(filesFromServer)
+        //self.files.adding(filesFromServer)
+//        print("name: \(filesFromServer.name)")
+//        print("Length: \(filesFromServer.length)")
+//        print("Completed: \(filesFromServer.completed)")
+//        print("Percentage: \(filesFromServer.percentage)")
+        //let lengthNumber: NSNumber = NSNumber(value: filesFromServer.length)
+//        let fileToAdd: File = File(name: filesFromServer.name, length: lengthNumber, bytesCompleted: Double(filesFromServer.completed), percentage: filesFromServer.percentage, entity: entity, insertIntoManagedObjectContext: managedObjectContext!)
+        //self.files.adding(File(name: filesFromServer.name, length: Int64(filesFromServer.length), bytesCompleted: Double(filesFromServer.completed), percentage: filesFromServer.percentage, entity: entity, insertIntoManagedObjectContext: managedObjectContext!))
+        //CoreDataHandler.createFileEntity(_, managedContext: managedObjectContext!)
+        /*
+        //I think this needs to go somewhere else, compare files.count from info to CDTorrent
+       
+       if fetchedfilesresult.count != torrentFromServer.files.count{
+       FILL THIS IN WITH THE CREATION OF THE ENTITY FOR ALL THE FILES IN THE TORRENTINFORMATION.FILES
+       }
+       ELSE
+       {
+       UPDATE THE FILE PROPERTIES FOR COMPLETED AND PERCENTAGE
+       }
+        let fileToAdd = CoreDataHandler.createFileEntity(torrentFromServer, managedContext: managedObjectContext!)
+        fileToAdd.name = filesFromServer.name
+        fileToAdd.length = filesFromServer.length
+        fileToAdd.bytesCompleted = filesFromServer.completed
+        fileToAdd.percentage = filesFromServer.percentage
+        self.files.adding(fileToAdd)
+        print("Self Files: \(self.files)")*/
+      //}
     }
+  
     
     var downloadedPercentDone: Double {
         get {

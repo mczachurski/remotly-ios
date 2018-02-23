@@ -18,31 +18,43 @@ struct BannerColors {
 
 class ViewController: UIViewController {
     @IBOutlet weak var imageSwitch: UISwitch!
+    @IBOutlet weak var positionSegmentedControl: UISegmentedControl!
     @IBOutlet weak var springinessSegmentedControl: UISegmentedControl!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var subtitleField: UITextField!
     @IBOutlet weak var colorSegmentedControl: UISegmentedControl!
     @IBOutlet weak var inViewSwitch: UISwitch!
     
-    @IBAction func showButtonTapped(sender: UIButton) {
+    @IBAction func showButtonTapped(_ sender: UIButton) {
         let color = currentColor()
-        let image = imageSwitch.on ? UIImage(named: "Icon") : nil
-        let title = titleField.text.validated
-        let subtitle = subtitleField.text.validated
+        let image = imageSwitch.isOn ? #imageLiteral(resourceName: "Icon") : nil
+        let title = titleField.text?.validated
+        let subtitle = subtitleField.text?.validated
         let banner = Banner(title: title, subtitle: subtitle, image: image, backgroundColor: color)
         banner.springiness = currentSpringiness()
-        if inViewSwitch.on {
-            banner.show(view: view, duration: 3.0)
+        banner.position = currentPosition()
+        banner.didTapBlock = {
+            print("Banner was tapped on \(Date())!")
+        }
+        if inViewSwitch.isOn {
+            banner.show(view, duration: 3.0)
         } else {
             banner.show(duration: 3.0)
         }
     }
     
+    func currentPosition() -> BannerPosition {
+        switch positionSegmentedControl.selectedSegmentIndex {
+        case 0: return .top
+        default: return .bottom
+        }
+    }
+    
     func currentSpringiness() -> BannerSpringiness {
         switch springinessSegmentedControl.selectedSegmentIndex {
-        case 0: return .None
-        case 1: return .Slight
-        default: return .Heavy
+        case 0: return .none
+        case 1: return .slight
+        default: return .heavy
         }
     }
     

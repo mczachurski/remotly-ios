@@ -1,6 +1,6 @@
-//  SwiftyJSON.h
+//  ViewController.swift
 //
-//  Copyright (c) 2014 Pinglin Tang
+//  Copyright (c) 2014 - 2016 Pinglin Tang
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,34 +25,34 @@ import SwiftyJSON
 
 class ViewController: UITableViewController {
 
-    var json: JSON = JSON.nullJSON
-    
+    var json: JSON = JSON.null
+
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
+	override func viewDidLoad() {
+		title = "SwiftyJSON(\(json.type))"
+	}
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.json.type {
-        case Type.Array, Type.Dictionary:
+        case .array, .dictionary:
             return self.json.count
         default:
             return 1
         }
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("JSONCell", forIndexPath: indexPath) as! UITableViewCell
-            
-        var row = indexPath.row
-        
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JSONCell", for: indexPath) as UITableViewCell
+
+        let row = indexPath.row
+
         switch self.json.type {
-        case .Array:
+        case .array:
             cell.textLabel?.text = "\(row)"
             cell.detailTextLabel?.text = self.json.arrayValue.description
-        case .Dictionary:
-            let key: AnyObject = self.json.dictionaryValue.keys.array[row]
+        case .dictionary:
+            let key: Any = Array(self.json.dictionaryValue.keys)[row]
             let value = self.json[key as! String]
             cell.textLabel?.text = "\(key)"
             cell.detailTextLabel?.text = value.description
@@ -60,42 +60,33 @@ class ViewController: UITableViewController {
             cell.textLabel?.text = ""
             cell.detailTextLabel?.text = self.json.description
         }
-        
+
         return cell
     }
 
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
 
-        var object: AnyObject
-        switch UIDevice.currentDevice().systemVersion.compare("8.0.0", options: NSStringCompareOptions.NumericSearch) {
-        case .OrderedSame, .OrderedDescending:
-            object = segue.destinationViewController.topViewController
-        case .OrderedAscending:
-            object = segue.destinationViewController
-        }
-        
-        if let nextController = object as? ViewController {
-            
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                var row = indexPath.row
-                var nextJson: JSON = JSON.nullJSON
-                
-                switch self.json.type {
-                case .Array:
-                    nextJson = self.json[row]
-                case .Dictionary where row < self.json.dictionaryValue.count:
-                    let key = self.json.dictionaryValue.keys.array[row]
-                    if let value = self.json.dictionary?[key] {
-                        nextJson = value
-                    }
-                default:
-                    print("")
+        var nextController: UIViewController?
+        nextController = segue.destination
+
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            let row = indexPath.row
+            var nextJson: JSON = JSON.null
+            switch self.json.type {
+            case .array:
+                nextJson = self.json[row]
+            case .dictionary where row < self.json.dictionaryValue.count:
+                let key = Array(self.json.dictionaryValue.keys)[row]
+                if let value = self.json.dictionary?[key] {
+                    nextJson = value
                 }
-                nextController.json = nextJson
-                print(nextJson)
+            default:
+                print("")
             }
+            (nextController as! ViewController).json = nextJson
+            print(nextJson)
         }
     }
 }

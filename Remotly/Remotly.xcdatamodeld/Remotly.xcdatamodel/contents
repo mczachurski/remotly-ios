@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="15A263e" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B48" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Configuration" representedClassName="Remotly.Configuration" syncable="YES">
         <relationship name="defaultServer" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="Server" syncable="YES"/>
+    </entity>
+    <entity name="File" representedClassName="Remotly.File" syncable="YES">
+        <attribute name="bytesCompleted" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="length" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="percentage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="files" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Torrent" inverseName="files" inverseEntity="Torrent" syncable="YES"/>
     </entity>
     <entity name="Server" representedClassName="Remotly.Server" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,26 +18,28 @@
         <relationship name="torrents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Torrent" inverseName="server" inverseEntity="Torrent" syncable="YES"/>
     </entity>
     <entity name="Torrent" representedClassName="Remotly.Torrent" syncable="YES">
-        <attribute name="addedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="addedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="hashString" attributeType="String" syncable="YES"/>
-        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="isFinished" attributeType="Boolean" syncable="YES"/>
-        <attribute name="leftUntilDone" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isFinished" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="leftUntilDone" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <attribute name="peersConnected" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="peersGettingFromUs" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="peersSendingToUs" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="percentDone" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="rateDownload" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="rateUpload" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="sizeWhenDone" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="status" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="totalSize" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="peersConnected" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="peersGettingFromUs" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="peersSendingToUs" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="percentDone" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="rateDownload" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="rateUpload" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="sizeWhenDone" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="status" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalSize" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="files" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="File" inverseName="files" inverseEntity="File" syncable="YES"/>
         <relationship name="server" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Server" inverseName="torrents" inverseEntity="Server" syncable="YES"/>
     </entity>
     <elements>
         <element name="Configuration" positionX="-45" positionY="36" width="128" height="60"/>
-        <element name="Server" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="Torrent" positionX="-27" positionY="54" width="128" height="285"/>
+        <element name="File" positionX="-45" positionY="135" width="128" height="118"/>
+        <element name="Server" positionX="-243" positionY="168" width="128" height="120"/>
+        <element name="Torrent" positionX="295" positionY="45" width="128" height="298"/>
     </elements>
 </model>

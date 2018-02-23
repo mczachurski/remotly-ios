@@ -25,4 +25,5 @@ class TorrentInformation
     var status:Int32 = 0
     var hashString:String = ""
     var addedDate: TimeInterval = 0
+    var files = [FileInfo]()
 }

@@ -54,7 +54,17 @@ class CoreDataHandler
         
         return torrent
     }
+  static func createFileEntity(_ torrent: Torrent, managedContext:NSManagedObjectContext) -> File
+  {
+    let entity = NSEntityDescription.entity(forEntityName: "File", in: managedContext)
+    let fileEntity = NSManagedObject(entity: entity!, insertInto: managedContext)
     
+    let file = fileEntity as! File
+    file.torrent = torrent
+    
+    return file
+  }
+  
     static func getConfiguration(_ managedContext:NSManagedObjectContext) -> Configuration
     {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Configuration")
@@ -111,7 +121,21 @@ class CoreDataHandler
         
         return frc
     }
+  static func getFileFetchedResultsController(_ context:NSManagedObjectContext, torrent:Torrent, delegate: NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<NSFetchRequestResult>
+  {
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "File")
+    let primarySortDescriptor = NSSortDescriptor(key: "length", ascending: false)
+    fetchRequest.sortDescriptors = [primarySortDescriptor]
     
+    let predicate = NSPredicate(format: "torrent == %@", torrent)
+    fetchRequest.predicate = predicate
+    
+    let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    frc.delegate = delegate
+    
+    return frc
+  }
+  
     static func getTorrentFetchedResultsController(_ context:NSManagedObjectContext, server:Server, delegate:NSFetchedResultsControllerDelegate) -> NSFetchedResultsController<NSFetchRequestResult>
     {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Torrent")

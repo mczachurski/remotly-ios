@@ -20,6 +20,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     fileprivate let deleteTorrentButtonIndex = 1
     fileprivate let deleteTorrentWitDataButtonIndex = 2
     fileprivate var torrentToDelete:Torrent? = nil
+    fileprivate var torrentToQuery:Torrent? = nil
     fileprivate var isAlternativeSpeedModeEnabled = false
     fileprivate var isDuringRequest = false
     
@@ -33,6 +34,10 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         let frc = CoreDataHandler.getTorrentFetchedResultsController(self.context, server: self.server, delegate: self)
         return frc
     }()
+  lazy var fetchedFiles: NSFetchedResultsController = { () -> NSFetchedResultsController<NSFetchRequestResult> in
+    let ffrc = CoreDataHandler.getFileFetchedResultsController(self.context, torrent: torrentToQuery!, delegate: self)
+    return ffrc
+  }()
     
     // MARK: Load view
     
@@ -105,11 +110,52 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
     
     @IBAction func addNewTorrentAction(_ sender: AnyObject)
     {
-        let alert = UIAlertView(title: "Torrent url", message: "Please enter url to torrent file", delegate: self, cancelButtonTitle: "Cancel")
-        alert.alertViewStyle = UIAlertViewStyle.plainTextInput
-        alert.tag = 1
-        alert.addButton(withTitle: "Add")
-        alert.show()
+
+      let alert = UIAlertController(title: "Magnet Link", message: "Please enter/paste URL", preferredStyle: UIAlertControllerStyle.alert)
+      let sendButton = UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction) -> Void in
+      let linkField = alert.textFields![0] as UITextField
+      let linkURL = URL(string: linkField.text!)
+      
+      self.transmissionClient.addTorrent(linkURL!, isExternal:true, onCompletion: { (error) -> Void in
+          if(error != nil)
+          {
+            NotificationHandler.showError("Error", message: error!.localizedDescription)
+          }
+          else
+          {
+            NotificationHandler.showSuccess("Success", message: "Torrent was added")
+          }
+        })
+      
+      
+      })
+      let pasteButton = UIAlertAction(title: "Paste + Send", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction) -> Void in
+      let pasteURL = URL(string: UIPasteboard.general.string!)!
+      self.transmissionClient.addTorrent(pasteURL, isExternal:true, onCompletion: { (error) -> Void in
+          if(error != nil)
+          {
+            NotificationHandler.showError("Error", message: error!.localizedDescription)
+          }
+          else
+          {
+            NotificationHandler.showSuccess("Success", message: "Torrent was added")
+          }
+        })
+      })
+      let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: {
+         (action: UIAlertAction) -> Void in
+      
+        })
+      
+      alert.addTextField { (textField: UITextField!) -> Void in
+        textField.placeholder = "Paste/Enter Link Here"
+      }
+      alert.addAction(sendButton)
+      alert.addAction(pasteButton)
+      alert.addAction(cancelButton)
+      
+      self.present(alert, animated: true, completion: nil)
+        
     }
     
     @objc func enableRefreshAction()
@@ -123,30 +169,7 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         }
     }
     
-    func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
-    {
-        if(alertView.tag == 1)
-        {
-            if(buttonIndex == 1)
-            {
-                var textfield = alertView.textField(at: 0)
-                var fileString = textfield?.text
-                var fileUrl = URL(string: fileString!)
-                
-                transmissionClient.addTorrent(fileUrl!, isExternal:true, onCompletion: { (error) -> Void in
-                    if(error != nil)
-                    {
-                        NotificationHandler.showError("Error", message: error!.localizedDescription)
-                    }
-                    else
-                    {
-                        NotificationHandler.showSuccess("Success", message: "Torrent was added")
-                    }
-                })
-            }
-        }
-    }
-    
+
     @IBAction func changeSpeedMode(_ sender: AnyObject)
     {
         if(isAlternativeSpeedModeEnabled)
@@ -335,8 +358,27 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
             
             if(!wasSynchronized)
             {
-                var newTorrent = CoreDataHandler.createTorrentEntity(server, managedContext: context)
+              var newTorrent = CoreDataHandler.createTorrentEntity(server, managedContext: context)
+//              for file in newTorrent.files{
+//                var newFile = CoreDataHandler.createFileEntity(newTorrent, managedContext: context)
+//              }
                 newTorrent.synchronizeData(torrentFromServer)
+              /*
+              for torrentFiles in torrentInformations{
+              var count = torrentFiles.files.count
+              while count > 0 {
+                  
+              let fileToAdd = CoreDataHandler.createFileEntity(newTorrent, managedContext: context)
+              fileToAdd.name = torrentFiles.files[count].name
+              print("fileToAdd.name \(fileToAdd.name)")
+              fileToAdd.length = torrentFiles.files[count].length
+              fileToAdd.bytesCompleted = torrentFiles.files[count].completed
+              fileToAdd.percentage = torrentFiles.files[count].percentage
+              count -= 1
+              newTorrent.files.adding(fileToAdd)
+              print("Count: \(newTorrent.files.count)")
+                }
+              } */
             }
         }
         
@@ -345,8 +387,25 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
             var isExist = false
             for torrentFromServer in torrentInformations
             {
+              //Create the new entities here? Didn't work up there.
                 if(torrentFromServer.hashString == torrentFromCoreData.hashString)
                 {
+                  /*
+                  if torrentFromServer.files.count != torrentFromCoreData.files.count{
+                    for torrentFile in torrentFromServer.files{
+                      var count = torrentFromServer.files.count
+                      while count > 0 {
+                      let fileToAdd = CoreDataHandler.createFileEntity(torrentFromCoreData, managedContext: context)
+                      fileToAdd.name = torrentFromServer.files[count].name
+                      print("fileToAdd.name \(fileToAdd.name)")
+                      fileToAdd.length = torrentFromServer.files[count].length
+                      fileToAdd.bytesCompleted = torrentFromServer.files[count].completed
+                      fileToAdd.percentage = torrentFromServer.files[count].percentage
+                      count -= 1
+                      
+                        }
+                      }
+                  } */
                     isExist = true
                     break
                 }
@@ -409,6 +468,24 @@ class TorrentsListController: UITableViewController, UIAlertViewDelegate, UIActi
         
         return [deleteAction, runAction]
     }
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+   
+    //fetch the entities instead of trying to pull the NSSet
+    //this fetch setup looks good to me. Just need to replicate the creating of the File, and the subsequent updating.
+    
+    let torrent = self.fetchedResultsController.object(at: indexPath) as! Torrent
+    torrentToQuery = torrent
+    do{
+      try fetchedFiles.performFetch()
+      let filesResult = self.fetchedFiles.fetchedObjects as! [File]
+      for files in filesResult {
+        print("Files: \(files.name)")
+      }
+    }
+    catch let error{
+      print("An error occurred: \(error.localizedDescription)")
+    }
+  }
     
     fileprivate func createReasumeAction(_ torrent:Torrent, tableView: UITableView) -> UITableViewRowAction
     {
